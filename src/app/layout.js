@@ -1,5 +1,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import {Navbar} from "@/component/Navbar";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,8 +12,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <html lang="en">
+      <body className={inter.className}>
+      <Script src="https://cdn.lordicon.com/lordicon.js" async></Script>
+      <Navbar/>
+      {children}
+      </body>
     </html>
-  )
+)
 }
