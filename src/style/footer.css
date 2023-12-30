@@ -1,0 +1,15 @@
+.footer {
+    width: 100vw;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    & p {
+        margin-right: 30px;
+        color: rgba(5, 0, 0, 0.51);
+    }
+}
+
+.hr {
+    color: rgba(255, 255, 255, 0.53);
+}

@@ -5,6 +5,7 @@ import {CardList} from "#/CardList";
 
 export const Page3 = () => {
     const [loop, setLoop] = useState(false);
+    const [loop2, setLoop2] = useState(false);
 
     return (
         <div className={'page3'}>
@@ -37,6 +38,47 @@ export const Page3 = () => {
                 </div>
                 <div className={'explore-icons'}>
                     <CardList/>
+                </div>
+            </div>
+            <div className={'questions-content'}>
+                <div className={'question-box'}>
+                    <div className={'question-hading'}>
+                        <div className={'question-hading-icons'}>
+                            <div className={'q-hading-icon'}>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/axteoudt.json"
+                                    trigger="loop"
+                                    delay="1500"
+                                    colors="primary:#ffffff"
+                                    style={{width: "30px", height: "30px"}}>
+                                </lord-icon>
+                            </div>
+                            <div className={'q-hading-icon'}>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/xzalkbkz.json"
+                                    trigger="loop"
+                                    delay="1500"
+                                    colors="primary:#ffffff,secondary:#ffffff"
+                                    style={{width: "30px", height: "30px"}}>
+                                </lord-icon>
+                            </div>
+                        </div>
+                        <h1>Questions, Community</h1>
+                    </div>
+                    <p>Over 3150 questions for you to practice. Come and join one of the largest tech communities with
+                        hundreds of thousands of active users.
+                    </p>
+
+                    <Link className={'explore-button'} href={'/exploring'} onMouseOver={() => setLoop2(true)}
+                          onMouseOut={() => setLoop2(false)}>
+                        <span>View Questions</span>
+                        <lord-icon
+                            src="https://cdn.lordicon.com/vduvxizq.json"
+                            trigger={loop2 ? "loop" : ""}
+                            style={{width: "20px", height: "20px"}}
+                        >
+                        </lord-icon>
+                    </Link>
                 </div>
             </div>
         </div>
