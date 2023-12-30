@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.hero-bar {
+    width: 100vw;
+    height: 550px;
+}
+
+.welcome-box {
+    width: 550px;
+    height: 250px;
+    position: absolute;
+    top: 200px;
+    right: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fbfcfe;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    border-radius: 20px;
+    & h1 {
+        text-align: center;
+        font-size: 40px;
+        padding-top: 20px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    & p {
+        color: rgba(5, 0, 0, 0.51);
+        text-align: center;
+        padding: 0 10px;
+    }
+}
+
+.login-button {
+    width: 180px;
+    height: 35px;
+    margin-bottom: 20px;
+    background-color: #30fbb9;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all .3s linear;
+}
+
+.login-button:hover {
+    background-color: #2fd19d;
+}
+
+.page2 {
+    width: 0;
+    height: 0;
+    border-top: 40vh solid rgba(0, 0, 0, 0.96);
+    border-left: 100vw solid transparent;
+    /*position: absolute;*/
+    /*top: 550px;*/
+    margin-top: -4px;
+    position: relative;
+}
