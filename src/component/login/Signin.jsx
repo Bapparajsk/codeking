@@ -2,7 +2,7 @@ import '$/login/signin.css'
 import Link from "next/link";
 import {useState} from "react";
 
-export const Signin = () => {
+export const Signin = props => {
     const [arrow1, setArrow1] = useState(false);
     const [arrow2, setArrow2] = useState(false);
     const [pass, setPass] = useState("password");
@@ -17,6 +17,10 @@ export const Signin = () => {
         setTimeout(() => {
             setPass("password")
         }, 250);
+    }
+
+    const clickHandler = () => {
+        props.setSignup("signup");
     }
 
     return (
@@ -44,7 +48,7 @@ export const Signin = () => {
                             </lord-icon>
                         </div>
                     </div>
-                    <button>Sign in</button>
+                    <button className={'login-form-button'}>Sign in</button>
                 </form>
             </div>
             <div className={'login-footer flex'}>
@@ -57,7 +61,7 @@ export const Signin = () => {
                             style={{width: "20px", height: "20px"}}>
                         </lord-icon>
                     </Link>
-                    <button className={'sing-up flex'} onMouseOver={() => setArrow2(true)} onMouseOut={() => setArrow2(false)}>
+                    <button onClick={clickHandler} className={'sing-up flex'} onMouseOver={() => setArrow2(true)} onMouseOut={() => setArrow2(false)}>
                         <span>Sign Up</span>
                         <lord-icon
                             src="https://cdn.lordicon.com/vduvxizq.json"
