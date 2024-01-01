@@ -17,3 +17,18 @@ html, body {
 a {
   color: rgba(0, 0, 0, 0.37);
 }
+
+.isWrong {
+  border: 2px solid red !important;
+}
+
+.isWrite {
+  border: 2px solid rgba(7, 192, 50, 0.77) !important;
+}
+
+.isP-Wrong {
+  color: red;
+}
+.isP-Write {
+  color: rgba(7, 192, 50, 0.77);
+}
