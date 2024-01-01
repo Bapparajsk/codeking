@@ -43,6 +43,10 @@
     border-radius: 20px;
     text-decoration: none;
     transition: all .3s linear;
+
+    & span {
+        color: #000;
+    }
 }
 
 .login-button:hover {

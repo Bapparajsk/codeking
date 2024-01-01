@@ -1,12 +1,12 @@
 "use client"
 
 import React, {useState} from 'react';
-import '$/home.css';
+import '$/home/style.css';
 import Image from 'next/image'
-import {Ipad} from "#/Ipad";
+import {Ipad} from "#/home/Ipad";
 import Link from "next/link";
-import {Page3} from "#/Page3";
-import {Footer} from "#/Footer";
+import {Page3} from "#/home/Page3";
+import {Footer} from "#/footer/Footer";
 
 function Page() {
     const [loop, setLoop] = useState(false);

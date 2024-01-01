@@ -1,7 +1,7 @@
-import '$/page3.css'
+import '$/home/page3.css'
 import Link from "next/link";
 import React, {useState} from "react";
-import {CardList} from "#/CardList";
+import {CardList} from "#/home/CardList";
 
 export const Page3 = () => {
     const [loop, setLoop] = useState(false);
@@ -57,7 +57,7 @@ export const Page3 = () => {
                                 <lord-icon
                                     src="https://cdn.lordicon.com/xzalkbkz.json"
                                     trigger="loop"
-                                    delay="1500"
+                                    delay="2000"
                                     colors="primary:#ffffff,secondary:#ffffff"
                                     style={{width: "30px", height: "30px"}}>
                                 </lord-icon>
@@ -65,7 +65,7 @@ export const Page3 = () => {
                         </div>
                         <h1>Questions, Community</h1>
                     </div>
-                    <p>Over 3150 questions for you to practice. Come and join one of the largest tech communities with
+                    <p>Over 200 questions for you to practice. Come and join one of the largest tech communities with
                         hundreds of thousands of active users.
                     </p>
 

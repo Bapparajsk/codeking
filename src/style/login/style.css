@@ -1,0 +1,11 @@
+.login-page {
+    width: 100vw;
+    height: calc(100vh - 50px);
+    background-color: #dbe0e8;
+}
+
+.login-container {
+    width: auto;
+    height: 500px;
+    margin-top: 40px;
+}

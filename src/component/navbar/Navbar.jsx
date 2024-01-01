@@ -1,4 +1,4 @@
-import '$/navbar.css';
+import '$/navbar/style.css';
 import Link from "next/link";
 
 export const Navbar = () => {
@@ -15,7 +15,7 @@ export const Navbar = () => {
                     href={'/'}
                     className={`nav-link brand-name`}
                 >
-                    <span>Code King</span>
+                    <span style={{color: "#1025e5"}}>Code King</span>
                 </Link>
             </ul>
 
@@ -51,7 +51,7 @@ export const Navbar = () => {
                         trigger="hover"
                         style={{width: "35px", height: "35px"}}>
                     </lord-icon>
-                    <span>Login</span>
+                    <span>Sing up</span>
                 </Link>
             </ul>
         </nav>
