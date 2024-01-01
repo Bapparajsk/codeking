@@ -1,5 +1,5 @@
-import '$/cardList.css';
-import {Card} from "#/Card";
+import '$/home/cardList.css';
+import {Card} from "#/home/Card";
 
 const cardDetails = [
     {

@@ -1,6 +1,6 @@
-import '$/ipad.css'
-import List from "#/List";
-import {Texts} from "#/Texts";
+import '$/home/ipad.css'
+import List from "#/home/List";
+import {Texts} from "#/home/Texts";
 
 export const Ipad = () => {
     return (

@@ -33,7 +33,6 @@
     font-size: 20px;
     font-weight: 700;
     margin-left: 10px;
-    color: #1025e5;
 }
 
 .nav-link {
@@ -43,8 +42,10 @@
     align-items: center;
     justify-content: center;
     position: relative;
+
     & span{
         margin-left: 2px;
+        color: black;
     }
 }
 

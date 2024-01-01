@@ -1,10 +1,19 @@
-import React from 'react';
+"use client"
 
+import React from 'react';
+import {Footer} from "#/footer/Footer";
+import '$/login/style.css'
+import {Signin} from "#/login/Signin";
 const Page = () => {
     return (
-        <div>
-            <h1>login</h1>
-        </div>
+        <>
+            <main className={'login-page flex'}>
+                <div className={'login-container'}>
+                    <Signin/>
+                </div>
+            </main>
+            <Footer/>
+        </>
     );
 };
 
