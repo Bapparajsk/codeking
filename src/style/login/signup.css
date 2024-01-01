@@ -57,3 +57,13 @@
         cursor: pointer;
     }
 }
+
+.pass-valid-box {
+    position: relative;
+}
+
+.pass-valid {
+    position: absolute;
+    font-size: 12px;
+    bottom: -10px;
+}
