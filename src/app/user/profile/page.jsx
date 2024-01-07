@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import '$/user/style.css'
 import {Footer} from "#/footer/Footer";

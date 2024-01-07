@@ -43,16 +43,41 @@
         padding: 0 10px;
         color: #00000085;
         font-family: 'Poppins', sans-serif;
-    }
 
-    & span {
-        color: #000000;
-        position: absolute;
-        left: 220px;
+        & span {
+            color: #000000;
+            position: absolute;
+            left: 220px;
+        }
     }
 
     & hr {
         margin-top: 8px;
         color: rgba(0, 0, 0, 0.32);
+    }
+}
+
+.edit-card {
+    width: 100%;
+    height: auto;
+    justify-content: end;
+}
+
+.edit-button {
+    width: auto;
+    height: 35px;
+    padding: 0 10px;
+    background-color: #0cefa4;
+    border-radius: 30px;
+    text-decoration: none;
+    & span {
+        margin-right: 5px;
+        text-decoration: none;
+        color: #000000;
+        font-family: 'Roboto Slab', serif;
+    }
+
+    &:hover {
+        background-color: rgba(12, 239, 164, 0.75);
     }
 }
