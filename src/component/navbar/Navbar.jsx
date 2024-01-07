@@ -36,7 +36,7 @@ export const Navbar = () => {
                     </lord-icon>
                     <span>problems</span>
                 </Link>
-                <Link href={'/user'} className={'nav-link'}>
+                <Link href={'/user/profile'} className={'nav-link'}>
                     <lord-icon
                         src="https://cdn.lordicon.com/ffpklhrd.json"
                         trigger="hover"
