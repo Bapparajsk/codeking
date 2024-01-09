@@ -65,16 +65,17 @@
 
 .edit-button {
     width: auto;
-    height: 35px;
+    height: 32px;
     padding: 0 10px;
     background-color: #0cefa4;
     border-radius: 30px;
     text-decoration: none;
     & span {
-        margin-right: 5px;
+        margin-right: 2px;
         text-decoration: none;
+        letter-spacing: 1px;
         color: #000000;
-        font-family: 'Roboto Slab', serif;
+        font-family: 'Poppins', sans-serif;
     }
 
     &:hover {

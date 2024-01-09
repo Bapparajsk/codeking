@@ -1,0 +1,101 @@
+.progress-card {
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.p-card {
+    height: 100%;
+    position: relative;
+}
+
+.progress-card-left {
+    width: 228px;
+
+    & .solved {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 12px;
+        color: #00000090;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+}
+
+svg {
+    width: 114px;
+    height: 114px;
+}
+
+.bg {
+    fill: none;
+    stroke-width: 5px;
+    stroke: #000000;
+}
+
+.meter-1 {
+    fill: none;
+    stroke-width: 10px;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    stroke-dasharray: 365;
+    stroke-dashoffset: 300;
+    stroke: aqua;
+}
+
+.pro-total-solves {
+    position: absolute;
+    cursor: pointer;
+    & p:nth-child(1) {
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    & p:nth-child(2) {
+        font-size: 14px;
+        text-align: center;
+        color: #00000090;
+    }
+}
+
+.progress-card-right {
+    width: 350px;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.progress-shadow {
+    width: 250px;
+    height: 10px;
+    border-radius: 50px;
+    justify-content: start;
+    position: relative;
+
+    & .main-progress {
+        width: 200px;
+        height: 10px;
+        background-color: #FFC01E;
+        border-radius: 50px;
+    }
+}
+
+.progress-status {
+    position: absolute;
+    width: 100%;
+    justify-content: space-between;
+    top: -20px;
+
+    & p {
+        color: #00000090;
+        font-size: 14px;
+        padding: 0 10px;
+    }
+
+    & span {
+        font-size: 16px;
+        color: #000000;
+        font-weight: 600;
+    }
+}

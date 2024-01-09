@@ -20,11 +20,11 @@ export const UserDetails = () => {
                         <hr/>
                     </li>
                     <li>
-                        <p>About Me : <span>i am a full fullstack Developer</span></p>
+                        <p>About Me : <span>I am FullStack Developer</span></p>
                         <hr/>
                     </li>
                     <li>
-                        <p>County : <span>india</span></p>
+                        <p>County : <span>India</span></p>
                         <hr/>
                     </li>
                     <li>
