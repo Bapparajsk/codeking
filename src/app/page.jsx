@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '$/home/style.css';
 import Image from 'next/image'
 import {Ipad} from "#/home/Ipad";
@@ -10,7 +10,9 @@ import {Footer} from "#/footer/Footer";
 
 function Page() {
     const [loop, setLoop] = useState(false);
-
+    useEffect(() => {
+        document.title = "code king"
+    }, []);
     return (
         <>
             <main className={'main'}>

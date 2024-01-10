@@ -20,34 +20,29 @@
         color: #00000090;
         font-family: 'Open Sans', sans-serif;
     }
-
 }
 
-svg {
-    width: 114px;
-    height: 114px;
+.sercail-progress {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    /*background: conic-gradient(#0cefa4 50deg, #fff 0deg);*/
+    position: relative;
+}
+.sercail-progress::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: white;
 }
 
-.bg {
-    fill: none;
-    stroke-width: 5px;
-    stroke: #000000;
-}
-
-.meter-1 {
-    fill: none;
-    stroke-width: 10px;
-    stroke-linecap: round;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
-    stroke-dasharray: 365;
-    stroke-dashoffset: 300;
-    stroke: aqua;
-}
 
 .pro-total-solves {
     position: absolute;
     cursor: pointer;
+    z-index: 10;
     & p:nth-child(1) {
         font-size: 24px;
         font-weight: 700;
@@ -63,7 +58,7 @@ svg {
 .progress-card-right {
     width: 350px;
     flex-direction: column;
-    gap: 30px;
+    gap: 35px;
 }
 
 .progress-shadow {
