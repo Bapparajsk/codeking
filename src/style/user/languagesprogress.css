@@ -1,0 +1,55 @@
+.lan-card {
+    width: 100%;
+    height: 100%;
+}
+
+.lan-inner-box {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.languages-progress {
+    width: 100%;
+    height: 180px;
+    gap: 50px;
+    align-items: end;
+    position: relative;
+}
+
+.languages-box {
+    width: 100%;
+    height: 40px;
+    gap: 50px;
+}
+
+.lan-box-progress {
+    width: 25px;
+    background-color: #21c08d;
+    border-radius: 5px;
+    transition: all .2s linear;
+
+    &:hover {
+        background-color: rgba(47, 209, 157, 0.75);
+    }
+}
+
+.lan-pro-details {
+    position: absolute;
+    width: 300px;
+    height: 50px;
+    top: 0;
+    left: 0;
+
+    & p {
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.336);
+        font-family: 'Open Sans', sans-serif;
+
+        & span:nth-child(1) {
+            margin: 5px 10px;
+        }
+    }
+}

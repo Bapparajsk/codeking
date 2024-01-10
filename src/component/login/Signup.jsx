@@ -28,7 +28,7 @@ export const Signup = props => {
     const togglePasswordVisibility = (passwordState, setPasswordState) => {
         setTimeout(() => {
             setPasswordState(passwordState === "password" ? "text" : "password");
-        }, 250);
+        }, 100);
     };
     const clickHandler = () => {
         props.setSignup("signin");
@@ -92,7 +92,8 @@ export const Signup = props => {
                             onChange={userHandler}
                             className={`inputs ${user_border.length !== 0 ? user_border : ""}`}
                             placeholder={'Username'} name={'username'}
-                            required={true}/>
+                            required={true}
+                        />
                         <input
                             type="email"
                             value={email}
@@ -100,7 +101,8 @@ export const Signup = props => {
                             className={`inputs ${email_border.length !== 0 ? email_border : ""}`}
                             placeholder={'E-mail address'}
                             name={'email'}
-                            required={true}/>
+                            required={true}
+                        />
                     </div>
                     <div className={'up-body-top flex'}>
                         <div className={'pass-eye flex pass-valid-box'}>
@@ -177,9 +179,9 @@ export const Signup = props => {
                 <p>
                     This site is protected by reCAPTCHA and the Google
                     <a href="https://policies.google.com/privacy"
-                       target={'_blank'}>Privacy Policy</a>
+                       target={'_blank'}> Privacy Policy </a>
                     and <a href="https://policies.google.com/terms"
-                           target={'_blank'}>Terms of Service</a>
+                           target={'_blank'}> Terms of Service </a>
                     apply.
                 </p>
             </div>

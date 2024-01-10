@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 * {
   padding: 0;
@@ -42,4 +44,8 @@ li {
 }
 .isP-Write {
   color: rgba(7, 192, 50, 0.77);
+}
+
+.link {
+  text-decoration: none;
 }
