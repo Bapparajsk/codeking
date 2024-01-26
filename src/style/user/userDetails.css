@@ -73,12 +73,13 @@
     text-decoration: none;
 
     & span {
-        font-size: 16px;
+        font-size: 14px;
         margin-right: 2px;
         text-decoration: none;
         letter-spacing: 1px;
         color: #000000;
         font-family: 'Poppins', sans-serif;
+        padding-left: 5px;
     }
 
     &:hover {

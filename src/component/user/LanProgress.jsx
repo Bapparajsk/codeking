@@ -5,15 +5,11 @@ export const LanProgress = props => {
     const hi = solve / total * 120;
 
     const handler1 = () => {
-        setTimeout(() => {
-            props.setName(name, solve);
-        }, 150)
+        props.setName(name, solve);
     }
 
     const handler2 = () => {
-        setTimeout(() => {
-            props.setDefualt();
-        }, 1000);
+        props.setDefualt();
     }
     return (
         <div className={'lan-box-progress'} style={{height: hi}} onMouseOver={handler1} onMouseOut={handler2}></div>

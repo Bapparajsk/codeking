@@ -6,7 +6,7 @@ const cardDetails = [
         cardW : "180px",
         cardH : "180px",
         topTitle1 : "10px",
-        topTitle2 : "80px",
+        topTitle2 : "85px",
         subTitle1 : "50px",
         subTitle2 : "80px",
         botTitle: "80px",
@@ -21,7 +21,7 @@ const cardDetails = [
         cardH : "230px",
         topTitle1 : "80px",
         topTitle2 : "30px",
-        subTitle1 : "80px",
+        subTitle1 : "50px",
         subTitle2 : "50px",
         botTitle: "80px",
         bg : "linear-gradient(rgba(213, 24, 24, 0.45), rgba(213, 24, 24, 0.85))",
@@ -44,7 +44,7 @@ const cardDetails = [
         play: "50px",
         idx: "card3"
     }
-]
+];
 
 export const CardList = () => {
     return (

@@ -39,5 +39,4 @@ const isPasswordSame = (pass1, pass2) => {
     return true;
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default { isEmail, isPassword, isPasswordSame };

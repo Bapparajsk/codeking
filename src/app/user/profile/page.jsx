@@ -10,7 +10,7 @@ import { LanguagesProgress } from "#/user/LanguagesProgress";
 const Profile = () => {
 
     useEffect(() => {
-        document.title = "user profile"
+        document.title = "Code King - Profile"
     }, []);
 
     return (
