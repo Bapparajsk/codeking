@@ -1,0 +1,15 @@
+.cards {
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+}
+
+.card {
+    width: auto;
+    height: calc(100% - 50px);
+    /*background-color: #ffffff;*/
+    border-radius: 10px;
+    box-shadow: var(--subchild-shadow);
+    cursor: pointer;
+}
+

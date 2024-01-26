@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Footer } from "#/footer/Footer";
 import '$/login/style.css'
 import { Signin } from "#/login/Signin";
@@ -13,6 +13,10 @@ const Page = () => {
         console.log("this " + value);
         setSing(value); // Change this line to setSing
     }
+
+    useEffect(() => {
+        document.title = "Code King - Account login "
+    }, []);
 
     return (
         <>

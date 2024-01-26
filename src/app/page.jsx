@@ -11,7 +11,7 @@ import {Footer} from "#/footer/Footer";
 function Page() {
     const [loop, setLoop] = useState(false);
     useEffect(() => {
-        document.title = "code king"
+        document.title = "Code King"
     }, []);
     return (
         <>
