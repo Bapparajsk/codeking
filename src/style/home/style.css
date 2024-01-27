@@ -33,8 +33,7 @@
 }
 
 .login-button {
-    width: 180px;
-    height: 35px;
+    padding: 8px 20px;
     margin-bottom: 20px;
     background-color: #30fbb9;
     display: flex;
@@ -46,6 +45,7 @@
 
     & span {
         color: #000;
+        margin-right: 6px;
     }
 }
 
@@ -58,8 +58,6 @@
     height: 0;
     border-top: 40vh solid rgba(0, 0, 0, 0.96);
     border-left: 100vw solid transparent;
-    /*position: absolute;*/
-    /*top: 550px;*/
     margin-top: -4px;
     position: relative;
 }
