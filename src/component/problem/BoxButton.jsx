@@ -7,7 +7,7 @@ export const BoxButton = props => {
     return (
         <Link
             href={`/problems/top/${props.name}`}
-            className={"login-button box-button"}
+            className={"box-button flex"}
             onMouseOver={() => setHover(true)}
             onMouseOut={() => setHover(false)}
         >

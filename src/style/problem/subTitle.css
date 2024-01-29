@@ -1,0 +1,59 @@
+.problem-page-sub-title-box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.problem-span {
+    position: absolute;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Roboto Mono', monospace;
+    transition: color .2s linear;
+}
+
+.problem-span::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 3px;
+    background-color: #270082;
+    border-radius: 20px;
+    transition: all .4s ease;
+}
+
+.problem-span:hover::before {
+    width: 100%;
+}
+
+.sub-title-box-container {
+    width: 100%;
+    height: calc(100% - 70px);
+}
+
+.p-sub-container-top {
+    width: 100%;
+    height: 50%;
+}
+
+.p-sub-container-bottom {
+    width: 100%;
+    height: 50%;
+}
+
+.p-sub-card {
+    width: 250px;
+    height: 90px;
+    background-color: #40A2D8;
+    border-radius: 10px;
+    margin: 0 20px;
+    transition: all .3s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px, rgba(0, 0, 0, 0.12) 0 -12px 30px, rgba(0, 0, 0, 0.12) 0 4px 6px, rgba(0, 0, 0, 0.17) 0 12px 13px, rgba(0, 0, 0, 0.09) 0 -3px 5px;
+}
+
+.p-sub-card:hover {
+    background-color: #0B60B0;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 30px 60px -12px inset, rgba(0, 0, 0, 0.45) 0 18px 36px -18px inset;
+}

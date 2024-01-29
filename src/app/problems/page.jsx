@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Footer } from "#/footer/Footer";
 import "$/problem/style.css"
 import { CardList } from "#/problem/CardList";
+import { SubTitles } from "#/problem/SubTitles";
 
 const Page = () => {
 
@@ -13,9 +14,12 @@ const Page = () => {
 
     return (
         <>
-            <main className={'problem-page'}>
-                <div className={'problem-page-hero-bar'}>
+            <main className={"problem-page"}>
+                <div className={"problem-page-hero-bar"}>
                     <CardList/>
+                </div>
+                <div className={"problem-page-sub-title-bar"}>
+                    <SubTitles/>
                 </div>
             </main>
             <Footer/>
