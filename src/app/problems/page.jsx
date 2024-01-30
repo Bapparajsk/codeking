@@ -5,6 +5,7 @@ import { Footer } from "#/footer/Footer";
 import "$/problem/style.css"
 import { CardList } from "#/problem/CardList";
 import { SubTitles } from "#/problem/SubTitles";
+import { ProblemsList } from "#/problem/ProblemsList";
 
 const Page = () => {
 
@@ -20,6 +21,9 @@ const Page = () => {
                 </div>
                 <div className={"problem-page-sub-title-bar"}>
                     <SubTitles/>
+                </div>
+                <div className={"problem-lists"}>
+                    <ProblemsList/>
                 </div>
             </main>
             <Footer/>

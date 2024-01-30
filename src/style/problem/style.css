@@ -1,6 +1,6 @@
 .problem-page {
     width: 100vw;
-    height: 100vh;
+    height: auto;
     margin-top: 60px;
     background: #ffffff;
 }
@@ -13,4 +13,9 @@
 .problem-page-sub-title-bar {
     width: 100vw;
     height: 335px;
+}
+
+.problem-lists {
+    width: 100vw;
+    height: auto;
 }
