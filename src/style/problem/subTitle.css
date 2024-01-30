@@ -7,6 +7,7 @@
 .problem-span {
     position: absolute;
     cursor: pointer;
+    color: #000;
     font-weight: 600;
     font-family: 'Roboto Mono', monospace;
     transition: color .2s linear;
@@ -49,11 +50,42 @@
     background-color: #40A2D8;
     border-radius: 10px;
     margin: 0 20px;
+    overflow: hidden;
     transition: all .3s ease-in-out;
     box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px, rgba(0, 0, 0, 0.12) 0 -12px 30px, rgba(0, 0, 0, 0.12) 0 4px 6px, rgba(0, 0, 0, 0.17) 0 12px 13px, rgba(0, 0, 0, 0.09) 0 -3px 5px;
+
+    & i {
+        transition: all .3s ease-in-out;
+    }
 }
 
 .p-sub-card:hover {
     background-color: #0B60B0;
     box-shadow: rgba(50, 50, 93, 0.25) 0 30px 60px -12px inset, rgba(0, 0, 0, 0.45) 0 18px 36px -18px inset;
+}
+
+.p-sub-card-icon {
+    width: 90px;
+    height: 100%;
+}
+
+.p-sub-card-name {
+    width: calc(100% - 90px);
+    height: 100%;
+    flex-direction: column;
+    align-items: start;
+
+    & h3 {
+        color: #000;
+        padding: 2px 5px;
+        font-size: 16px;
+    }
+
+    & p {
+        color: rgba(255, 255, 255, 0.73);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 3px 5px;
+        font-family: 'Roboto Mono', monospace;
+    }
 }
