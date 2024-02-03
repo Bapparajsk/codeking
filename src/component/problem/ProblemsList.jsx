@@ -5,8 +5,6 @@ import { Problems } from "#/problem/Problems";
 
 export const ProblemsList = () => {
 
-
-
     const buttons = [
         {
             iconName: "fa-solid fa-box-archive",

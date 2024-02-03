@@ -1,0 +1,57 @@
+.problems-container {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+}
+
+.problem-box {
+    width: 100%;
+    height: 50px;
+    justify-content: start;
+}
+
+.p-box {
+    height: 100%;
+}
+
+.problem-box-hr {
+    width: 100%;
+    color: #00000066;
+}
+
+.status {
+    width: 10%;
+    transition: all .5s linear;
+}
+
+.title {
+    width: 40%;
+
+    & span {
+        font-family: 'Roboto Mono', monospace;
+        color: black;
+    }
+}
+
+.p-title-number-box {
+    width: 20%;
+    height: 100%;
+}
+
+.p-title-name-box {
+    width: 80%;
+    height: 100%;
+    justify-content: start;
+}
+
+.difficulty {
+    width: 20%;
+
+    span {
+        font-family: 'Roboto Slab', serif;
+    }
+}
+
+.submission {
+    width: 30%;
+}

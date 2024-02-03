@@ -92,8 +92,9 @@
 
 .pro-list-body {
     width: 100%;
-    height: 1000px;
+    height: auto;
     align-items: start;
+    margin-bottom: 50px;
 }
 
 .problem-list-box {
@@ -121,8 +122,8 @@
     }
 
     & p:nth-child(2){
-        left: 30%;
-        transform: translateX(-30%);
+        left: 27%;
+        transform: translateX(-27%);
     }
 
     & p:nth-child(3){
@@ -131,7 +132,7 @@
     }
 
     & p:nth-child(4){
-        left: 90%;
-        transform: translateX(-90%);
+        left: 88%;
+        transform: translateX(-88%);
     }
 }
