@@ -1,8 +1,11 @@
 import "$/problem/problemLists.css"
-import {TopicButton} from "#/problem/TopicButton";
-import {ControlButton} from "#/problem/ControlButton";
+import { TopicButton } from "#/problem/TopicButton";
+import { ControlButton } from "#/problem/ControlButton";
+import { Problems } from "#/problem/Problems";
 
 export const ProblemsList = () => {
+
+
 
     const buttons = [
         {
@@ -47,6 +50,34 @@ export const ProblemsList = () => {
                     <ControlButton buttonName={"Difficulty"}/>
                     <ControlButton buttonName={"Status"}/>
                     <ControlButton buttonName={"Tags"}/>
+                    <div className={"control-search-box flex"}>
+                        <div className={"csb-icon"}>
+                            <i className="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <input
+                            name={"problemSearch"}
+                            className={"problemSearch"}
+                            placeholder={"Search questions"}
+                        />
+                    </div>
+                    <div className={"pro-con-button"}>
+                        <i className="fa-solid fa-gear fa-lg"></i>
+                    </div>
+                    <div className={"one-pick"}>
+                        <i className="fa-solid fa-shuffle fa-xl"></i>
+                        <span>Pick One</span>
+                    </div>
+                </div>
+            </div>
+            <div className={"pro-list-body flex"}>
+                <div className={"problem-list-box"}>
+                    <div className={"problem-list-header"}>
+                        <p>Status</p>
+                        <p>Title</p>
+                        <p>Difficulty</p>
+                        <p>Submission</p>
+                    </div>
+                    <Problems/>
                 </div>
             </div>
         </div>

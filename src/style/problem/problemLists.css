@@ -45,7 +45,7 @@
     transition: background-color .2s linear;
     cursor: pointer;
     margin: 0 20px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 19px 38px, rgba(0, 0, 0, 0.22) 0 15px 12px;
 
     & p {
         font-family: 'Roboto', sans-serif;
@@ -58,5 +58,51 @@
 
     &:hover {
         background-color: rgba(80, 154, 255, 0.84);
+    }
+}
+
+.control-search-box {
+    background-color: #509AFF;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    transition: background-color .2s linear;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 19px 38px, rgba(0, 0, 0, 0.22) 0 15px 12px;
+
+    &:hover {
+        background-color: rgba(80, 154, 255, 0.84);
+    }
+}
+
+.csb-icon {
+    padding: 8px 2px 8px 14px;
+    cursor: text;
+}
+
+.problemSearch {
+    outline: none;
+    border: none;
+    width: 280px;
+    background-color: transparent;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: .5px;
+    font-size: 14px;
+    padding: 0 5px;
+}
+
+.one-pick {
+    padding: 8px 14px;
+    background-color: #0cefa4;
+    border-radius: 15px;
+    transition: all .2s linear;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px, rgba(0, 0, 0, 0.12) 0 -12px 30px, rgba(0, 0, 0, 0.12) 0 4px 6px, rgba(0, 0, 0, 0.17) 0 12px 13px, rgba(0, 0, 0, 0.09) 0 -3px 5px;
+
+    & span {
+        margin-left: 10px;
+    }
+
+    &:hover {
+        color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.17) 0 -23px 25px 0 inset, rgba(0, 0, 0, 0.15) 0 -36px 30px 0 inset, rgba(0, 0, 0, 0.1) 0 -79px 40px 0 inset, rgba(0, 0, 0, 0.06) 0 2px 1px, rgba(0, 0, 0, 0.09) 0 4px 2px, rgba(0, 0, 0, 0.09) 0 8px 4px, rgba(0, 0, 0, 0.09) 0 16px 8px, rgba(0, 0, 0, 0.09) 0 32px 16px;
     }
 }

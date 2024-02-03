@@ -89,3 +89,49 @@
         font-family: 'Roboto Mono', monospace;
     }
 }
+
+.pro-list-body {
+    width: 100%;
+    height: 1000px;
+    align-items: start;
+}
+
+.problem-list-box {
+    width: calc(100% - 400px);
+    height: auto;
+    margin-top: 30px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px, rgba(0, 0, 0, 0.12) 0 -12px 30px, rgba(0, 0, 0, 0.12) 0 4px 6px, rgba(0, 0, 0, 0.17) 0 12px 13px, rgba(0, 0, 0, 0.09) 0 -3px 5px;
+}
+
+.problem-list-header {
+    width: 100%;
+    height: 50px;
+    /*background-color: #1f84cc;*/
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    & p {
+        position: absolute;
+    }
+
+    & p:nth-child(1){
+        left: 3%;
+        transform: translateX(-3%);
+    }
+
+    & p:nth-child(2){
+        left: 30%;
+        transform: translateX(-30%);
+    }
+
+    & p:nth-child(3){
+        left: 60%;
+        transform: translateX(-60%);
+    }
+
+    & p:nth-child(4){
+        left: 90%;
+        transform: translateX(-90%);
+    }
+}
