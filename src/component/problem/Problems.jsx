@@ -1,11 +1,12 @@
 import "$/problem/problems.css"
 import {ProblemBox} from "#/problem/ProblemBox";
 import Link from "next/link";
+import {useRouter} from "next/navigation";
 
 export const Problems = () => {
     return (
         <div className={"problems-container flex"}>
-            <Link href={"ss"} style={{width: "100%"}}>
+            <Link href={"/problems/Letter-Combinations-of-a-Phone-Number"} style={{width: "100%"}}>
                 <ProblemBox
                     successful={false}
                     problemNumber={101}
