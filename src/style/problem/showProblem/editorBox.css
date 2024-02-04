@@ -1,0 +1,114 @@
+.editor-box {
+    width: 50%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.editor-nav {
+    width: calc(100% - 20px);
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.71);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    font-family: 'Noto Serif', serif;
+}
+
+.editor-lan-box {
+    height: 100%;
+    width: 20%;
+    cursor: pointer;
+
+    .lan-box {
+        padding: 5px 10px;
+        background-color: #000000AA;
+        border-radius: 10px;
+        transition: background-color .2s linear;
+        position: relative;
+
+        span {
+            margin-right: 6px;
+            color: #e7ebf2;
+        }
+
+        i {
+            margin-top: 4px;
+            color: #e7ebf2;
+        }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    }
+
+
+}
+
+.editor-run-box {
+    width: 60%;
+    height: 100%;
+
+    .run-box {
+        padding: 5px 10px;
+        background-color: #000000AA;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color .2s linear;
+
+        span {
+            margin-right: 5px;
+            color: #e7ebf2;
+        }
+        i {
+            color: #e7ebf2;
+        }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    }
+
+    .submit-box {
+        padding: 5px 10px;
+        background-color: #2fd19d;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color .2s linear;
+        margin-left: 10px;
+
+        &:hover {
+            background-color: #2FD19DDA;
+        }
+    }
+}
+
+.editor-setting-box {
+    width: 20%;
+    height: 100%;
+
+    .setting-box {
+        padding: 5px 10px;
+        background-color: #2fb3d1;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 4s linear;
+
+        i {
+            transition: all .1s linear;
+        }
+
+        &:hover {
+            i {
+                transform: rotate(20deg);
+            }
+        }
+    }
+}
+
+.editor-card {
+    width: calc(100% - 20px);
+    height: calc(100% - 80px);
+    border-radius: 10px;
+    overflow: hidden;
+}
