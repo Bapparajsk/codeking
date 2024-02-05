@@ -2,5 +2,5 @@
     margin-top: 60px;
     width: 100vw;
     height: calc(100vh - 60px);
-    background-color: #509AFF;
+    background-color: rgba(0, 0, 0, 0.25);
 }
