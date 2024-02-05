@@ -11,7 +11,7 @@
     background-color: rgba(255, 255, 255, 0.71);
     border-radius: 10px;
     box-shadow: var(--box-shadow);
-    overflow: hidden;
+    /*overflow: hidden;*/
     font-family: 'Noto Serif', serif;
 }
 
@@ -19,6 +19,7 @@
     height: 100%;
     width: 20%;
     cursor: pointer;
+    position: relative;
 
     .lan-box {
         padding: 5px 10px;
@@ -29,7 +30,7 @@
 
         span {
             margin-right: 6px;
-            color: #e7ebf2;
+            color: rgba(231, 235, 242, 0.72);
         }
 
         i {
@@ -38,12 +39,43 @@
         }
 
         &:hover {
+            color: #ffffff;
             background-color: rgba(0, 0, 0, 0.8);
         }
     }
 
-
 }
+
+.editor-languages-box {
+    width: 200px;
+    height: 200px;
+    background-color: #e4e2e2;
+    z-index: 100;
+    position: absolute;
+    top: 52px;
+    left: 0;
+    border-radius: 10px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+
+    span {
+        width: 100%;
+        height: 40px;
+        background-color: #ffffff;
+        color: rgba(0, 0, 0, 0.55);
+        transition: all .4s ease-out;
+        /*transform: rotate(180deg);*/
+
+        &:hover {
+            box-shadow: rgba(0, 0, 0, 0.17) 0 -23px 25px 0 inset, rgba(0, 0, 0, 0.15) 0 -36px 30px 0 inset, rgba(0, 0, 0, 0.1) 0 -79px 40px 0 inset, rgba(0, 0, 0, 0.06) 0 2px 1px, rgba(0, 0, 0, 0.09) 0 4px 2px, rgba(0, 0, 0, 0.09) 0 8px 4px, rgba(0, 0, 0, 0.09) 0 16px 8px, rgba(0, 0, 0, 0.09) 0 32px 16px;
+            color: #000000;
+        }
+    }
+}
+
+
 
 .editor-run-box {
     width: 60%;
@@ -58,14 +90,27 @@
 
         span {
             margin-right: 5px;
-            color: #e7ebf2;
+            color: rgba(231, 235, 242, 0.82);
+            transition: all .2s linear;
         }
+
         i {
-            color: #e7ebf2;
+            margin-top: 1px;
+            color: rgba(231, 235, 242, 0.72);
+            transition: all .2s linear;
         }
 
         &:hover {
             background-color: rgba(0, 0, 0, 0.8);
+
+            i {
+                color: #ffffff;
+                font-size: 14px;
+            }
+
+            span {
+                color: #ffffff;
+            }
         }
     }
 
@@ -78,7 +123,7 @@
         margin-left: 10px;
 
         &:hover {
-            background-color: #2FD19DDA;
+            background-color: rgba(47, 209, 157, 0.68);
         }
     }
 }
