@@ -19,7 +19,7 @@ export const Description = () => {
     }
 
     useEffect(() => {
-        setTagButton(getButton("easy"))
+        setTagButton(getButton("Medium"))
     }, [])
 
     return (
@@ -28,18 +28,33 @@ export const Description = () => {
                 <span>17. Letter Combinations of a Phone Number</span>
             </div>
             <div className={"dp-tags flex"}>
-                <ul>
+                <ul className={"flex"}>
                     <li>
                         <span
-                            style={tagButton?.style()}
+                            style={tagButton?.getStyle()}
                             ref={buttonRef}
                             onMouseOver={hoverOnHandler}
                             onMouseOut={hoverOutHandler}
                         >
-                            Easy
+                            Medium
+                        </span>
+                    </li>
+                    <li>
+                        <span className={"topic-tag"}>
+                            <i className="fa-solid fa-tag"></i>
+                            Topic
                         </span>
                     </li>
                 </ul>
+            </div>
+            <div className={"dp-body"}>
+                <p>Given an array of integers <code>nums</code> and an integer target, return indices of the two numbers such that
+                    they add up to target.</p>
+                <p>&nbsp;</p>
+                <p>You may assume that each input would have exactly one solution, and you may not use the same element
+                    twice.</p>
+                <p>&nbsp;</p>
+                <p>You can return the answer in any order.</p>
             </div>
         </div>
     )
