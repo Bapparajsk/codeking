@@ -29,28 +29,36 @@
     width: 100%;
     height: 50px;
     justify-content: normal;
+
+    & li {
+        margin-right: 10px ;
+    }
 }
 
-.medium-tag-button {
-    background-color: #c2fbd7;
-    border-radius: 100px;
-    box-shadow: rgba(250, 195, 29, .2) 0 -25px 18px -14px inset,rgba(250, 195, 29, .15) 0 1px 2px,rgba(250, 195, 29, .15) 0 2px 4px,rgba(250, 195, 29, .15) 0 4px 8px,rgba(250, 195, 29, .15) 0 8px 16px,rgba(250, 195, 29, .15) 0 16px 32px;
-    color: #FAC31D;
-    cursor: pointer;
-    display: inline-block;
-    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+.topic-tag {
+    background-color: #8bc4e8;
     padding: 7px 20px;
-    text-align: center;
-    text-decoration: none;
+    border-radius: 20px;
+    color: #030ffd !important;
     transition: all 250ms;
-    border: 0;
-    font-size: 16px;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    cursor: pointer;
+    box-shadow: rgba(3, 15, 253, .2) 0 -25px 18px -14px inset,rgba(3, 15, 253, .15) 0 1px 2px,rgba(3, 15, 253, .15) 0 2px 4px,rgba(3, 15, 253, .15) 0 4px 8px,rgba(3, 15, 253, .15) 0 8px 16px,rgba(3, 15, 253, .15) 0 16px 32px;
+
+    & i {
+        margin-right: 6px;
+    }
+
+    &:hover {
+        box-shadow: rgba(3, 15, 253, .35) 0 -25px 18px -14px inset,rgba(3, 15, 253, .25) 0 1px 2px,rgba(3, 15, 253, .25) 0 2px 4px,rgba(3, 15, 253, .25) 0 4px 8px,rgba(3, 15, 253, .25) 0 8px 16px,rgba(3, 15, 253, .25) 0 16px 32px;
+
+        transform: scale(1.05) rotate(-1deg);
+    }
 }
 
-.medium-tag-button:hover {
-    box-shadow: rgba(250, 195, 29,.35) 0 -25px 18px -14px inset,rgba(250, 195, 29,.25) 0 1px 2px,rgba(250, 195, 29,.25) 0 2px 4px,rgba(250, 195, 29, .25) 0 4px 8px,rgba(250, 195, 29,.25) 0 8px 16px,rgba(250, 195, 29, .25) 0 16px 32px;
-    transform: scale(1.05) rotate(-1deg);
+.dp-body {
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    /*background-color: #103067;*/
 }
