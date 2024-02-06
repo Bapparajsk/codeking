@@ -1,0 +1,22 @@
+.dashboard-main {
+    width: calc(100% - 20px);
+    height: calc(100% - 80px);
+    border-radius: 10px;
+    overflow-y: scroll;
+    background-color: #415672;
+}
+
+.dashboard-main::-webkit-scrollbar {
+    width: 10px;
+}
+
+.dashboard-main::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+}
+
+.dashboard-main::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #ed0606;
+}
