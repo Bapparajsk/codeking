@@ -2,7 +2,7 @@
     width: 100%;
     height: auto;
     background-color: #415672;
-    padding: 10px;
+    padding: 15px;
 
     & span {
         color: #e7ebf2;
@@ -11,6 +11,14 @@
     & p {
         color: #e7ebf2;
         font-family: 'Noto Sans', sans-serif;
+    }
+
+    & hr {
+        /*color: rgba(255, 255, 255, 0.22)*/
+        border-top-width: 1px;
+        color: initial;
+        height: 0;
+        border-color: #FFFFFF5B;
     }
 }
 
@@ -60,5 +68,133 @@
     width: 100%;
     height: auto;
     margin-top: 15px;
-    /*background-color: #103067;*/
 }
+
+pre {
+    color: #ffffff;
+    font-size: 14px;
+    padding-left: 20px;
+    white-space: pre-wrap;
+    border-left-style: solid;
+    border-color: rgba(255, 255, 255, 0.34);
+    border-left-width: 2px;
+    margin: 10px 0;
+}
+
+.constraints {
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.constraints li {
+    list-style: outside;
+    color: rgba(255, 255, 255, 0.59);
+    font-size: 12px;
+}
+
+.constraints li::marker {
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+    text-transform: none;
+    text-indent: 0px !important;
+    text-align: start !important;
+    text-align-last: start !important;
+    padding-left: 10px;
+}
+
+.dp-footer {
+    width: 100%;
+    height: auto;
+}
+
+.dp-footer-accepted {
+    margin: 20px 0;
+    justify-content: start;
+    padding: 0 10px;
+
+    & span {
+        letter-spacing: .5px;
+    }
+}
+
+.accepted {
+    margin-right: 50px;
+    & span {
+        font-family: "Roboto Slab", sans-serif;
+        font-size: 12px;
+        color: rgba(200, 199, 199, 0.68);
+        margin-right: 10px;
+    }
+}
+
+.parentage {
+    & span {
+        color: #ffffff;
+        font-size: 14px;
+    }
+}
+
+.dp-footer-topics {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    transition: all .5s linear;
+}
+
+
+.dp-footer-topics-popup {
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.dp-footer-popup-name {
+    & span {
+        color: #EFEFEFE4;
+        font-family: "Roboto Slab", sans-serif;
+        margin-left: 5px;
+    }
+    & i {
+        color: #EFEFEFE4;
+    }
+}
+
+.dp-footer-popup-icon i {
+    color: rgba(239, 239, 239, 0.56);
+}
+
+.show-dp-footer-topic-names {
+    transition: all .2s linear;
+    transition-duration: 0.25s;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+}
+
+.topic-tag-name {
+    cursor: pointer;
+     padding: 5px 20px;
+     border: 0;
+     font-size: 16px;
+     margin: 5px 10px;
+     transition: all 150ms ease-in-out;
+     border-radius: 14px;
+     font-weight: 500;
+     color: #ffffff;
+     background-color: transparent;
+     background-image: radial-gradient(50% 115% at 50% -5%, rgba(255, 255, 255, 0.11) 0%, transparent 100%);
+     box-shadow: inset 0 0px 10px 0px rgba(255, 255, 255, 0.14), inset 0px 5px 10px 0px rgba(255, 255, 255, 0.11), inset 0px 2px 5px 0px rgba(255, 255, 255, 0.4), inset 0px 3px 20px 0px rgba(0, 0, 0, 0.25);
+}
+
+.topic-tag-name:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.topic-tag-name:active {
+    transform: scale(.95);
+}
+

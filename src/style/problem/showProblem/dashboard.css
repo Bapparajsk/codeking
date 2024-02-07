@@ -18,5 +18,5 @@
 
 .dashboard-main::-webkit-scrollbar-thumb {
     border-radius: 8px;
-    background-color: #ed0606;
+    background-color: rgba(100, 244, 88, 0.66);
 }

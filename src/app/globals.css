@@ -6,6 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
 * {
   padding: 0;
@@ -35,9 +36,6 @@ a {
 
 li {
   list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .isWrong {
@@ -61,4 +59,18 @@ li {
 
 .is-current {
   box-shadow: rgba(0, 0, 0, 0.17) 0 -23px 25px 0 inset, rgba(0, 0, 0, 0.15) 0 -36px 30px 0 inset, rgba(0, 0, 0, 0.1) 0 -79px 40px 0 inset, rgba(0, 0, 0, 0.06) 0 2px 1px, rgba(0, 0, 0, 0.09) 0 4px 2px, rgba(0, 0, 0, 0.09) 0 8px 4px, rgba(0, 0, 0, 0.09) 0 16px 8px, rgba(0, 0, 0, 0.09) 0 32px 16px;
+}
+
+code {
+  font-size: 14px;
+  line-height: 25px;
+  padding: 0.125rem;
+  white-space: pre-wrap;
+  border-radius: 5px;
+  border-width: 1px;
+  font-family: 'Lora', serif;
+  letter-spacing: 1px;
+  background-color: #ffffff12;
+  border-color: #f7faff1f;
+  color: #eff1f6bf;
 }
