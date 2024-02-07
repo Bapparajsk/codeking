@@ -21,12 +21,13 @@ export const Navbar = () => {
         <nav className={'navbar'}>
             <ul className={'logo-bar'}>
                 <li
+                    className={"flex"}
                     onMouseOver={() => handleHovers(setLogoHover, true)}
                     onMouseOut={() => handleHovers(setLogoHover, false)}
                 >
                     <lord-icon
                         src="https://cdn.lordicon.com/yedgackm.json"
-                        trigger={logoHover ? "loop" : ""}
+                        trigger={logoHover ? "loop" : "in"}
                         stroke="light"
                         delay="150"
                         style={{width: "50px", height: "50px"}}>
@@ -48,7 +49,7 @@ export const Navbar = () => {
                     <Link href={'/'} className={'nav-link'}>
                         <lord-icon
                             src="https://cdn.lordicon.com/epietrpn.json"
-                            trigger={homeHover ? "loop" : ""}
+                            trigger={homeHover ? "loop" : "in"}
                             delay="150"
                             style={{width: "35px", height: "35px"}}>
                         </lord-icon>
@@ -63,7 +64,7 @@ export const Navbar = () => {
                     <Link href={'/problems'} className={'nav-link'}>
                         <lord-icon
                             src="https://cdn.lordicon.com/yhwigecd.json"
-                            trigger={problemHover? "loop": ""}
+                            trigger={problemHover? "loop": "in"}
                             delay="150"
                             style={{width: "35px", height: "35px"}}>
                         </lord-icon>
@@ -78,7 +79,7 @@ export const Navbar = () => {
                     <Link href={'/user/profile'} className={'nav-link'}>
                         <lord-icon
                             src="https://cdn.lordicon.com/ffpklhrd.json"
-                            trigger={userHover ? "loop" : ""}
+                            trigger={userHover ? "loop" : "in"}
                             delay="150"
                             style={{width: "35px", height: "35px"}}>
                         </lord-icon>
@@ -94,7 +95,7 @@ export const Navbar = () => {
                         <lord-icon
                             src="https://cdn.lordicon.com/bdwluond.json"
                             colors="primary:#e8308c,secondary:#7166ee"
-                            trigger={singInHover ? "loop" : ""}
+                            trigger={singInHover ? "loop" : "in"}
                             delay="150"
                             style={{width: "35px", height: "35px"}}>
                         </lord-icon>
