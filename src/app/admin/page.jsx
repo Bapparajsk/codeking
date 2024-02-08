@@ -1,6 +1,8 @@
 const Page = () => {
     return (
-        <div></div>
+        <div>
+
+        </div>
     )
 }
 
