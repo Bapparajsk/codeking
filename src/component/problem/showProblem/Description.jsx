@@ -25,6 +25,7 @@ export const Description = () => {
     const scrollToSection = () => {
         const section = document.getElementById('targetSection');
         section.scrollIntoView({ behavior: 'smooth' });
+        setShowTopicName(true);
     };
 
     const pathName = usePathname();
@@ -51,8 +52,13 @@ export const Description = () => {
                         </span>
                     </li>
                     <li>
-                        <span className={"topic-tag"} onClick={scrollToSection}>
-                            <i className="fa-solid fa-tag fa-bounce"></i>
+                        <span
+                            className={"topic-tag"}
+                            onClick={scrollToSection}
+                            onMouseOver={() => setTopicIconRef(true)}
+                            onMouseOut={() => setTopicIconRef(false)}
+                        >
+                            <i className={`fa-solid fa-tag ${topicIconRef ? "fa-bounce" : ""} `}></i>
                             Topic
                         </span>
                     </li>
@@ -120,12 +126,6 @@ export const Description = () => {
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
             </div>
-            {/*Accepted*/}
-            {/*1.9M*/}
-            {/*Submissions*/}
-            {/*3.2M*/}
-            {/*Acceptance Rate*/}
-            {/*59.8%*/}
             <div className={"dp-footer"}>
                 <hr/>
                 <div className={"dp-footer-accepted flex"}>
@@ -159,15 +159,16 @@ export const Description = () => {
                         <div className={"dp-footer-popup-name"}
 
                         >
-                            <i className={`fa-solid fa-tag ${topicIconRef ? "fa-bounce": ""} `}></i>
+                            <i className={`fa-solid fa-tag ${topicIconRef ? "fa-bounce" : ""} `}></i>
                             <span>Topics</span>
                         </div>
                         <div className={"dp-footer-popup-icon"}>
-                            <i className={`fa-solid fa-chevron-down ${topicIconRef ? "fa-bounce": ""}`}></i>
+                            <i className={`fa-solid fa-chevron-down ${topicIconRef ? "fa-bounce" : ""}`}></i>
                         </div>
                     </div>
                     <div className={"show-dp-footer-topic-names"}
-                         style={{ height: showTopicName ? '50px' : '0' }}
+                         id={"targetSection"}
+                         style={{height: showTopicName ? '50px' : '0'}}
                     >
                         <TopicTage tagName={"Hash Table"}/>
                         <TopicTage tagName={"String"}/>
@@ -176,6 +177,11 @@ export const Description = () => {
                     </div>
                 </div>
                 <hr/>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p className={"dp-footer-name"}>Copyright © 2023 Code King</p>
             </div>
         </div>
     )
