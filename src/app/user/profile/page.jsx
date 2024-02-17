@@ -6,9 +6,18 @@ import { Footer } from "#/footer/Footer";
 import { UserDetails } from "#/user/UserDetails";
 import { ProgressCard } from "#/user/ProgressCard";
 import { LanguagesProgress } from "#/user/LanguagesProgress";
+import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
+import { useAuthUser } from '@/context/usertoken/AuthUser';
 
 const Profile = () => {
 
+    const { router } = useNavigateRouter();
+    const { token } = useAuthUser();
+
+    if(token === undefined) {
+        router.push('/login') // Redirect to login page if user is not logged in
+    }
+    
     useEffect(() => {
         document.title = "Code King - Profile"
     }, []);

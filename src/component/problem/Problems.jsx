@@ -2,10 +2,8 @@ import "$/problem/problems.css"
 import {ProblemBox} from "#/problem/ProblemBox";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
-import axios from 'axios'
 
 export const Problems = () => {
-
     return (
         <div className={"problems-container flex"}>
             <Link href={"/problems/Letter-Combinations-of-a-Phone-Number"} style={{width: "100%"}}>
