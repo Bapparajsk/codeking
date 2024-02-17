@@ -25,11 +25,16 @@ export const Signup = props => {
     const [digit, setDigit] = useState("");
     const [special, setSpecial] = useState("");
 
-    const togglePasswordVisibility = (passwordState, setPasswordState) => {
-        setTimeout(() => {
-            setPasswordState(passwordState === "password" ? "text" : "password");
-        }, 100);
+    const hoverOnPasswordVisibility = (passwordState, setPasswordState) => {
+        setPasswordState("text");
     };
+
+    const hoverOUtPasswordVisibility = (passwordState, setPasswordState) => {
+        setTimeout(() => {
+            setPasswordState("password");
+        }, 250)
+    };
+
     const clickHandler = () => {
         props.setSignup("signin");
     }
@@ -113,11 +118,12 @@ export const Signup = props => {
                                 required={true}
                                 name={'password'}
                                 placeholder={'Password'}
-                                className={`inputs ${pass_border.length !== 0 ? pass_border : ""}`}/>
+                                className={`inputs ${pass_border.length !== 0 ? pass_border : ""}`}
+                            />
                             <div
                                 className={'pass-eye-icon flex'}
-                                onMouseOver={() => togglePasswordVisibility(pass1, setPass1)}
-                                onMouseOut={() => togglePasswordVisibility(pass1, setPass1)}>
+                                onMouseOver={() => hoverOnPasswordVisibility(pass1, setPass1)}
+                                onMouseOut={() => hoverOUtPasswordVisibility(pass1, setPass1)}>
 
                                 <lord-icon
                                     src="https://cdn.lordicon.com/fmjvulyw.json"
@@ -141,13 +147,17 @@ export const Signup = props => {
                                 placeholder={'Confirm Password'}
                                 value={cPassword}
                                 onChange={cPasswordHandler}
-                                className={`inputs ${cPass_border.length !== 0 ? cPass_border : ""}`}/>
+                                className={`inputs ${cPass_border.length !== 0 ? cPass_border : ""}`}
+                            />
                             <div
                                 className={'pass-eye-icon flex'}
-                                onMouseOver={() => togglePasswordVisibility(pass2, setPass2)}
-                                onMouseOut={() => togglePasswordVisibility(pass2, setPass2)}>
+                                onMouseOver={() => hoverOnPasswordVisibility(pass2, setPass2)}
+                                onMouseOut={() => hoverOUtPasswordVisibility(pass2, setPass2)}
+                                // style={{backgroundColor: 'red',}}
+                            >
 
                                 <lord-icon
+
                                     src="https://cdn.lordicon.com/fmjvulyw.json"
                                     trigger="morph"
                                     state="morph-cross"

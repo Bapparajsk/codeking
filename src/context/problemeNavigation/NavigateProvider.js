@@ -1,10 +1,12 @@
 // context/YourContextProvider.js
 "use client"
-import { useState } from 'react';
-import Navigate from './Navigate';
+import { useState, createContext, useContext } from 'react';
+import { } from 'next'
+
+const Navigate = createContext();
 
 const NavigateProvider = ({ children }) => {
-    const [yourState, setYourState] = useState("bappa");
+
 
 
     return (
@@ -14,4 +16,6 @@ const NavigateProvider = ({ children }) => {
     );
 };
 
-export default NavigateProvider;
+const useNavigateRouter = useContext(Navigate);
+
+export { NavigateProvider, useNavigateRouter };

@@ -113,9 +113,10 @@
     & .pass-eye-icon {
         position: absolute;
         right: -40px;
-        top: 0;
-        height: 40px;
-        width: 40px;
+        top: 50%;
+        height: auto;
+        width: auto;
         border-radius: 10px;
+        transform: translateY(-50%);
     }
 }
