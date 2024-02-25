@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export const TopicTage = ({tagName}) => {
     return (
         <button className={"topic-tag-name"}>

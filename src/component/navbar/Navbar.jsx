@@ -3,6 +3,7 @@
 import '$/navbar/style.css';
 import Link from "next/link";
 import { useState } from "react";
+import { useUserDetails } from '@/context/user/UserProvider';
 
 export const Navbar = () => {
 
@@ -11,19 +12,20 @@ export const Navbar = () => {
     const [problemHover, setProblemHover] = useState(false);
     const [userHover, setUserHover] = useState(false);
     const [singInHover, setSingInHover] = useState(false);
+    const [isLogin, setIsLogin] = useState(true);
+
 
     const handleHovers = (setHover, value) => {
         setHover(value)
     }
-
 
     return (
         <nav className={'navbar'}>
             <ul className={'logo-bar'}>
                 <li
                     className={"flex"}
-                    onMouseOver={() => handleHovers(setLogoHover, true)}
-                    onMouseOut={() => handleHovers(setLogoHover, false)}
+                    onMouseOver={() => setLogoHover(true)}
+                    onMouseOut={() => setLogoHover(false)}
                 >
                     <lord-icon
                         src="https://cdn.lordicon.com/yedgackm.json"
@@ -43,8 +45,8 @@ export const Navbar = () => {
 
             <ul className={'details-ber'}>
                 <li
-                    onMouseOver={() => handleHovers(setHomeHover, true)}
-                    onMouseOut={() => handleHovers(setHomeHover, false)}
+                    onMouseOver={() => setHomeHover(true)}
+                    onMouseOut={() => setHomeHover(false)}
                 >
                     <Link href={'/'} className={'nav-link'}>
                         <lord-icon
@@ -58,7 +60,7 @@ export const Navbar = () => {
                 </li>
 
                 <li
-                    onMouseOver={() => handleHovers(setProblemHover, true)}
+                    onMouseOver={() => setProblemHover( true)}
                     onMouseOut={() => handleHovers(setProblemHover, false)}
                 >
                     <Link href={'/problems'} className={'nav-link'}>
@@ -76,7 +78,7 @@ export const Navbar = () => {
                     onMouseOver={() => handleHovers(setUserHover, true)}
                     onMouseOut={() => handleHovers(setUserHover, false)}
                 >
-                    <Link href={'/user/profile'} className={'nav-link'}>
+                    <Link href={"/user/profile"} className={"nav-link"}>
                         <lord-icon
                             src="https://cdn.lordicon.com/ffpklhrd.json"
                             trigger={userHover ? "loop" : "in"}
@@ -91,16 +93,16 @@ export const Navbar = () => {
                     onMouseOver={() => handleHovers(setSingInHover, true)}
                     onMouseOut={() => handleHovers(setSingInHover, false)}
                 >
-                    <Link href={'/login'} className={'nav-link'}>
+                    { isLogin && <Link href={"/login"} className={"nav-link"}>
                         <lord-icon
                             src="https://cdn.lordicon.com/bdwluond.json"
                             colors="primary:#e8308c,secondary:#7166ee"
                             trigger={singInHover ? "loop" : "in"}
                             delay="150"
-                            style={{width: "35px", height: "35px"}}>
+                            style={{ width: "35px", height: "35px" }}>
                         </lord-icon>
                         <span>Sing up</span>
-                    </Link>
+                    </Link>}
                 </li>
             </ul>
         </nav>

@@ -1,41 +1,17 @@
 import React, {useState} from 'react';
 import '$/user/languagesprogress.css';
 import Image from "next/image";
-import {LanProgress} from "#/user/LanProgress";
+import { LanProgress } from "#/user/LanProgress";
+import { useUserDetails } from "@/context/user/UserProvider";
+import { getLanProgressTemplate } from '@/lib/templates/template';
 
 
 export const LanguagesProgress = () => {
-    const [lanProgress, setLanProgress] = useState([
-        {
-        name: "java",
-            total: 1000,
-            solve: 600
-        },
-        {
-            name: "python",
-            total: 800,
-            solve: 290
-        },
-        {
-            name: "c++",
-            total: 1300,
-            solve: 800
-        },
-        {
-            name: "c",
-            total: 700,
-            solve: 300
-        },
-        {
-            name: "javaScript",
-            total: 1000,
-            solve: 500
-        },
-    ]);
-    const [lanSolve, setLanSolve] = useState({
-        name: "java",
-        solve: 600
-    });
+
+    const { userDetails } = useUserDetails();
+
+    const [lanProgress, setLanProgress] = useState(getLanProgressTemplate());
+    const [lanSolve, setLanSolve] = useState({ name: "java", solve: 600 });
 
     const setName = ( name, solve ) => {
         setLanSolve({ name, solve });
@@ -55,11 +31,11 @@ export const LanguagesProgress = () => {
                     <div className={'lan-pro-details'}>
                         <p><span>{lanSolve.name}</span><span>{lanSolve.solve}</span></p>
                     </div>
-                    {
-                        lanProgress.map((item, idx) => {
-                            return <LanProgress key={idx} items={item} setName={setName} setDefualt={setDefault}/>
-                        })
-                    }
+                    <LanProgress  items={lanProgress['java']} setName={setName} setDefualt={setDefault}/>
+                    <LanProgress  items={lanProgress['python']} setName={setName} setDefualt={setDefault}/>
+                    <LanProgress  items={lanProgress['cpp']} setName={setName} setDefualt={setDefault}/>
+                    <LanProgress  items={lanProgress['c']} setName={setName} setDefualt={setDefault}/>
+                    <LanProgress  items={lanProgress['javaScript']} setName={setName} setDefualt={setDefault}/>
                 </div>
                 <div className={'languages-box flex'}>
                     <div className="flex" style={{width: "25px"}}><i className="fa-brands fa-java"></i></div>

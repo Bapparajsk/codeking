@@ -1,4 +1,5 @@
-import {useEffect, useRef, useState} from "react";
+import { useState } from "react";
+
 
 const diff = (name) => {
     return <span style={{color: (name === "Easy" ? "#00B8A3" : name === "Medium" ? "#FFA427" : "#DA211A")}}>{name}</span>
@@ -29,7 +30,6 @@ export const ProblemBox = ({ successful, problemNumber, problemName, difficulty,
         setStatusHover(false);
         setStatusIcon({w: 25, h: 25});
     }
-
 
     return (
         <>

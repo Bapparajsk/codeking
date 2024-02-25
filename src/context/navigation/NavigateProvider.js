@@ -7,7 +7,6 @@ const Navigate = createContext();
 
 const NavigateProvider = ({ children }) => {
     const router = useRouter();
-    
     return (
         <Navigate.Provider value={{router}}>
             {children}

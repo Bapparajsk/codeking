@@ -15,7 +15,7 @@ const Page = () => {
     }
 
     useEffect(() => {
-        document.title = "Code King - Account login "
+        document.title = "Code King - Account login"
     }, []);
 
     return (

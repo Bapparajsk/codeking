@@ -1,26 +1,55 @@
 import '$/user/userDetails.css'
 import Link from "next/link";
-import {useState} from "react";
+import { useEffect, useState } from "react";
+import { useUserDetails } from '@/context/user/UserProvider';
 
 export const UserDetails = () => {
     const [edit_hover, setEdit_hover] = useState(false);
+    const [imageSrc, setImageSrc] = useState(null);
+
+    const { userDetails } = useUserDetails();
+
+    const setDetails = () => {
+        const { data } = userDetails.profile_image.data;
+        const base64String = Buffer.from(data).toString('base64');
+        const imageSrc = `data:image/jpeg;base64,${base64String}`;
+        setImageSrc(imageSrc)
+    }
+
+    useEffect(() => {
+        if(userDetails) {
+            setDetails();
+        }
+        // const buffer = userDetails.
+    }, [userDetails]);
 
     return (
         <div className={'details-card'}>
             <div className={'details-card-top flex'}>
                 <div className={'d-card-img'}>
-                    <img src={'https://cdn2.iconfinder.com/data/icons/rcons-users-color/32/boy-512.png'} alt={'user image'}/>
+                    {imageSrc ? <img src={imageSrc} alt="Image" /> :
+                        <img src={"https://cdn2.iconfinder.com/data/icons/rcons-users-color/32/boy-512.png"}
+                             alt={"user image"} />}
                 </div>
-                <h1>bapparaj sk</h1>
+                <h1>{userDetails?.user_name}</h1>
+                <div className={'user-settings'}>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/lecprnjb.json"
+                        trigger="loop"
+                        delay="1500"
+                        state="hover-cog-2"
+                        style={{ width: "25px", height: "25px" }}>
+                    </lord-icon>
+                </div>
             </div>
-            <div className={'details-card-body'}>
+            <div className={"details-card-body"}>
                 <ul>
                     <li>
-                        <p>Username : <span>Bapparaj sk</span></p>
-                        <hr/>
+                        <p>Username : <span>{userDetails?.user_name}</span></p>
+                        <hr />
                     </li>
                     <li>
-                        <p>About Me : <span>I am FullStack Developer</span></p>
+                        <p>About Me : <span>{userDetails?.about_me}</span></p>
                         <hr/>
                     </li>
                     <li>
@@ -28,26 +57,10 @@ export const UserDetails = () => {
                         <hr/>
                     </li>
                     <li>
-                        <p>Student/Professional : <span>Professional</span></p>
+                        <p>Student/Professional : <span>{userDetails?.student_professional}</span></p>
                         <hr/>
                     </li>
                 </ul>
-                <div className={'edit-card flex'}>
-                    <Link href={'user/profile/edit'} className={'link'}>
-                        <div
-                            className={'edit-button flex'}
-                            onMouseOver={() => setEdit_hover(true)}
-                            onMouseOut={() => setEdit_hover(false)}
-                        >
-                            <span>Edit Now</span>
-                            <lord-icon
-                                src="https://cdn.lordicon.com/zfzufhzk.json"
-                                trigger={edit_hover ? "loop": ""}
-                                style={{width: "25px", height: "25px"}}>
-                            </lord-icon>
-                        </div>
-                    </Link>
-                </div>
             </div>
         </div>
     )

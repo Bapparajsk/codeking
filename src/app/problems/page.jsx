@@ -6,8 +6,21 @@ import "$/problem/style.css"
 import { CardList } from "#/problem/CardList";
 import { SubTitles } from "#/problem/SubTitles";
 import { ProblemsList } from "#/problem/ProblemsList";
+import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
+import { useAuthUser } from '@/context/usertoken/AuthUser';
 
 const Page = () => {
+
+    const { router } = useNavigateRouter();
+    const { token, getAndSetTokenInLocalstorage } = useAuthUser();
+
+    if (token === undefined) {
+        if (getAndSetTokenInLocalstorage()) {
+
+        } else {
+            router.push('/login');
+        }
+    }
 
     useEffect(() => {
         document.title = "Code King - Problems List"

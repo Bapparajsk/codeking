@@ -1,42 +1,35 @@
 import "$/problem/problems.css"
 import {ProblemBox} from "#/problem/ProblemBox";
 import Link from "next/link";
-import {useRouter} from "next/navigation";
+import { useProblem } from "@/context/problemList/ProblemProvider";
+import { useCallback, useState } from "react";
+import { createLink } from '@/lib/handler/functionHandler';
 
 export const Problems = () => {
+
+    const { problemLists } = useProblem();
+    console.log(problemLists);
+
+
+
     return (
         <div className={"problems-container flex"}>
-            <Link href={"/problems/Letter-Combinations-of-a-Phone-Number"} style={{width: "100%"}}>
-                <ProblemBox
-                    successful={false}
-                    problemNumber={101}
-                    problemName={"Letter Combinations of a Phone Number"}
-                    difficulty={"Easy"}
-                    submission={{sub: 100, total: 5000}}
-                />
-            </Link>
 
-            <ProblemBox
-                successful={true}
-                problemNumber={387}
-                problemName={"Find First and Last Position of Element in Sorted"}
-                difficulty={"Medium"}
-                submission={{sub: 2000, total: 5000}}
-            />
-            <ProblemBox
-                successful={true}
-                problemNumber={10}
-                problemName={"Regular Expression Matching"}
-                difficulty={"Hard"}
-                submission={{sub: 80, total: 5000}}
-            />
-            <ProblemBox
-                successful={false}
-                problemNumber={10}
-                problemName={"Regular Expression Matching"}
-                difficulty={"Hard"}
-                submission={{sub: 80, total: 5000}}
-            />
+            {
+                problemLists?.map((item, idx) => {
+                    return (
+                        <Link key={idx} href={`/problems/${createLink(item.hading)}`} style={{width: "100%"}}>
+                        <ProblemBox
+                            successful={false}
+                            problemNumber={item.number}
+                            problemName={item.hading}
+                            difficulty={item.difficulty}
+                            submission={{sub: 100, total: 5000}}
+                        />
+                    </Link>
+                    )
+                })
+            }
         </div>
     )
 }

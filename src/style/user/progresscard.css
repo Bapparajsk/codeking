@@ -28,6 +28,7 @@
     border-radius: 50%;
     /*background: conic-gradient(#0cefa4 50deg, #fff 0deg);*/
     position: relative;
+
 }
 .sercail-progress::before {
     content: '';
@@ -38,11 +39,11 @@
     background: white;
 }
 
-
 .pro-total-solves {
     position: absolute;
     cursor: pointer;
     z-index: 10;
+
     & p:nth-child(1) {
         font-size: 24px;
         font-weight: 700;

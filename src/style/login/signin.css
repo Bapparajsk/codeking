@@ -43,6 +43,7 @@
     letter-spacing: 1px;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
+    cursor: pointer;
 
     &:hover {
         background-color: #03fdaa;
@@ -98,7 +99,33 @@
         padding-right: 5px;
         font-family: 'Poppins', sans-serif;
         letter-spacing: 1px;
+        cursor: pointer;
     }
+}
+
+.login-options {
+    height: 30px;
+    width: 100%;
+    gap: 10px;
+
+    & .img {
+        width: 25px;
+        height: 25px;
+        object-fit: cover;
+        cursor: pointer;
+        filter: grayscale(100%);
+        transition: all .5s ease;
+    }
+}
+
+.linkedin:hover{
+    filter: grayscale(0%);
+}
+.google:hover{
+    filter: grayscale(0%);
+}
+.github:hover{
+    filter: grayscale(0%);
 }
 
 .login-privacy-policy {
@@ -112,11 +139,13 @@
     position: relative;
     & .pass-eye-icon {
         position: absolute;
-        right: -40px;
+        right: -30px;
         top: 50%;
         height: auto;
         width: auto;
         border-radius: 10px;
-        transform: translateY(-50%);
+        transform: translateY(-80%);
+        font-size: 20px;
+        cursor: pointer;
     }
 }

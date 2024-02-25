@@ -1,17 +1,21 @@
 import "$/problem/showProblem/description.css"
 import getButton from "@/lib/button/tagButtons";
-import React, {Fragment, useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { usePathname } from "next/navigation";
 import { TopicTage } from "#/problem/showProblem/TopicTage";
+import { linkToName } from '@/lib/handler/functionHandler';
+import { useAuthUser } from "@/context/usertoken/AuthUser";
+import axios from "axios";
 
 export const Description = () => {
     const [tagButton, setTagButton] = useState(null);
     const buttonRef = useRef();
     const [topicIconRef, setTopicIconRef] = useState(false);
     const [showTopicName, setShowTopicName] = useState(false);
+    const [problem, setProblem] = useState();
 
     const hoverOnHandler = () => {
-        const { boxShadow, transform} = tagButton.mouseOver();
+        const { boxShadow, transform} = tagButton?.mouseOver();
         buttonRef.current.style.boxShadow = boxShadow;
         buttonRef.current.style.transform = transform;
     }
@@ -29,15 +33,33 @@ export const Description = () => {
     };
 
     const pathName = usePathname();
+    const { token } = useAuthUser();
+
+
     useEffect(() => {
-        document.title = pathName.split("/")[2];
-        setTagButton(getButton("Medium"))
-    }, [])
+        const link = pathName.split("/")[2];
+        document.title = `Code King - ${ link }`;
+
+        const fetchData = async () => {
+            let problemName = linkToName(link);
+            const headers = { 'token': token };
+            try {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-one/${problemName}`, {headers});
+                setProblem(res.data.problem);
+                setTagButton(getButton(res.data.problem.difficulty));
+                console.log(res.data.problem);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
+    }, [pathName])
+
 
     return (
         <div className={"description-card"}>
             <div className={"dp-hading flex"}>
-                <span>17. Letter Combinations of a Phone Number</span>
+                <span>{problem?.number}. {problem?.hading}</span>
             </div>
             <div className={"dp-tags flex"}>
                 <ul className={"flex"}>
@@ -48,7 +70,7 @@ export const Description = () => {
                             onMouseOver={hoverOnHandler}
                             onMouseOut={hoverOutHandler}
                         >
-                            Medium
+                            {problem?.difficulty}
                         </span>
                     </li>
                     <li>
@@ -65,23 +87,35 @@ export const Description = () => {
                 </ul>
             </div>
             <div className={"dp-body"}>
-                <p>Given an array of integers <code>nums</code> and an integer target, return indices of the two numbers
-                    such that
-                    they add up to target.</p>
-                <p>&nbsp;</p>
-                <p>You may assume that each input would have exactly one solution, and you may not use the same element
-                    twice.</p>
-                <p>&nbsp;</p>
-                <p>You can return the answer in any order.</p>
+                {
+                    problem?.statement.map((item, idx) => {
+                        let conName = item.replace(/@C/g, '<code>').replace(/#C/g, '</code>');
+                        return (
+                            <>
+                                <p dangerouslySetInnerHTML={{__html: conName}}></p>
+                                <p>&nbsp;</p>
+                            </>
+                        )
+                    })
+                }
                 <p>&nbsp;</p>
                 <p>
                     <strong>Example 1:</strong>
                 </p>
                 <pre className={"examples"}>
                     <strong>Input : </strong>
-                    {`digits = "23"`}<br/>
+                    {problem?.example[0].example1.input}
+                    <br/>
                     <strong>Output : </strong>
-                    {`["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]`}
+                    {problem?.example[0].example1.output}
+                    {
+                        problem?.example[0].example1.explanation &&
+                        <>
+                            <br />
+                            <strong>Explanation : </strong>
+                            {problem?.example[0].example1.explanation}
+                        </>
+                    }
                 </pre>
                 <p>&nbsp;</p>
                 <p>
@@ -89,20 +123,20 @@ export const Description = () => {
                 </p>
                 <pre className={"examples"}>
                     <strong>Input : </strong>
-                    {`digits = "23"`}<br/>
+                    {problem?.example[0].example2.input}
+                    <br/>
                     <strong>Output : </strong>
-                    {`["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]`}
+                    {problem?.example[0].example2.output}
+                    {
+                        problem?.example[0].example2.explanation &&
+                        <>
+                            <br />
+                            <strong>Explanation : </strong>
+                            {problem?.example[0].example2.explanation}
+                        </>
+                    }
                 </pre>
                 <p>&nbsp;</p>
-                <p>
-                    <strong>Example 2:</strong>
-                </p>
-                <pre className={"examples"}>
-                    <strong>Input : </strong>
-                    {`digits = "23"`}<br/>
-                    <strong>Output : </strong>
-                    {`["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]`}
-                </pre>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
@@ -110,18 +144,13 @@ export const Description = () => {
                     <strong>Constraints :</strong>
                 </p>
                 <ul className={"constraints"}>
-                    <li>
-                        <code>{`0 <= digits.length <= 4`}</code>
-                    </li>
-                    <li>
-                        <code>digit[i]</code>
-                        {` is a digit int the range `}
-                        <code>{`['2', '9']`}</code>
-                        .
-                    </li>
+                    {
+                        problem?.constraints.map((item, idx) => {
+                            let conName = item.replace(/@C/g, '<code>').replace(/#C/g, '</code>');
+                            return <li key={idx} dangerouslySetInnerHTML={{__html: conName}}></li>;
+                        })
+                    }
                 </ul>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
@@ -170,10 +199,11 @@ export const Description = () => {
                          id={"targetSection"}
                          style={{height: showTopicName ? '50px' : '0'}}
                     >
-                        <TopicTage tagName={"Hash Table"}/>
-                        <TopicTage tagName={"String"}/>
-                        <TopicTage tagName={"Backtracking"}/>
-                        <TopicTage tagName={"Hash Table"}/>
+                        {
+                            problem?.tagName.map((item, idx) => {
+                                return <TopicTage key={idx} tagName={item}/>
+                            })
+                        }
                     </div>
                 </div>
                 <hr/>

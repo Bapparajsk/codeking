@@ -8,18 +8,22 @@ import { ProgressCard } from "#/user/ProgressCard";
 import { LanguagesProgress } from "#/user/LanguagesProgress";
 import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
 import { useAuthUser } from '@/context/usertoken/AuthUser';
+import { SolvedProblems }  from "#/user/SolvedProblems";
 
 const Profile = () => {
 
     const { router } = useNavigateRouter();
-    const { token } = useAuthUser();
+    const { getAndSetTokenInLocalstorage } = useAuthUser();
 
-    if(token === undefined) {
-        router.push('/login') // Redirect to login page if user is not logged in
-    }
-    
     useEffect(() => {
-        document.title = "Code King - Profile"
+        const checkTokenAndRedirect = async () => {
+            const isTokenSet = await getAndSetTokenInLocalstorage();
+            if (!isTokenSet) {
+                router.push('/login');
+            }
+        };
+
+        checkTokenAndRedirect();
     }, []);
 
     return (
@@ -39,7 +43,9 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={'user-pro-body'}></div>
+                    <div className={'user-pro-body'}>
+                        <SolvedProblems/>
+                    </div>
                 </div>
             </main>
             <Footer />
