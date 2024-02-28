@@ -15,11 +15,7 @@ const Page = () => {
     const { token, getAndSetTokenInLocalstorage } = useAuthUser();
 
     if (token === undefined) {
-        if (getAndSetTokenInLocalstorage()) {
-
-        } else {
-            router.push('/login');
-        }
+        router.push('/login');
     }
 
     useEffect(() => {

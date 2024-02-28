@@ -29,6 +29,12 @@ export const AuthProvider = ({ children }) => {
         setUserDetails(response.data.userDetails);
     }
 
+    const removeToken = () => {
+        localStorage.removeItem('token');
+        setToken(undefined);
+        return true;
+    }
+
     const setTokenInLocalstorage = async (userToken) => {
         try {
             await new Promise((res , rej) => {
@@ -46,12 +52,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     const getAndSetTokenInLocalstorage = async () => {
-        // if (setUserDetails !== undefined) {
-        //     console.log(setUserDetails);
-        //     console.log("dfsdhfz,jhfwe8urfh sdjklhfbsdjfgas");
-        //     return true;
-        // }
-
         const getToken = localStorage.getItem('token');
         if (getToken) {
             const headers = { 'token': getToken }
@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthUser.Provider value={{token, setTokenInLocalstorage, getAndSetTokenInLocalstorage}}>
+        <AuthUser.Provider value={{token, setTokenInLocalstorage, getAndSetTokenInLocalstorage, removeToken}}>
             {children}
         </AuthUser.Provider>
     );

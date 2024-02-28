@@ -4,6 +4,8 @@ import '$/navbar/style.css';
 import Link from "next/link";
 import { useState } from "react";
 import { useUserDetails } from '@/context/user/UserProvider';
+import { useAuthUser } from '@/context/usertoken/AuthUser';
+import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
 
 export const Navbar = () => {
 
@@ -14,9 +16,19 @@ export const Navbar = () => {
     const [singInHover, setSingInHover] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
 
+    const { userDetails, setUserDetails } = useUserDetails();
+    const { removeToken } = useAuthUser();
+    const { router } = useNavigateRouter();
+    
 
     const handleHovers = (setHover, value) => {
         setHover(value)
+    }
+
+    const logout = () => {
+        removeToken();
+        setUserDetails(undefined);
+        router.push('/login');
     }
 
     return (
@@ -89,21 +101,39 @@ export const Navbar = () => {
                     </Link>
                 </li>
 
-                <li
-                    onMouseOver={() => handleHovers(setSingInHover, true)}
-                    onMouseOut={() => handleHovers(setSingInHover, false)}
-                >
-                    { isLogin && <Link href={"/login"} className={"nav-link"}>
-                        <lord-icon
-                            src="https://cdn.lordicon.com/bdwluond.json"
-                            colors="primary:#e8308c,secondary:#7166ee"
-                            trigger={singInHover ? "loop" : "in"}
-                            delay="150"
-                            style={{ width: "35px", height: "35px" }}>
-                        </lord-icon>
-                        <span>Sing up</span>
-                    </Link>}
-                </li>
+                { userDetails === undefined ?
+                    <li
+                        onMouseOver={() => handleHovers(setSingInHover, true)}
+                        onMouseOut={() => handleHovers(setSingInHover, false)}
+                    >
+                        <Link href={"/login"} className={"nav-link"}>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/bdwluond.json"
+                                colors="primary:#e8308c,secondary:#7166ee"
+                                trigger={singInHover ? "loop" : "in"}
+                                delay="150"
+                                style={{ width: "35px", height: "35px" }}>
+                            </lord-icon>
+                            <span>Sing up</span>
+                        </Link>
+                    </li> : 
+                    <li
+                        onMouseOver={() => handleHovers(setSingInHover, true)}
+                        onMouseOut={() => handleHovers(setSingInHover, false)}
+                        className='nav-link'
+                        style={{cursor: 'pointer'}}
+                        onClick={logout}
+                    >
+                            <lord-icon
+                                src="https://cdn.lordicon.com/gwvmctbb.json"
+                                colors="primary:#121331,secondary:#1663c7"
+                                trigger={singInHover ? "loop" : "in"}
+                                delay="150"
+                                style={{ width: "35px", height: "35px" }}>
+                            </lord-icon>
+                            <span>Log out</span>
+                    </li> 
+                }
             </ul>
         </nav>
     );
