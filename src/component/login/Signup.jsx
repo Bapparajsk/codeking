@@ -94,13 +94,21 @@ export const Signup = props => {
             email: email,
             password: password
         }
+        try {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/sign-up`, userD);
+            const { userDetails, token } = res.data;
+            setTokenInLocalstorage(token);
+            setUserDetails(userDetails);
 
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/sign-up`, userD);
-        const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
-        setProblemLists(resProblem.data.problem);
-        setTokenInLocalstorage(res.data.token)
-        setUserDetails(res.data.userDetails);
-        router.push('/user/profile');
+            const headers = { 'token': token };
+
+            const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
+            setProblemLists(resProblem.data.problem);
+
+            router.push('/user/profile');
+        } catch (error) {
+            console.log('login error :- ', error);
+        }
     }
 
     const textToPass = (value, setPass, setPassHover, name) => {

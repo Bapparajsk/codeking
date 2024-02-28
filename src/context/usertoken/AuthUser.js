@@ -29,9 +29,20 @@ export const AuthProvider = ({ children }) => {
         setUserDetails(response.data.userDetails);
     }
 
-    const setTokenInLocalstorage = (userToken) => {
-        setToken(userToken);
-        localStorage.setItem('token', userToken);
+    const setTokenInLocalstorage = async (userToken) => {
+        try {
+            await new Promise((res , rej) => {
+                setToken(userToken);
+                localStorage.setItem('token', userToken);
+                setTimeout(() => {
+                    res(true);
+                }, 1000);
+            });
+        } catch (e) {
+            console.log('token set error :- ', e);
+        }
+
+        
     }
 
     const getAndSetTokenInLocalstorage = async () => {

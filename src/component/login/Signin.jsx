@@ -66,11 +66,16 @@ export const Signin = props => {
         }
         try {
             const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/sign-in`, useS);
+            const { userDetails, token } = res.data;
+
+            setUserDetails(userDetails);
+            setTokenInLocalstorage(token)
+
+            const headers = { 'token': token };
+
             const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
             setProblemLists(resProblem.data.problem);
-            setTokenInLocalstorage(res.data.token)
-            setUserDetails(res.data.userDetails);
-            console.log('ok');
+            
             router.push('/user/profile');
         } catch (e) {
             console.log(e);
