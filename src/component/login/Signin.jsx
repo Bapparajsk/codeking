@@ -1,6 +1,6 @@
 import '$/login/signin.css'
 import Link from "next/link";
-import {useState} from "react";
+import { useState } from "react";
 import isValid from "@/validator/isValid";
 import axios from "axios";
 import Image from "next/image";
@@ -14,7 +14,7 @@ import linkedin from '@/../public/images/linkedin.png';
 import { textToPass } from '@/lib/handler/passwordHover'
 
 
-export const Signin = props => {
+export const Signin = ({ setSignup, showMassagegHandler }) => {
     const [arrow1, setArrow1] = useState(false);
     const [arrow2, setArrow2] = useState(false);
     const [pass, setPass] = useState("password");
@@ -32,9 +32,9 @@ export const Signin = props => {
 
 
 
-    const clickHandler = () => {
-        props.setSignup("signup");
-    }
+    // const clickHandler = () => {
+    //     setSignup("signup");
+    // }
 
     const setEmailHandler = (e) => {
         let email = e.target.value;
@@ -101,7 +101,7 @@ export const Signin = props => {
                     <div className={"pass-eye flex"}>
                         <input type={pass} value={password} onChange={setPasswordHandler} required={true}
                                name={"password"} placeholder={"Password"}
-                               className={`inputs ${pass_border.length !== 0 ? pass_border : ""}`}
+                               className={`inputs`}
                         />
                         <i
                             className={`fa-regular ${passHover ? 'fa-eye-slash' : 'fa-eye'} pass-eye-icon`}
@@ -122,12 +122,12 @@ export const Signin = props => {
                             style={{ width: "20px", height: "20px" }}>
                         </lord-icon>
                     </Link>
-                    <button onClick={clickHandler} className={'sing-up flex'} onMouseOver={() => setArrow2(true)}
+                    <button onClick={() => setSignup("signup")} className={'sing-up flex'} onMouseOver={() => setArrow2(true)}
                             onMouseOut={() => setArrow2(false)}>
                         <span>Sign Up</span>
                         <lord-icon
                             src="https://cdn.lordicon.com/vduvxizq.json"
-                            trigger={arrow2 ? "loop" : ""}
+                            trigger={arrow2 ? "loop" : "in"}
                             style={{ width: "20px", height: "20px" }}>
                         </lord-icon>
                     </button>

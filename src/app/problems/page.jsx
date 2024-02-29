@@ -12,7 +12,7 @@ import { useAuthUser } from '@/context/usertoken/AuthUser';
 const Page = () => {
 
     const { router } = useNavigateRouter();
-    const { token, getAndSetTokenInLocalstorage } = useAuthUser();
+    const { token } = useAuthUser();
 
     if (token === undefined) {
         router.push('/login');
