@@ -20,31 +20,31 @@ const getProgressStatusTemplate = () => {
     }
 }
 
-const setProgressValues = (value) => {
+const setProgressValues = (value, totalNumbers) => {
     return {
         "Easy": {
             name: "Easy",
-            total_Problems: 778,
+            total_Problems: totalNumbers['Easy'],
             total_Solve: value['Easy'],
             progress_color: "#2fd19d",
         },
         "Medium" : {
-            name: "Easy",
-            total_Problems: 1591,
+            name: "Medium",
+            total_Problems: totalNumbers['Medium'],
             total_Solve: value['Medium'],
             progress_color:"#FFC01E"
         },
         "Hard": {
             name: "Hard",
-            total_Problems: 664,
+            total_Problems: totalNumbers['Hard'],
             total_Solve: value['Hard'],
             progress_color: "#EF4743"
         }
     }
 }
 
-const setProgressStatusTemplate = (value, setValue) => {
-    setValue(setProgressValues(value));
+const setProgressStatusTemplate = (value, setValue, totalNumbers) => {
+    setValue(setProgressValues(value, totalNumbers));
 }
 
 const getLanProgressTemplate = () => {

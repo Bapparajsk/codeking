@@ -10,8 +10,6 @@ export const Problems = () => {
     const { problemLists } = useProblem();
     console.log(problemLists);
 
-
-
     return (
         <div className={"problems-container flex"}>
 

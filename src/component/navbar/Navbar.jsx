@@ -2,7 +2,7 @@
 
 import '$/navbar/style.css';
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUserDetails } from '@/context/user/UserProvider';
 import { useAuthUser } from '@/context/usertoken/AuthUser';
 import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
@@ -15,6 +15,7 @@ export const Navbar = () => {
     const [userHover, setUserHover] = useState(false);
     const [singInHover, setSingInHover] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
+    const [useName, setUseName] = useState('User');
 
     const { userDetails, setUserDetails } = useUserDetails();
     const { removeToken } = useAuthUser();
@@ -29,7 +30,14 @@ export const Navbar = () => {
         removeToken();
         setUserDetails(undefined);
         router.push('/login');
+        setUseName('User');
     }
+
+    useEffect(() => {
+        if (userDetails) {
+            setUseName(userDetails.user_name);
+        }
+    }, [userDetails]);
 
     return (
         <nav className={'navbar'}>
@@ -97,7 +105,7 @@ export const Navbar = () => {
                             delay="150"
                             style={{width: "35px", height: "35px"}}>
                         </lord-icon>
-                        <span>User</span>
+                        <span>{useName}</span>
                     </Link>
                 </li>
 

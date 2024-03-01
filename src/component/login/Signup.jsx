@@ -1,14 +1,13 @@
 import '$/login/signup.css';
-import { useState } from "react";
+import {useState} from "react";
 import isValid from "@/validator/isValid";
-import axios from "axios"
+import axios from "axios";
 import { useUserDetails } from "@/context/user/UserProvider";
 import { useAuthUser } from "@/context/usertoken/AuthUser";
 import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
 import { useProblem } from "@/context/problemList/ProblemProvider";
-import { textToPass } from "@/lib/handler/passwordHover";
 
-export const Signup = ({ setSignup, showMassagegHandler }) => {
+export const Signup = props => {
     const [arrow3, setArrow3] = useState(false);
     const [pass1, setPass1] = useState("password");
     const [pass2, setPass2] = useState("password");
@@ -44,11 +43,16 @@ export const Signup = ({ setSignup, showMassagegHandler }) => {
         }, 250)
     };
 
+    const clickHandler = () => {
+        props.setSignup("signin");
+    }
+
     const userHandler = e => {
         let u = e.target.value;
         setUsername(u);
         setUser_border(u.length >= 5 ? "isWrite" : "isWrong");
     }
+
 
     const emailHandler = e => {
         let E = e.target.value;
@@ -82,57 +86,21 @@ export const Signup = ({ setSignup, showMassagegHandler }) => {
 
     const handleSignup = async (e) => {
         e.preventDefault();
+        
+        let passValid = isValid.isPassword(password);
+        const allValid = passValid.every(boolean => boolean);
+
+        if(allValid) {
+            
+        }
+
+        const userD = {
+            userName: username,
+            email: email,
+            password: password
+        }
         try {
-            /* check user Name is Valid*/
-            if (username.length < 5) {
-                showMassagegHandler('User Name not Valid . . . .', 'fc3c6b', '4a0f89');
-                setUser_border("isWrong");
-                return;
-            }
-
-            /*Check is UserName already exists or not */
-            const userres = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user/is-valid/${username}`);
-            console.log('userres ', userres.data.message)
-            if (userres.data.message === "exists") {
-                showMassagegHandler('User Name is exgist . . . .', 'fc3c6b', '4a0f89');
-                setUser_border("isWrong");
-                return;
-            }
-
-            /* check Email is Valid*/
-            if (!isValid.isEmail(email)) {
-                showMassagegHandler('Email not Valid . . . .', 'fc3c6b', '4a0f89');
-                setEmail_border("isWrong");
-                return;
-            }
-
-            /*Check is Email already exists or not */
-            const emailres = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user/is-valid/${email}`);
-            if (emailres.data.message === "exists") {
-                showMassagegHandler('Email is exgist . . . .', 'fc3c6b', '4a0f89');
-                setEmail_border("isWrong");
-                return;
-            }
-
-            if(!isValid.isPassword(password).every(boolean => boolean)) {
-                showMassagegHandler('Passwrod are Wrong . . . .', 'fc3c6b', '4a0f89');
-                setPass_border("isWrong");
-                return;
-            }
-
-            /* password ar confirm password are same */
-            if (password !== cPassword) {
-                showMassagegHandler('Passwrod are Wrong . . . .', 'fc3c6b', '4a0f89');
-                return;
-            }
-
-            const newUser = {
-                userName: username,
-                email: email,
-                password: password
-            }
-
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/sign-up`, newUser);
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/sign-up`, userD);
             const { userDetails, token } = res.data;
             setTokenInLocalstorage(token);
             setUserDetails(userDetails);
@@ -143,7 +111,6 @@ export const Signup = ({ setSignup, showMassagegHandler }) => {
             setProblemLists(resProblem.data.problem);
 
             router.push('/user/profile');
-
         } catch (error) {
             console.log('login error :- ', error);
         }
@@ -235,7 +202,7 @@ export const Signup = ({ setSignup, showMassagegHandler }) => {
                 <div className={'flex'}>
                     <p>Have an account?</p>
                     <div
-                        onClick={() => setSignup("signin")}
+                        onClick={clickHandler}
                         className={'sign-button flex'}
                         onMouseOver={() => setArrow3(true)}
                         onMouseOut={() => setArrow3(false)}>
@@ -243,7 +210,7 @@ export const Signup = ({ setSignup, showMassagegHandler }) => {
                         <span>Sign In</span>
                         <lord-icon
                             src="https://cdn.lordicon.com/vduvxizq.json"
-                            trigger={arrow3 ? "loop" : "in"}
+                            trigger={arrow3 ? "loop" : ""}
                             style={{width: "20px", height: "20px"}}>
                         </lord-icon>
                     </div>

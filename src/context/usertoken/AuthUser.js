@@ -11,22 +11,26 @@ export const AuthProvider = ({ children }) => {
     const  [token, setToken] = useState(undefined);
 
     const { setUserDetails } = useUserDetails();
-    const { setProblemLists } = useProblem();
+    const { setProblems, setTotalProblem } = useProblem();
 
     useEffect(() => {
         const localToken = localStorage.getItem('token');
         if (localToken) {
+            console.log('token', localToken);
             fetchUser(localToken);
+            setToken(localToken);
         }
     },[])
 
     const fetchUser = async (localToken) => {
         const headers = { 'token': localToken }
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/get-user`,{headers});
-        const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
-        setProblemLists(resProblem.data.problem);
-        console.log(response.data.userDetails);
         setUserDetails(response.data.userDetails);
+
+        const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
+        const { problemList, NameOfTotalProblem } = resProblem.data.problem;
+        setProblems(problemList);
+        setTotalProblem(NameOfTotalProblem);
     }
 
     const removeToken = () => {
@@ -47,8 +51,6 @@ export const AuthProvider = ({ children }) => {
         } catch (e) {
             console.log('token set error :- ', e);
         }
-
-        
     }
 
     const getAndSetTokenInLocalstorage = async () => {
@@ -57,11 +59,13 @@ export const AuthProvider = ({ children }) => {
             const headers = { 'token': getToken }
             try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/get-user`,{headers});
-                const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
-                setProblemLists(resProblem.data.problem);
                 setToken(getToken);
-                console.log(response.data.userDetails);
                 setUserDetails(response.data.userDetails);
+
+                const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
+                const { problemList, NameOfTotalProblem } = resProblem.data.problem;
+                setProblems(problemList);
+                setTotalProblem(NameOfTotalProblem);
                 return true;
             } catch (e) {
                 console.log(e);

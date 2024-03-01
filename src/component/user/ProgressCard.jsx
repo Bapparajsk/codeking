@@ -3,39 +3,38 @@ import { useEffect, useState } from "react";
 import { Progress } from "#/user/Progress";
 import { useUserDetails } from "@/context/user/UserProvider";
 import { getProgressStatusTemplate, setProgressStatusTemplate } from '@/lib/templates/template';
+import { useProblem } from '@/context/problemList/ProblemProvider';
 
 export const ProgressCard = () => {
-    const [point_hover, setPoint_hover] = useState("500");
+    const [point_hover, setPoint_hover] = useState(0);
+    const [totalProblemNumber, setTotalProblemNumber] = useState(0);
+    const [progressStatus, setProgressStatus] = useState(getProgressStatusTemplate());
 
     const { userDetails } = useUserDetails();
+    const { getSize, nameOfTotalProblem } = useProblem();
 
-    const [progressStatus, setProgressStatus] = useState(getProgressStatusTemplate());
     useEffect(() => {
-        console.log(userDetails);
         if (userDetails) {
-            setProgressStatusTemplate(userDetails.problem_difficulty, setProgressStatus);
+            const { Easy, Medium, Hard } = userDetails.problem_difficulty;
+            setProgressStatusTemplate(userDetails.problem_difficulty, setProgressStatus, nameOfTotalProblem);
+            setPoint_hover(Easy + Medium + Hard);
+
+            console.log('progressStatus ',progressStatus)
+            console.log('nameOfTotalProblem ',nameOfTotalProblem)
         }
-    }, [userDetails]);
-    console.log(progressStatus);
-    const setPointParent = () => {
-        setTimeout(() => {
-            setPoint_hover(point_hover === "500" ? "16%" : "500");
-        }, 1000)
-    }
+
+        setTotalProblemNumber(getSize);
+    }, [userDetails, getSize]);
 
     return (
         <div className={'progress-card flex'}>
             <div className={'progress-card-left p-card flex'}>
                 <p className={'solved'}>Solved Problems</p>
-                <div
-                    className={'pro-total-solves'}
-                    onMouseOver={setPointParent}
-                    onMouseOut={setPointParent}
-                >
-                    <p id={'point'}>{point_hover}</p>
+                <div className={'pro-total-solves'}>
+                    <p id={'point'}><span>{point_hover}</span>/<span>{totalProblemNumber}</span></p>
                     <p>solve</p>
                 </div>
-                <div className={'sercail-progress flex'} style={{background: `conic-gradient(#0cefa4 ${496/3033 * 360}deg, #fff 0deg)`}}></div>
+                <div className={'sercail-progress flex'} style={{background: `conic-gradient(#0cefa4 ${point_hover/totalProblemNumber * 360}deg, #fff 0deg)`}}></div>
             </div>
             <div className={'progress-card-right p-card flex'}>
                 <Progress items={progressStatus.Easy}/>

@@ -12,13 +12,15 @@ import { useAuthUser } from '@/context/usertoken/AuthUser';
 const Page = () => {
 
     const { router } = useNavigateRouter();
-    const { token } = useAuthUser();
-
-    if (token === undefined) {
-        router.push('/login');
-    }
-
+    const { getAndSetTokenInLocalstorage } = useAuthUser();
+    
     useEffect(() => {
+        const init = async () => {
+            if (!await getAndSetTokenInLocalstorage()) {
+                router.push('/login');
+            }
+        }
+        init();
         document.title = "Code King - Problems List"
     }, []);
 

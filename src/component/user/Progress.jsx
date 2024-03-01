@@ -1,5 +1,5 @@
-export const Progress = props => {
-    const { name, total_Problems , total_Solve , progress_color } = props.items;
+export const Progress = ({ items }) => {
+    const { name, total_Problems , total_Solve , progress_color } = items;
     let progress_width = total_Solve / total_Problems * 250;
     return (
         <div className={'progress-shadow flex'} style={{backgroundColor: `${progress_color}56`}}>
