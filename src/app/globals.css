@@ -23,6 +23,31 @@
 
 html, body {
   overflow-x: hidden;
+  cursor: none!important;
+}
+
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  background-color: black;
+}
+
+.cursor-outline {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.7);
+}
+
+.cursor-dot,
+.cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9000000;
+  pointer-events: none;
 }
 
 .flex {

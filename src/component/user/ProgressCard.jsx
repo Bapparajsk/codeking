@@ -14,7 +14,7 @@ export const ProgressCard = () => {
     const { getSize, nameOfTotalProblem } = useProblem();
 
     useEffect(() => {
-        if (userDetails) {
+        if (userDetails && nameOfTotalProblem) {
             const { Easy, Medium, Hard } = userDetails.problem_difficulty;
             setProgressStatusTemplate(userDetails.problem_difficulty, setProgressStatus, nameOfTotalProblem);
             setPoint_hover(Easy + Medium + Hard);
@@ -24,7 +24,7 @@ export const ProgressCard = () => {
         }
 
         setTotalProblemNumber(getSize);
-    }, [userDetails, getSize]);
+    }, [userDetails, getSize, nameOfTotalProblem]);
 
     return (
         <div className={'progress-card flex'}>

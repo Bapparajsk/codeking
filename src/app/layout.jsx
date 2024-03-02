@@ -7,13 +7,13 @@ import { NavigateProvider } from '@/context/navigation/NavigateProvider';
 import { AuthProvider } from '@/context/usertoken/AuthUser';
 import { UserProvider } from '@/context/user/UserProvider';
 import { ProblemProvider } from "@/context/problemList/ProblemProvider";
+import { Cursor } from '@/component/cursor/Cursor';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
     title: 'code king app',
 }
-
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
                     <ProblemProvider>
                         <AuthProvider>
                             <NavigateProvider>
+                                <Cursor/>
                                 <Navbar/>
                                 {children}
                             </NavigateProvider>
