@@ -1,28 +1,60 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import '$/user/languagesprogress.css';
 import Image from "next/image";
 import { LanProgress } from "#/user/LanProgress";
 import { useUserDetails } from "@/context/user/UserProvider";
-import { getLanProgressTemplate } from '@/lib/templates/template';
-
+import { getLanProgressTemplate, setLanProgressTemplate } from '@/lib/templates/template';
+import { useProblem } from '@/context/problemList/ProblemProvider'
 
 export const LanguagesProgress = () => {
 
     const { userDetails } = useUserDetails();
+    const { getSize } = useProblem();
 
     const [lanProgress, setLanProgress] = useState(getLanProgressTemplate());
-    const [lanSolve, setLanSolve] = useState({ name: "java", solve: 600 });
-
+    const [lanSolve, setLanSolve] = useState({ name: "", solve: 0 });
+    const [defultLan, setDefultLan] = useState(undefined);
+    const [totalProblem, setTotalProblem] = useState(0);
+    
     const setName = ( name, solve ) => {
         setLanSolve({ name, solve });
     }
 
-    const setDefault = () => {
-        setLanSolve({
-            name: "java",
-            solve: 600
-        })
+    const setDefaultName = () => {
+        console.log('djdjksdjkfhasuih', defultLan)
+        if (defultLan !== undefined) {
+            setLanSolve({name: defultLan.name, solve: defultLan.solve})
+        }
     }
+
+    useEffect(() => {
+        if (userDetails) {
+            const { language } = userDetails;
+
+            
+            setLanProgressTemplate(language, setLanProgress);
+            let name = '';
+            let solve = -1;
+
+            const { java, python, cpp, c, javaScript } = language;
+            let maxSolve = -1;
+            let maxName = '';
+
+            for (const [lang, solve] of Object.entries(language)) {
+                if (solve > maxSolve) {
+                    maxSolve = solve;
+                    maxName = lang;
+                }
+            }
+
+            console.log(maxName, maxSolve)
+
+            setLanSolve({ name: maxName, solve: maxSolve });
+            setDefultLan({ name: maxName, solve: maxSolve });
+        }
+
+        setTotalProblem(getSize())
+    }, [userDetails, getSize]);
 
     return (
         <div className={'lan-card flex'}>
@@ -31,11 +63,11 @@ export const LanguagesProgress = () => {
                     <div className={'lan-pro-details'}>
                         <p><span>{lanSolve.name}</span><span>{lanSolve.solve}</span></p>
                     </div>
-                    <LanProgress  items={lanProgress['java']} setName={setName} setDefualt={setDefault}/>
-                    <LanProgress  items={lanProgress['python']} setName={setName} setDefualt={setDefault}/>
-                    <LanProgress  items={lanProgress['cpp']} setName={setName} setDefualt={setDefault}/>
-                    <LanProgress  items={lanProgress['c']} setName={setName} setDefualt={setDefault}/>
-                    <LanProgress  items={lanProgress['javaScript']} setName={setName} setDefualt={setDefault}/>
+                    <LanProgress  items={lanProgress['java']} setName={setName} size={totalProblem} setDefaultName={setDefaultName}/>
+                    <LanProgress  items={lanProgress['python']} setName={setName} size={totalProblem} setDefaultName={setDefaultName}/>
+                    <LanProgress  items={lanProgress['cpp']} setName={setName} size={totalProblem} setDefaultName={setDefaultName}/>
+                    <LanProgress  items={lanProgress['c']} setName={setName} size={totalProblem} setDefaultName={setDefaultName}/>
+                    <LanProgress  items={lanProgress['javaScript']} setName={setName} size={totalProblem} setDefaultName={setDefaultName}/>
                 </div>
                 <div className={'languages-box flex'}>
                     <div className="flex" style={{width: "25px"}}><i className="fa-brands fa-java"></i></div>

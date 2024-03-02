@@ -28,7 +28,7 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
     const { setTokenInLocalstorage } = useAuthUser();
     const { setUserDetails } = useUserDetails();
     const { router } = useNavigateRouter();
-    const { setProblemLists } = useProblem();
+    const { setProblems } = useProblem();
 
 
 
@@ -74,8 +74,8 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
             const headers = { 'token': token };
 
             const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
-            setProblemLists(resProblem.data.problem);
-            
+            setProblems(resProblem.data.problem);
+            console.log('si.sdkjfghsakhjgfdddddddddddddddddddddddddsuedyg')
             router.push('/user/profile');
         } catch (e) {
             console.log(e);

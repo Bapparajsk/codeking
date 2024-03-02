@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export const LanProgress = props => {
-    const { name, total, solve } = props.items;
-    const hi = solve / total * 120;
+export const LanProgress = ({ items, setName, size, setDefaultName }) => {
+    const [height, setHeight] = useState(0);
+    const { name, solve } = items;
+    useEffect(() => {
+        const { name, solve } = items;
+        if (size !== 0) {
+            let hi = solve / size * 120;
+            console.log(typeof hi)
+            if (isNaN(hi)) {
+                hi = 0
+            }
+            setHeight(hi)
+        }
+    }, [items]);
 
-    const handler1 = () => {
-        props.setName(name, solve);
-    }
-
-    const handler2 = () => {
-        props.setDefualt();
-    }
     return (
-        <div className={'lan-box-progress'} style={{height: hi}} onMouseOver={handler1} onMouseOut={handler2}></div>
-    )
-}
+        <div className={'lan-box-progress'} style={{ height: height }} onMouseOver={() => setName(name, solve)} onMouseOut={() => setDefaultName()}></div>
+    );
+};

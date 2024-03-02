@@ -51,30 +51,59 @@ const getLanProgressTemplate = () => {
     return {
         "java": {
             name: "java",
-            total: 1000,
-            solve: 600
+            total: 0,
+            solve: 0
         },
         "python": {
             name: "python",
-            total: 800,
-            solve: 290
+            total: 0,
+            solve: 0
         },
         "cpp": {
             name: "c++",
-            total: 1300,
-            solve: 800
+            total: 0,
+            solve: 0
         },
         "c": {
             name: "c",
-            total: 700,
-            solve: 300
+            total: 0,
+            solve: 0
         },
         "javaScript": {
             name: "javaScript",
-            total: 1000,
-            solve: 500
+            total: 0,
+            solve: 0
         },
     }
 }
 
-module.exports = { getProgressStatusTemplate, setProgressStatusTemplate, getLanProgressTemplate }
+const setLan = (value) => {
+    return {
+        "java": {
+            name: "java",
+            solve: value['java']
+        },
+        "python": {
+            name: "python",
+            solve: value['python']
+        },
+        "cpp": {
+            name: "c++",
+            solve: value['cpp']
+        },
+        "c": {
+            name: "c",
+            solve: value['c']
+        },
+        "javaScript": {
+            name: "javaScript",
+            solve: value['javaScript']
+        },
+    }
+}
+
+const setLanProgressTemplate = (solve, setValues) => {
+    setValues(setLan(solve));
+}
+
+module.exports = { getProgressStatusTemplate, setProgressStatusTemplate, getLanProgressTemplate, setLanProgressTemplate }

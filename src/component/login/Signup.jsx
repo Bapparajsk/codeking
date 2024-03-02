@@ -31,7 +31,7 @@ export const Signup = props => {
     const { setTokenInLocalstorage } = useAuthUser();
     const { setUserDetails } = useUserDetails();
     const { router } = useNavigateRouter();
-    const { setProblemLists } = useProblem();
+    const { setProblems } = useProblem();
 
     const hoverOnPasswordVisibility = (passwordState, setPasswordState) => {
         setPasswordState("text");
@@ -108,8 +108,8 @@ export const Signup = props => {
             const headers = { 'token': token };
 
             const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
-            setProblemLists(resProblem.data.problem);
-
+            setProblems(resProblem.data.problem);
+            console.log('si.sdkjfghsakhjgfsuedyg')
             router.push('/user/profile');
         } catch (error) {
             console.log('login error :- ', error);
