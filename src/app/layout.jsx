@@ -15,7 +15,7 @@ export const metadata = {
     title: 'code king app',
 }
 export default function RootLayout({ children }) {
-
+    
     return (
         <html lang="en">
             <body className={inter.className}>

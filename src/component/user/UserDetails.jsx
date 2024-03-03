@@ -2,12 +2,14 @@ import '$/user/userDetails.css'
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useUserDetails } from '@/context/user/UserProvider';
+import { useNavigateRouter } from '@/context/navigation/NavigateProvider'
 
 export const UserDetails = () => {
     const [edit_hover, setEdit_hover] = useState(false);
     const [imageSrc, setImageSrc] = useState(null);
 
     const { userDetails } = useUserDetails();
+    const { router } = useNavigateRouter();
 
     const setDetails = () => {
         const { data } = userDetails.profile_image.data;
@@ -32,7 +34,7 @@ export const UserDetails = () => {
                              alt={"user image"} />}
                 </div>
                 <h1>{userDetails?.user_name}</h1>
-                <div className={'user-settings'}>
+                <div className={'user-settings flex'} onClick={() => router.push('/user/setting')}>
                     <lord-icon
                         src="https://cdn.lordicon.com/lecprnjb.json"
                         trigger="loop"

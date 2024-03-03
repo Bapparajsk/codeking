@@ -27,6 +27,7 @@ export const Cursor = () => {
             cursorOutline.style.width = '10px';
             cursorOutline.style.height = '10px';
             cursorOutline.style.borderWidth = '5px'
+            
             setTimeout(() => {
                 cursorOutline.style.borderColor = '#000000B2'
                 cursorOutline.style.width = '30px';
