@@ -55,7 +55,7 @@ export const UserDetails = () => {
                         <hr/>
                     </li>
                     <li>
-                        <p>County : <span>India</span></p>
+                        <p>County : <span>{userDetails?.county}</span></p>
                         <hr/>
                     </li>
                     <li>

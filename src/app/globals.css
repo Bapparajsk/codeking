@@ -70,6 +70,19 @@ li {
 
 .isWrong {
   border: 2px solid red !important;
+  animation: worng .2s ease-out forwards;
+}
+
+@keyframes worng {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(0.873rem);
+  }
+  60% {
+    transform: translateX(-0.873rem);
+  }
 }
 
 .isWrite {
@@ -103,4 +116,46 @@ code {
   background-color: #ffffff12;
   border-color: #f7faff1f;
   color: #eff1f6bf;
+}
+
+input {
+  cursor: none;
+}
+
+/* looding */
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  background-color: #cd2525;
+  top: 5px;
+  /*transform: translateY(-50%);*/
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  /*top: 11px;*/
+  background-color: #cd2525;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

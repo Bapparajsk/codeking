@@ -42,7 +42,7 @@ const Page = () => {
                     </div>
                     <hr/>
                     <div className={'setting-container flex'}>
-                        <div className={'updates-names flex'}><span>About Me</span></div>
+                        <div className={'updates-names flex'}><span>County</span></div>
                         <div className={'updates-inputs flex'}>
                             <input
                                 className={'updates-input'}

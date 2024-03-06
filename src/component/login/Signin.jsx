@@ -1,6 +1,6 @@
 import '$/login/signin.css'
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import isValid from "@/validator/isValid";
 import axios from "axios";
 import Image from "next/image";
@@ -12,6 +12,7 @@ import github from '@/../public/images/github.png';
 import google from '@/../public/images/google.jpg';
 import linkedin from '@/../public/images/linkedin.png';
 import { textToPass } from '@/lib/handler/passwordHover'
+import { Spnner } from '@/component/loading/Spnner'
 
 
 export const Signin = ({ setSignup, showMassagegHandler }) => {
@@ -19,22 +20,17 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
     const [arrow2, setArrow2] = useState(false);
     const [pass, setPass] = useState("password");
     const [email_border, setEmail_border] = useState("");
-    const [pass_border, setPass_border] = useState("");
     const [passHover, setPassHover] = useState(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const emailRef = useRef();
 
     const { setTokenInLocalstorage } = useAuthUser();
     const { setUserDetails } = useUserDetails();
     const { router } = useNavigateRouter();
     const { setProblems } = useProblem();
 
-
-
-    // const clickHandler = () => {
-    //     setSignup("signup");
-    // }
 
     const setEmailHandler = (e) => {
         let email = e.target.value;
@@ -51,11 +47,6 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
         let p = e.target.value;
         setPassword(p);
 
-        if (p.length >= 8) {
-            setPass_border("isWrite");
-        } else {
-            setPass_border("isWrong");
-        }
     }
 
     const handleSignin = async (e) => {
@@ -75,13 +66,11 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
 
             const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
             setProblems(resProblem.data.problem);
-            console.log('si.sdkjfghsakhjgfdddddddddddddddddddddddddsuedyg')
             router.push('/user/profile');
         } catch (e) {
-            console.log(e);
-            router.push('/login');
+            showMassagegHandler('Email or Password Invalid', 'FF004D', '1D2B53');
+            setEmail_border("isWrong");
         }
-
     }
 
     return (
@@ -97,18 +86,31 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
             </div>
             <div className={'login-body'}>
                 <form className={'flex'} onSubmit={handleSignin}>
-                    <input type={'email'} value={email} onChange={setEmailHandler} required={true} name={'email'} placeholder={'Username or Email'} className={`inputs ${email_border.length !== 0 ? email_border : ""}`}/>
+                    <input
+                        ref={emailRef}
+                        type={'email'}
+                        value={email}
+                        onChange={setEmailHandler}
+                        required={true}
+                        name={'email'}
+                        placeholder={'Username or Email'}
+                        className={`inputs ${email_border.length !== 0 ? email_border : ""}`}
+                    />
                     <div className={"pass-eye flex"}>
-                        <input type={pass} value={password} onChange={setPasswordHandler} required={true}
-                               name={"password"} placeholder={"Password"}
-                               className={`inputs`}
+                        <input
+                            type={pass}
+                            value={password}
+                            onChange={setPasswordHandler}
+                            required={true}
+                            name={"password"} placeholder={"Password"}
+                            className={`inputs`}
                         />
                         <i
                             className={`fa-regular ${passHover ? 'fa-eye-slash' : 'fa-eye'} pass-eye-icon`}
                             onClick={() => textToPass(passHover, setPass, setPassHover)}
                         ></i>
                     </div>
-                    <button type={"submit"} className={'login-form-button'}>Sign in</button>
+                    <button type={"submit"} className={'login-form-button flex'}><Spnner size={30}/></button>
                 </form>
             </div>
             <div className={'login-footer flex'}>

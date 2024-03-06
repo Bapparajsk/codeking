@@ -49,7 +49,7 @@ const Page = () => {
                         onMouseOver={() => { notiRef.current.style.backgroundColor = `#${notification.backgroundColor}C9` }}
                         onMouseOut={() => { notiRef.current.style.backgroundColor = `#${notification.backgroundColor}` }}
                     >
-                        <p>{notification.massageg}</p>
+                        <p>{notification.massageg}...</p>
                         <div className={'notification-bottom-bar'} style={{animation: notification.animation, backgroundColor: `#${notification.shroll}`}}></div>
                     </div>
                 }

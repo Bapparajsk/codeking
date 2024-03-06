@@ -43,7 +43,7 @@
     letter-spacing: 1px;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    cursor: pointer;
+    cursor: none;
 
     &:hover {
         background-color: #03fdaa;
