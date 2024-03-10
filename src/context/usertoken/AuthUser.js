@@ -10,7 +10,7 @@ const AuthUser = createContext();
 export const AuthProvider = ({ children }) => {
     const  [token, setToken] = useState(undefined);
 
-    const { setUserDetails } = useUserDetails();
+    const { setUserDetails, userDetails } = useUserDetails();
     const { setProblems, setTotalProblem } = useProblem();
 
     useEffect(() => {
@@ -56,7 +56,12 @@ export const AuthProvider = ({ children }) => {
     const getAndSetTokenInLocalstorage = async () => {
         const getToken = localStorage.getItem('token');
         if (getToken) {
-            const headers = { 'token': getToken }
+
+            if (userDetails) {
+                return true;
+            }
+            const headers = { 'token': getToken };
+
             try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/get-user`,{headers});
                 setToken(getToken);
@@ -72,7 +77,7 @@ export const AuthProvider = ({ children }) => {
                 return false
             }
         }
-        return false
+        return false;
     }
 
     return (

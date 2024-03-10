@@ -7,6 +7,7 @@ import { useNavigateRouter } from '@/context/navigation/NavigateProvider'
 export const UserDetails = () => {
     const [edit_hover, setEdit_hover] = useState(false);
     const [imageSrc, setImageSrc] = useState(null);
+    const [userDetail , setUserDetail] = useState(undefined);
 
     const { userDetails } = useUserDetails();
     const { router } = useNavigateRouter();
@@ -16,6 +17,7 @@ export const UserDetails = () => {
         const base64String = Buffer.from(data).toString('base64');
         const imageSrc = `data:image/jpeg;base64,${base64String}`;
         setImageSrc(imageSrc)
+        setUserDetail(userDetails);
     }
 
     useEffect(() => {
@@ -33,7 +35,7 @@ export const UserDetails = () => {
                         <img src={"https://cdn2.iconfinder.com/data/icons/rcons-users-color/32/boy-512.png"}
                              alt={"user image"} />}
                 </div>
-                <h1>{userDetails?.user_name}</h1>
+                <h1>{userDetail?.user_name}</h1>
                 <div className={'user-settings flex'} onClick={() => router.push('/user/setting')}>
                     <lord-icon
                         src="https://cdn.lordicon.com/lecprnjb.json"
@@ -47,19 +49,19 @@ export const UserDetails = () => {
             <div className={"details-card-body"}>
                 <ul>
                     <li>
-                        <p>Username : <span>{userDetails?.user_name}</span></p>
+                        <p>Username : <span>{userDetail?.user_name}</span></p>
                         <hr />
                     </li>
                     <li>
-                        <p>About Me : <span>{userDetails?.about_me}</span></p>
+                        <p>About Me : <span>{userDetail?.about_me}</span></p>
                         <hr/>
                     </li>
                     <li>
-                        <p>County : <span>{userDetails?.county}</span></p>
+                        <p>County : <span>{userDetail?.county}</span></p>
                         <hr/>
                     </li>
                     <li>
-                        <p>Student/Professional : <span>{userDetails?.student_professional}</span></p>
+                        <p>Student/Professional : <span>{userDetail?.student_professional}</span></p>
                         <hr/>
                     </li>
                 </ul>

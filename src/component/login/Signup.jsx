@@ -90,9 +90,9 @@ export const Signup = props => {
         let passValid = isValid.isPassword(password);
         const allValid = passValid.every(boolean => boolean);
 
-        if(allValid) {
-            
-        }
+        // if(allValid) {
+        //
+        // }
 
         const userD = {
             userName: username,

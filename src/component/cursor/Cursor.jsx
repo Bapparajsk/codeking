@@ -1,53 +1,57 @@
 "use client"
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useCursor } from '@/context/cursor/cursorProvider';
 
 export const Cursor = () => {
+    const [cursorActive, setCursorActive] = useState(false);
+    const cursorDot = useRef();
+    const cursorOutline = useRef();
+    
+    const {cursorRef, cursorType } = useCursor();
+
     useEffect(() => {
-        const cursorDot = document.getElementById('cursorDot');
-        const cursorOutline = document.getElementById('cursorOutline');
+        if (cursorRef.current) {
+            const moveCursor = (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
 
-        const moveCursor = (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
+                cursorDot.current.style.left = `${posX}px`;
+                cursorDot.current.style.top = `${posY}px`;
 
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
+                cursorOutline.current.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, {duration: 500, fill: 'forwards'})
+            };
 
-            // cursorOutline.style.left = `${posX}px`;
-            // cursorOutline.style.top = `${posY}px`;
+            const click = (e) => {
+                cursorOutline.current.style.borderColor = 'red';
+                cursorOutline.current.style.width = '10px';
+                cursorOutline.current.style.height = '10px';
+                cursorOutline.current.style.borderWidth = '5px'
 
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: 'forwards' })
-        };
+                setTimeout(() => {
+                    cursorOutline.current.style.borderColor = '#000000B2'
+                    cursorOutline.current.style.width = '30px';
+                    cursorOutline.current.style.height = '30px';
+                    cursorOutline.current.style.borderWidth = '2px'
+                }, 250)
+            }
 
-        const click = (e) => {
-            cursorOutline.style.borderColor = 'red';
-            cursorOutline.style.width = '10px';
-            cursorOutline.style.height = '10px';
-            cursorOutline.style.borderWidth = '5px'
-            
-            setTimeout(() => {
-                cursorOutline.style.borderColor = '#000000B2'
-                cursorOutline.style.width = '30px';
-                cursorOutline.style.height = '30px';
-                cursorOutline.style.borderWidth = '2px'
-            }, 250)
+            window.addEventListener('mousemove', moveCursor);
+            window.addEventListener('click', click)
+
+            return () => {
+                window.removeEventListener('mousemove', moveCursor);
+                window.removeEventListener('click', click);
+            };
         }
-
-        window.addEventListener('mousemove', moveCursor);
-        window.addEventListener('click', click)
-
-        return () => {
-            window.removeEventListener('mousemove', moveCursor);
-            window.removeEventListener('click', click);
-        };
-    }, []); // Empty dependency array ensures this effect runs only onc
+    }, [cursorRef.current, cursorType]);
     return (
+        cursorRef.current &&
         <>
-            <div className={'cursor-dot'} id={'cursorDot'}></div>
-            <div className={'cursor-outline'} id={'cursorOutline'}></div>
+            <div className={'cursor-dot'}  ref={cursorDot}></div>
+            <div className={'cursor-outline'} ref={cursorOutline}></div>
         </>
     );
 };

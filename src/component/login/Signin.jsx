@@ -13,6 +13,7 @@ import google from '@/../public/images/google.jpg';
 import linkedin from '@/../public/images/linkedin.png';
 import { textToPass } from '@/lib/handler/passwordHover'
 import { Spnner } from '@/component/loading/Spnner'
+import { useCursor } from '@/context/cursor/cursorProvider';
 
 
 export const Signin = ({ setSignup, showMassagegHandler }) => {
@@ -21,6 +22,7 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
     const [pass, setPass] = useState("password");
     const [email_border, setEmail_border] = useState("");
     const [passHover, setPassHover] = useState(false);
+    const [isLooding, setIsLooding] = useState(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -30,7 +32,7 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
     const { setUserDetails } = useUserDetails();
     const { router } = useNavigateRouter();
     const { setProblems } = useProblem();
-
+    const { cursorRef } = useCursor();
 
     const setEmailHandler = (e) => {
         let email = e.target.value;
@@ -51,7 +53,7 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
 
     const handleSignin = async (e) => {
         e.preventDefault();
-
+        setIsLooding(true);
         const useS = {
             email: email, password:password
         }
@@ -66,8 +68,11 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
 
             const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
             setProblems(resProblem.data.problem);
+            cursorRef.current = userDetails.cursor;
             router.push('/user/profile');
+            setIsLooding(false);
         } catch (e) {
+            setIsLooding(false);
             showMassagegHandler('Email or Password Invalid', 'FF004D', '1D2B53');
             setEmail_border("isWrong");
         }
@@ -110,13 +115,22 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
                             onClick={() => textToPass(passHover, setPass, setPassHover)}
                         ></i>
                     </div>
-                    <button type={"submit"} className={'login-form-button flex'}><Spnner size={30}/></button>
+                    <button
+                        type={"submit"}
+                        className={'login-form-button flex'}
+                    >
+                        { isLooding?  <Spnner size={30}/> : 'Sign in'}
+                    </button>
                 </form>
             </div>
             <div className={'login-footer flex'}>
                 <div className={'login-footer-button flex'}>
-                    <Link href={'/password/reset'} className={'forgot-password flex'}
-                          onMouseOver={() => setArrow1(true)} onMouseOut={() => setArrow1(false)}>
+                    <Link
+                        href={'/password/reset'}
+                        className={'forgot-password flex'}
+                        onMouseOver={() => setArrow1(true)}
+                        onMouseOut={() => setArrow1(false)}
+                    >
                         <span>Forgot Password?</span>
                         <lord-icon
                             src="https://cdn.lordicon.com/vduvxizq.json"
@@ -124,8 +138,12 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
                             style={{ width: "20px", height: "20px" }}>
                         </lord-icon>
                     </Link>
-                    <button onClick={() => setSignup("signup")} className={'sing-up flex'} onMouseOver={() => setArrow2(true)}
-                            onMouseOut={() => setArrow2(false)}>
+                    <button
+                        onClick={() => setSignup("signup")}
+                        className={'sing-up flex'}
+                        onMouseOver={() => setArrow2(true)}
+                        onMouseOut={() => setArrow2(false)}
+                    >
                         <span>Sign Up</span>
                         <lord-icon
                             src="https://cdn.lordicon.com/vduvxizq.json"
@@ -141,9 +159,19 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
                     <Image src={linkedin} alt={'linkedin'} className={'img linkedin'}/>
                 </div>
                 <div className={'login-privacy-policy flex'}>
-                    <p>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy"
-                                                                             target={'_blank'}>Privacy Policy</a> and <a
-                        href="https://policies.google.com/terms" target={'_blank'}>Terms of Service</a> apply.</p>
+                    <p>
+                        This site is protected by reCAPTCHA and the Google
+                        <a
+                            href="https://policies.google.com/privacy"
+                            target={'_blank'}>Privacy Policy
+                        </a>
+                        and
+                        <a
+                            href="https://policies.google.com/terms"
+                            target={'_blank'}>Terms of Service
+                        </a>
+                        apply.
+                    </p>
                 </div>
             </div>
         </div>
