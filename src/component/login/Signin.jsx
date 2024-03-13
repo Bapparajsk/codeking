@@ -29,7 +29,7 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
     const emailRef = useRef();
 
     const { setTokenInLocalstorage } = useAuthUser();
-    const { setUserDetails } = useUserDetails();
+    const { setUserDetails, setProblemStatus } = useUserDetails();
     const { router } = useNavigateRouter();
     const { setProblems } = useProblem();
     const { cursorRef } = useCursor();
@@ -59,17 +59,20 @@ export const Signin = ({ setSignup, showMassagegHandler }) => {
         }
         try {
             const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/sign-in`, useS);
-            const { userDetails, token } = res.data;
+            console.log(res.data)
+            const { userDetails, token, problemsStatus } = res.data;
 
-            setUserDetails(userDetails);
-            setTokenInLocalstorage(token)
-
-            const headers = { 'token': token };
-
-            const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
-            setProblems(resProblem.data.problem);
+            setUserDetails(userDetails);    /* set token in localstorage */
+            setTokenInLocalstorage(token);  /* set user details in  context */
+            setProblemStatus(problemsStatus);   /* set problem status in context */
             cursorRef.current = userDetails.cursor;
+            
+            const headers = { 'token': token };
+            const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
+
+            setProblems(resProblem.data.problem);
             router.push('/user/profile');
+
             setIsLooding(false);
         } catch (e) {
             setIsLooding(false);

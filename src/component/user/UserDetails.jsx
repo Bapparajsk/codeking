@@ -22,6 +22,7 @@ export const UserDetails = () => {
 
     useEffect(() => {
         if(userDetails) {
+            console.log(userDetails.problems_status);
             setDetails();
         }
         // const buffer = userDetails.

@@ -29,7 +29,7 @@ export const Signup = props => {
     const [passwordValid, setPasswordValid] = useState({ lower: '', upper: '', digit: '', special: '' });
 
     const { setTokenInLocalstorage } = useAuthUser();
-    const { setUserDetails } = useUserDetails();
+    const { setUserDetails, setProblemStatus } = useUserDetails();
     const { router } = useNavigateRouter();
     const { setProblems } = useProblem();
 
@@ -90,9 +90,6 @@ export const Signup = props => {
         let passValid = isValid.isPassword(password);
         const allValid = passValid.every(boolean => boolean);
 
-        // if(allValid) {
-        //
-        // }
 
         const userD = {
             userName: username,
@@ -101,15 +98,16 @@ export const Signup = props => {
         }
         try {
             const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/sign-up`, userD);
-            const { userDetails, token } = res.data;
-            setTokenInLocalstorage(token);
-            setUserDetails(userDetails);
+            const { userDetails, token, problemsStatus } = res.data;
+            console.log('userDetails :- ', res.data);
+            setTokenInLocalstorage(token);  /* set token in localstorage */
+            setUserDetails(userDetails);    /* set user details in context */
+            setProblemStatus(problemsStatus); /* set problem status in context */
 
             const headers = { 'token': token };
 
             const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
-            setProblems(resProblem.data.problem);
-            console.log('si.sdkjfghsakhjgfsuedyg')
+            setProblems(resProblem.data.problem);   /* set problems in context */
             router.push('/user/profile');
         } catch (error) {
             console.log('login error :- ', error);

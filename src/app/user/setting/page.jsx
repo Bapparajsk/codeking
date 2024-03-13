@@ -36,6 +36,7 @@ const Page = () => {
     }
 
     const userInit = () => {
+        console.log('userDetails :- ', userDetails);
         const details = {
             user_name: userDetails?.user_name,
             email: userDetails?.email,

@@ -37,4 +37,15 @@ const composeFile = (key, value) => {
     return newFile;
 }
 
-module.exports = { createLink, linkToName, composeFile }
+const findMaxLangth = (data) => {
+    let max = 0;
+    let n = data.length;
+    for (let i = 0; i < n; i++) {
+        if (data[i].length > max) {
+            max = data[i].length;
+        }
+    }
+    return max;
+}
+
+module.exports = { createLink, linkToName, composeFile, findMaxLangth }

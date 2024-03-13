@@ -1,37 +1,55 @@
 import "$/problem/problemLists.css"
+import { useState, useEffect } from "react";
 import { TopicButton } from "#/problem/TopicButton";
 import { ControlButton } from "#/problem/ControlButton";
 import { Problems } from "#/problem/Problems";
+import { useProblem } from "@/context/problemList/ProblemProvider";
+import { sort } from '@/lib/handler/problemSortHandler';
+import { getButtonDetails, sortButton } from '@/lib/button/listingButton';
+import { useUserDetails } from "@/context/user/UserProvider";
 
 export const ProblemsList = () => {
 
-    const buttons = [
-        {
-            iconName: "fa-solid fa-box-archive",
-            buttonName: "All Topics",
-            color: "#ffffff"
-        },
-        {
-            iconName: "fa-solid fa-code-compare",
-            buttonName: "Algorithms",
-            color: "#c2a309",
-        },
-        {
-            iconName: "fa-solid fa-server",
-            buttonName: "Database",
-            color: "#2712ed",
-        },
-        {
-            iconName: "fa-solid fa-terminal",
-            buttonName: "Shell",
-            color: "#12ed57",
-        },
-        {
-            iconName: "fa-brands fa-node-js",
-            buttonName: "JavaScript",
-            color: "#0ce7ef",
+    const [pinNames, setPinNames] = useState({list : '', difficulty: '', status: ''});
+    const [ProblemLists, setProblemLists] = useState([]);
+    const { problemLists } = useProblem();
+    const { getProblemStatus } = useUserDetails();
+    const buttons = getButtonDetails();
+
+    const list = sortButton('lists');
+    const Difficulty = sortButton('difficulty');
+    const Status = sortButton('status');
+
+    const setPinName = (key, name) => {
+        setPinNames(prevPinNames => ({
+            ...prevPinNames,
+            [key]: name
+        }));
+    }
+
+    const removePinName = (key) => {
+        setPinNames(prevPinNames => ({
+            ...prevPinNames,
+            [key]: ''
+        }));
+    }
+
+    useEffect(() => {
+        if (problemLists) {
+            console.log(problemLists);
+            setProblemLists(problemLists);
         }
-    ]
+    }, [problemLists]);
+    useEffect(() => {
+        const { list, difficulty, status } = pinNames;
+        if (list === '' && difficulty === '' && status === '') {
+            setProblemLists(problemLists);
+            return;
+        }
+        const ss = sort(problemLists, pinNames, getProblemStatus());
+        setProblemLists(ss);
+
+    }, [pinNames]);
 
     return (
         <div className={"problem-lists-bar"}>
@@ -44,10 +62,10 @@ export const ProblemsList = () => {
                     }
                 </div>
                 <div className={"problem-control flex"}>
-                    <ControlButton buttonName={"Lists"}/>
-                    <ControlButton buttonName={"Difficulty"}/>
-                    <ControlButton buttonName={"Status"}/>
-                    <ControlButton buttonName={"Tags"}/>
+                    <ControlButton buttonName={"Lists"} list={list} keyName={'list'} setPinName={setPinName}/>
+                    <ControlButton buttonName={"Difficulty"} list={Difficulty} keyName={'difficulty'} setPinName={setPinName}/>
+                    <ControlButton buttonName={"Status"} list={Status} keyName={'status'} setPinName={setPinName}/>
+                    {/*<ControlButton buttonName={"Tags"}/>*/}
                     <div className={"control-search-box flex"}>
                         <div className={"csb-icon"}>
                             <i className="fa-solid fa-magnifying-glass"></i>
@@ -66,6 +84,20 @@ export const ProblemsList = () => {
                         <span>Pick One</span>
                     </div>
                 </div>
+                <div className={'pin-list-box flex'}>
+                    {
+                        Object.keys(pinNames).map((key, idx) => {
+                            if (pinNames[key] !== '') {
+                                return (
+                                    <div key={idx} className={"pin-list-item"}>
+                                        <span>{pinNames[key]}</span>
+                                        <i className="fa-solid fa-xmark" onClick={() => removePinName(key)}></i>
+                                    </div>
+                                )
+                            }
+                        })
+                    }
+                </div>
             </div>
             <div className={"pro-list-body flex"}>
                 <div className={"problem-list-box"}>
@@ -75,7 +107,7 @@ export const ProblemsList = () => {
                         <p>Difficulty</p>
                         <p>Submission</p>
                     </div>
-                    <Problems/>
+                    <Problems problemLists={ProblemLists}/>
                 </div>
             </div>
         </div>
