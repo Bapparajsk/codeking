@@ -1,34 +1,43 @@
-export const sort = ( problemList, condition, Status ) => {
-    const { list, difficulty, status } = condition;
+export const sort = (problemList, condition, Status) => {
+    const { difficulty, status } = condition;
     const { accepted, runtimeError, timeLimitExceeded, wrongAnswer, notAttempted } = Status;
-    const sorted = problemList.filter(( problem ) => {
 
+    return problemList.filter((problem) => {
         if (difficulty !== '' && problem.difficulty !== difficulty) {
-            return;
+            return false;
         }
 
-        if(status !== '') {
-            console.log(!timeLimitExceeded[problem.number])
-            if(status === 'Accepted' && !accepted[problem.number]) {
-                return;
-            }
-            if (status === 'Runtime Error' && !runtimeError[problem.number]) {
-                return;
-            }
+        if (status !== '') {
+            const statusMap = {
+                'Accepted': accepted[problem.number],
+                'Runtime Error': runtimeError[problem.number],
+                'Time Limit Exceeded': timeLimitExceeded[problem.number],
+                'Wrong Answer': wrongAnswer[problem.number],
+                'Not Attempted': !notAttempted[problem.number]
+            };
 
-            if (status === 'Time Limit Exceeded' && !timeLimitExceeded[problem.number]) {
-                return;
-            }
-            if (status === 'Wrong Answer' && !wrongAnswer[problem.number]) {
-                return;
-            }
-            if (status === 'Not Attempted' && notAttempted[problem.number]) {
-                return;
-            }
+            return statusMap[status];
         }
 
-        return problem;
+        return true;
     });
-    console.log('sorted',sorted);
-    return sorted;
+};
+
+export const sortByTagName = (problemList, tages) => {
+    // const wordSet = new Set(tagName);
+    return problemList.filter((problem) => {
+        const wordSet = new Set(problem.tagName);
+        console.log(problem);
+        console.log(wordSet);
+        let flag = false;
+        for (let key in tages) {
+            if (wordSet.has(key)) {
+                flag = true;
+                break;
+            }
+        }
+
+        return flag;
+    });
 }
+

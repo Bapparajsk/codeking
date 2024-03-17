@@ -106,4 +106,35 @@ const setLanProgressTemplate = (solve, setValues) => {
     setValues(setLan(solve));
 }
 
-module.exports = { getProgressStatusTemplate, setProgressStatusTemplate, getLanProgressTemplate, setLanProgressTemplate }
+
+const getTagesName = () => {
+    const TagName  = [
+        "Dynamic Programming",
+        "Union Find",
+        "Backtracking",
+        "Divide and Conquer",
+        "Monotonic Stack",
+        "Trie",
+        "Topological Sort",
+        "Data Stream",
+        "Hash Table",
+        "Math",
+        "Depth-First Search",
+        "Greedy",
+        "Breadth-First Search",
+        "Tree",
+        "Binary Tree",
+        "Binary Search",
+        "Array",
+        "String",
+        "Sorting",
+        "Two Pointers",
+        "Matrix",
+        "Simulation",
+        "Stack",
+        "Linked List"
+    ];
+    return TagName;
+}
+
+module.exports = { getProgressStatusTemplate, setProgressStatusTemplate, getLanProgressTemplate, setLanProgressTemplate, getTagesName }

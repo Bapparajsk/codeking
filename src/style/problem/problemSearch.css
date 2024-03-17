@@ -1,0 +1,62 @@
+.problem-search {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 400px;
+    height: 250px;
+    background-color: #424156;
+    border-radius: 5px;
+    z-index: 1000;
+    padding: 5px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.problem-search-input-box {
+    width: 100%;
+    height: 40px;
+    background-color: #515067;
+    border-radius: 5px;
+
+    & input {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border: none;
+        color: #FFFFFFA0;
+        padding: 0 10px;
+        font-size: 16px;
+        font-family: 'Roboto', sans-serif;
+        outline: none;
+    }
+
+    & i {
+        margin-left: 10px;
+        color: #FFFFFFA0;
+        cursor: pointer;
+    }
+}
+
+.problem-search-tages {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin-top: 10px;
+
+    & span {
+        padding: 5px 10px;
+        background-color: #515067;
+        border-radius: 5px;
+        margin: 5px;
+        color: #FFFFFFA0;
+        font-family: 'Roboto', sans-serif;
+        cursor: pointer;
+        transition: all .2s linear;
+
+        &:hover {
+            background-color: #595966;
+        }
+    }
+}

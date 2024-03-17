@@ -11,7 +11,7 @@ export const ControlButton = ({ buttonName, list, setPinName, keyName }) => {
             setTimeout(() => {
                 window.addEventListener("click", windowHan);
             }, 300)
-            // w.addEventListener("click", windowHan);
+
         } else {
             setRoted(0);
             setTimeout(() => {
@@ -20,7 +20,7 @@ export const ControlButton = ({ buttonName, list, setPinName, keyName }) => {
         }
     }
 
-    const windowHan = () => {
+    const windowHan = (e) => {
         setRoted(0);
         setTimeout(() => {
             window.removeEventListener("click", windowHan);
@@ -34,8 +34,11 @@ export const ControlButton = ({ buttonName, list, setPinName, keyName }) => {
     }, [roted]);
 
     useEffect(() => {
-        const maxLangth = findMaxLangth(list);
-        setBox((maxLangth * 10) + 35);
+        if (list) {
+            const maxLangth = findMaxLangth(list);
+            setBox((maxLangth * 10) + 35);
+        }
+
     }, [list]);
 
     return (
@@ -44,7 +47,7 @@ export const ControlButton = ({ buttonName, list, setPinName, keyName }) => {
             <i className="fa-solid fa-angle-down" style={{transform: `rotate(${roted}deg)`}}></i>
             <div className={'pro-con-box'} style={{width: `${box}px`, display: `${roted === 0 ? 'none' : 'block'}`}}>
                 <ul>
-                    {list.map((item, index) => {
+                    {list?.map((item, index) => {
                         let textColor = item === 'Easy' ? 'green' : item === 'Medium' ? 'orange' : item === 'Hard' ? 'red' : '';
                         return (
                             <li

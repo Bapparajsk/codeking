@@ -2,7 +2,7 @@ import '$/user/userDetails.css'
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useUserDetails } from '@/context/user/UserProvider';
-import { useNavigateRouter } from '@/context/navigation/NavigateProvider'
+import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
 
 export const UserDetails = () => {
     const [edit_hover, setEdit_hover] = useState(false);

@@ -29,14 +29,6 @@ export const getButtonDetails = () => {
 }
 
 export const sortButton = (name) => {
-    if (name === 'lists') {
-        return [
-            'LeetCode Curated Algo 170',
-            'LeetCode Curated SQL 70',
-            'Top 100 Liked Questions',
-        ]
-    }
-
     if (name === 'difficulty') {
         return [
             'Easy',

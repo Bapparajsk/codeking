@@ -5,9 +5,12 @@ import { createContext, useContext, useState } from 'react';
 const ProblemContext = createContext();
 
 const ProblemProvider = ({ children }) => {
+    
     const [problemLists, setProblemLists] = useState(undefined);
     const [nameOfTotalProblem, setNameOfTotalProblem] = useState(undefined)
-
+    const [pinNames, setPinNames] = useState({ difficulty: '', status: ''});
+    const [tagNames, setTagNames] = useState({})
+    
     const getSize = () => {
         if (problemLists) {
             return problemLists.length;
@@ -25,7 +28,7 @@ const ProblemProvider = ({ children }) => {
     }
 
     return (
-        <ProblemContext.Provider value={{ problemLists, getSize, setProblems, setTotalProblem, nameOfTotalProblem }}>
+        <ProblemContext.Provider value={{ problemLists, getSize, setProblems, setTotalProblem, nameOfTotalProblem, pinNames, setPinNames, tagNames, setTagNames }}>
             {children}
         </ProblemContext.Provider>
     );

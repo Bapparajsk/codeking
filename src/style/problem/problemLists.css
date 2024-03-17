@@ -66,7 +66,6 @@
     position: absolute;
     height: auto;
     background-color: #424156;
-    /*background-color: blue;*/
     top: 110%;
     border-radius: 10px;
     z-index: 100;
@@ -90,6 +89,9 @@
     width: calc(100% - 400px);
     height: auto;
     justify-content: start;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    margin-top: 5px;
 }
 
 .pin-list-item {
@@ -116,6 +118,7 @@
 }
 
 .control-search-box {
+    position: relative;
     background-color: #509AFF;
     width: auto;
     height: auto;
@@ -145,6 +148,7 @@
 }
 
 .one-pick {
+    margin-left: 20px;
     padding: 8px 14px;
     background-color: #0cefa4;
     border-radius: 15px;
