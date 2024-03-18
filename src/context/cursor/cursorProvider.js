@@ -1,7 +1,6 @@
 "use client"
 
 import { createContext, useContext, useRef, useState, useEffect } from 'react';
-import f from './cc';
 
 const cursor = createContext();
 

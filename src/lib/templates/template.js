@@ -137,4 +137,8 @@ const getTagesName = () => {
     return TagName;
 }
 
-module.exports = { getProgressStatusTemplate, setProgressStatusTemplate, getLanProgressTemplate, setLanProgressTemplate, getTagesName }
+const searchTagesName = (value) => {
+    return getTagesName().filter((item) => item.toLowerCase().includes(value.toLowerCase()));
+}
+
+module.exports = { getProgressStatusTemplate, setProgressStatusTemplate, getLanProgressTemplate, setLanProgressTemplate, getTagesName, searchTagesName }

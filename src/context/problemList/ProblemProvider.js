@@ -24,6 +24,7 @@ const ProblemProvider = ({ children }) => {
     }
 
     const setTotalProblem = (name) => {
+        console.log('nameOfTotalProblem',nameOfTotalProblem);
         setNameOfTotalProblem(name);
     }
 

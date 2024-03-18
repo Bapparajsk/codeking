@@ -27,12 +27,10 @@ export const sortByTagName = (problemList, tages) => {
     // const wordSet = new Set(tagName);
     return problemList.filter((problem) => {
         const wordSet = new Set(problem.tagName);
-        console.log(problem);
-        console.log(wordSet);
-        let flag = false;
+        let flag = true;
         for (let key in tages) {
-            if (wordSet.has(key)) {
-                flag = true;
+            if (!wordSet.has(key)) {
+                flag = false;
                 break;
             }
         }

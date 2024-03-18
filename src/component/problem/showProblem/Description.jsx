@@ -42,7 +42,6 @@ export const Description = () => {
 
         const fetchData = async () => {
             let problemName = linkToName(link);
-            const headers = { 'token': token };
             try {
                 const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-one/${problemName}`, {headers});
                 setProblem(res.data.problem);
@@ -53,7 +52,7 @@ export const Description = () => {
             }
         }
         fetchData();
-    }, [pathName])
+    }, [])
 
 
     return (

@@ -8,15 +8,19 @@ import { sort, sortByTagName } from '@/lib/handler/problemSortHandler';
 import { getButtonDetails, sortButton } from '@/lib/button/listingButton';
 import { useUserDetails } from "@/context/user/UserProvider";
 import { ProblemSearch } from "#/problem/ProblemSearch";
+import { createLink } from '@/lib/handler/functionHandler';
+import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
+
+
 
 export const ProblemsList = () => {
 
     const [roted, setRoted] = useState(0);
-    // const [pinNames, setPinNames] = useState({ difficulty: '', status: ''});
-    // const [tagNames, setTagNames] = useState({})
     const [ProblemLists, setProblemLists] = useState([]);
+    const [searchProblemByName, setSearchProblemByName] = useState('')
     const { problemLists, pinNames, setPinNames, tagNames, setTagNames } = useProblem();
     const { getProblemStatus } = useUserDetails();
+    const { router } = useNavigateRouter();
     const buttons = getButtonDetails();
     
     const Difficulty = sortButton('difficulty');
@@ -37,7 +41,6 @@ export const ProblemsList = () => {
     }
     
     const addTagNameinState = (name) => {
-        console.log(name);
         setTagNames(prevTagNames => ({ ...prevTagNames, [name]: name }));
     }
 
@@ -53,22 +56,20 @@ export const ProblemsList = () => {
         });
     };
 
-
     const containskey = (key) => {
-        // console.log(Object.keys(tagNames).includes(key));
         return Object.keys(tagNames).includes(key);
     }
 
+
     useEffect(() => {
         if (problemLists) {
-            console.log('problemLists',problemLists);
             setProblemLists(problemLists);
         }
     }, [problemLists]);
     
     useEffect(() => {
         const { difficulty, status } = pinNames;
-        if (difficulty === '' && status === '' && Object.keys(tagNames).length === 0) {
+        if (difficulty === '' && status === '' && Object.keys(tagNames).length === 0 && searchProblemByName === '') {
             setProblemLists(problemLists);
             return;
         }
@@ -77,11 +78,24 @@ export const ProblemsList = () => {
         if (Object.keys(tagNames).length !== 0) {
             sortProblem = sortByTagName(sortProblem, tagNames);
         }
-        console.log('sortProblem', sortProblem);
-        setProblemLists(sortProblem);
-        console.log(tagNames);
-    }, [pinNames, tagNames]);
 
+        if (searchProblemByName !== '') {
+            if(/^-?\d*\.?\d+$/.test(searchProblemByName)) {
+                sortProblem = sortProblem.filter(problem => problem.number.toString().includes(searchProblemByName));
+            } else {
+                sortProblem = sortProblem.filter(problem => problem.hading.toLowerCase().includes(searchProblemByName.toLowerCase()));
+            }
+        }
+
+        setProblemLists(sortProblem);
+    }, [pinNames, tagNames, searchProblemByName]);
+
+    const handleOnePick = () => {
+        const random = Math.floor(Math.random() * problemLists.length);
+        const problem = problemLists[random];
+        console.log(problem);
+        router.push(`/problems/${createLink(problem.hading)}`);
+    }
 
     const onClickHandle = (e) => {
         if (roted === 0) {
@@ -99,8 +113,7 @@ export const ProblemsList = () => {
     }
 
     const windowHan = (e) => {
-        console.log(e.target.parentNode.className);
-        if(e.target.parentNode.className === "problem-search-tages"){
+        if(e.target.parentNode.parentNode.className === "problem-search"){
             return;
         }
         setRoted(0);
@@ -145,9 +158,8 @@ export const ProblemsList = () => {
                             <i className="fa-solid fa-angle-down" style={{transform: `rotate(${roted}deg)`}}></i>
                         </div>
                         {
-                            roted === 180 ? <ProblemSearch addTagName={addTagNameinState} removeTagName={removeTagNameinState} containskey={containskey}/> : null
+                            roted === 180 ? <ProblemSearch tagNames={tagNames} addTagName={addTagNameinState} removeTagName={removeTagNameinState} containskey={containskey}/> : null
                         }
-                        {/*<ProblemSearch addTagName={addTagNameinState} removeTagName={removeTagNameinState} containskey={containskey}/>*/}
                     </div>
 
                     <div className={"control-search-box flex"}>
@@ -158,10 +170,11 @@ export const ProblemsList = () => {
                             name={"problemSearch"}
                             className={"problemSearch"}
                             placeholder={"Search questions"}
+                            value={searchProblemByName}
+                            onChange={(e) => setSearchProblemByName(e.target.value)}
                         />
-                        {/*<ProblemSearch/>*/}
                     </div>
-                    <div className={"one-pick"}>
+                    <div className={"one-pick"} onClick={handleOnePick}>
                         <i className="fa-solid fa-shuffle fa-xl"></i>
                         <span>Pick One</span>
                     </div>
@@ -179,7 +192,6 @@ export const ProblemsList = () => {
                     })}
                     {Object.keys(tagNames).map(key => {
                         if (tagNames[key] !== '') {
-                            console.log(tagNames[key])
                             return (
                                 <div key={key} className={"pin-list-item"}>
                                     <span>{tagNames[key]}</span>
