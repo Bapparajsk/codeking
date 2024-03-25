@@ -1,0 +1,90 @@
+.testCase-box {
+    width: 100%;
+    height: auto;
+    background-color: #415672;
+    padding: 15px;
+}
+
+.testCase-title {
+    width: 100%;
+    height: 50px;
+    justify-content: start;
+}
+
+.case-button {
+    width: 65px;
+    height: 40px;
+    background-color: #415672;
+    border: none;
+    margin-right: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+
+    & span {
+        color: rgba(255, 255, 255, 0.56);
+        font-family: "Roboto Mono", monospace;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 14px;
+        letter-spacing: .5px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    & .case-button-icon {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #8c9db2;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 2px solid #8c9db2;
+        transition: all 0.3s ease-in-out;
+        color: #000000B5;
+    }
+
+    &:hover {
+        background-color: #6c85a4;
+        & span {
+            color: #fff;
+        }
+    }
+}
+
+.add-case-button {
+    width: 50px;
+    height: 40px;
+    margin-left: -5px;
+    color: #FFFFFF4C;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    /*background-color: red;*/
+
+    &:hover {
+        color: #FFFFFF82;
+    }
+}
+
+.case-button-active {
+    background-color: #6c85a4;
+    & span {
+        color: #fff;
+    }
+}
+
+.add-case-button-text {
+    position: absolute;
+    width: 120px;
+    height: 30px;
+    left: -50%;
+    bottom: -30px;
+    transform: translate(-5%);
+    background-color: #6c85a4;
+    border-radius: 5px;
+    color: rgba(255, 255, 255, 0.65);
+    transition: aLL 0.3s ease-in-out;
+}

@@ -54,7 +54,7 @@ export const ProblemBox = ({ successful, problemNumber, problemName, difficulty,
                     <div className={"p-title-name-box flex"}>
                         <span>
                             {
-                                problemName.length >= 36 ? `${problemName.substring(0, 36)}...` : problemName
+                                problemName.length >= 33 ? `${problemName.substring(0, 33)}...` : problemName
                             }
                         </span>
                     </div>

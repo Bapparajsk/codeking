@@ -2,8 +2,10 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from 'next/navigation';
 import { useUserDetails } from '@/context/user/UserProvider';
 import { useProblem } from "@/context/problemList/ProblemProvider";
+
 
 const AuthUser = createContext();
 
@@ -12,28 +14,43 @@ export const AuthProvider = ({ children }) => {
 
     const { setUserDetails, userDetails, setProblemStatus } = useUserDetails();
     const { setProblems, setTotalProblem } = useProblem();
+    const router = useRouter();
 
     useEffect(() => {
-        const localToken = localStorage.getItem('token');
-        if (localToken) {
-            console.log('token', localToken);
-            fetchUser(localToken);
-            setToken(localToken);
+        const init = async () => {
+            try {
+                const localToken = localStorage.getItem('token');
+                if (localToken) {
+                    console.log('token', localToken);
+                    await fetchUser(localToken);
+                    setToken(localToken);
+                }
+            } catch (e) {
+                console.log(e);
+                router.push('/login');
+            }
         }
+        init();
     },[])
 
     const fetchUser = async (localToken) => {
-        const headers = { 'token': localToken }
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/get-user`,{headers});
-        const { userDetails, problemsStatus } = response.data;
+        try {
+            const headers = { 'token': localToken }
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/get-user`,{headers});
+            const { userDetails, problemsStatus } = response.data;
 
-        setUserDetails(userDetails);        /* set user details in  context */
-        setProblemStatus(problemsStatus);   /* set problem status in context */
+            setUserDetails(userDetails);        /* set user details in  context */
+            setProblemStatus(problemsStatus);   /* set problem status in context */
 
-        const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
-        const { problemList, NameOfTotalProblem } = resProblem.data.problem;
-        setProblems(problemList);
-        setTotalProblem(NameOfTotalProblem);
+            const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
+            const { problemList, NameOfTotalProblem } = resProblem.data.problem;
+            setProblems(problemList);
+            setTotalProblem(NameOfTotalProblem);
+        } catch (e) {
+            console.log(e)
+            router.push('/login');
+        }
+
     }
 
     const removeToken = () => {
@@ -44,13 +61,8 @@ export const AuthProvider = ({ children }) => {
 
     const setTokenInLocalstorage = async (userToken) => {
         try {
-            await new Promise((res , rej) => {
-                setToken(userToken);
-                localStorage.setItem('token', userToken);
-                setTimeout(() => {
-                    res(true);
-                }, 1000);
-            });
+            setToken(userToken);
+            localStorage.setItem('token', userToken);
         } catch (e) {
             console.log('token set error :- ', e);
         }

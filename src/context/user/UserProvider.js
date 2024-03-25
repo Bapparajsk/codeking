@@ -12,6 +12,10 @@ export const UserProvider = ({ children }) => {
     const headers = { 'token': token };
     try {
       const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/user/updates/user-details`, newUserDetails, {headers});
+
+      const { user } = response.data;
+      setUserDetails(user);
+      // console.log('response', user);
       return true;
     } catch (error) {
       console.log(error);

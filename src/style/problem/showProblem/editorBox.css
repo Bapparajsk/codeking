@@ -87,6 +87,7 @@
         border-radius: 10px;
         cursor: pointer;
         transition: background-color .2s linear;
+        border: none;
 
         span {
             margin-right: 5px;

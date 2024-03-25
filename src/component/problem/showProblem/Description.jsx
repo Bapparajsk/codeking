@@ -3,16 +3,17 @@ import getButton from "@/lib/button/tagButtons";
 import React, { useEffect, useRef, useState } from 'react';
 import { usePathname } from "next/navigation";
 import { TopicTage } from "#/problem/showProblem/TopicTage";
-import { linkToName } from '@/lib/handler/functionHandler';
-import { useAuthUser } from "@/context/usertoken/AuthUser";
-import axios from "axios";
+
+import { useNavigateRouter } from "@/context/navigation/NavigateProvider";
+import { useProblem } from '@/context/problemList/ProblemProvider';
+
 
 export const Description = () => {
     const [tagButton, setTagButton] = useState(null);
     const buttonRef = useRef();
     const [topicIconRef, setTopicIconRef] = useState(false);
     const [showTopicName, setShowTopicName] = useState(false);
-    const [problem, setProblem] = useState();
+    const [problem, setProblem] = useState(undefined);
 
     const hoverOnHandler = () => {
         const { boxShadow, transform} = tagButton?.mouseOver();
@@ -32,27 +33,16 @@ export const Description = () => {
         setShowTopicName(true);
     };
 
-    const pathName = usePathname();
-    const { token } = useAuthUser();
-
+    const { currentProblem } = useProblem();
 
     useEffect(() => {
-        const link = pathName.split("/")[2];
-        document.title = `Code King - ${ link }`;
-
-        const fetchData = async () => {
-            let problemName = linkToName(link);
-            try {
-                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-one/${problemName}`, {headers});
-                setProblem(res.data.problem);
-                setTagButton(getButton(res.data.problem.difficulty));
-                console.log(res.data.problem);
-            } catch (error) {
-                console.log(error);
-            }
+        if (currentProblem) {
+            setProblem(currentProblem)
+            setTagButton(getButton(currentProblem.difficulty));
+            console.log("currentProblem", currentProblem)
         }
-        fetchData();
-    }, [])
+
+    }, [currentProblem])
 
 
     return (
@@ -90,10 +80,10 @@ export const Description = () => {
                     problem?.statement.map((item, idx) => {
                         let conName = item.replace(/@C/g, '<code>').replace(/#C/g, '</code>');
                         return (
-                            <>
-                                <p dangerouslySetInnerHTML={{__html: conName}}></p>
+                            <div key={idx}>
+                                <p  dangerouslySetInnerHTML={{__html: conName}}></p>
                                 <p>&nbsp;</p>
-                            </>
+                            </div>
                         )
                     })
                 }

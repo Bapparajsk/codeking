@@ -1,14 +1,16 @@
 "use client"
 
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const Navigate = createContext();
 
 const NavigateProvider = ({ children }) => {
+
+    const [navigate, setNavigate] = useState('Description');
     const router = useRouter();
     return (
-        <Navigate.Provider value={{router}}>
+        <Navigate.Provider value={{ router, navigate, setNavigate }}>
             {children}
         </Navigate.Provider>
     );

@@ -1,15 +1,31 @@
 import React, {useEffect, useRef, useState} from 'react';
 import "$/problem/showProblem/editorBox.css"
 import { Editor } from '@monaco-editor/react';
-import {Languages} from "#/problem/showProblem/Ianguages";
+import { Languages } from "#/problem/showProblem/Ianguages";
+import { useProblem } from '@/context/problemList/ProblemProvider';
 
 export const EditorBox = () => {
 
     const [lan_box, setLan_box] = useState(false);
     const [v, setV] = useState(1.0);
     const [currLAn, setCurrLAn] = useState("java");
-
+    const [code, setCode] = useState('');
+    const [codeDetails, setCodeDetails] = useState(undefined);
     const iconRef = useRef();
+
+    const { currentProblem } = useProblem();
+
+
+    const sohwCode = () => {
+        console.log(code);
+    }
+
+    useEffect(() => {
+        if (currentProblem) {
+            const defaultValue = `class codeKing {\n\tpublic ${currentProblem.codeDetails.returnType} ${currentProblem.codeDetails.functionName}(${currentProblem.codeDetails.functionParameter}) {\n       //code here\n\t}\n}`;
+            setCode(defaultValue);
+        }
+    }, [currentProblem]);
 
     const removeLanBox = () => {
         let intervalId = setInterval(() => {
@@ -24,7 +40,7 @@ export const EditorBox = () => {
 
                 return newValue;
             });
-        }, 100);
+        }, 50);
     }
 
     const setLan = (e) => {
@@ -35,7 +51,6 @@ export const EditorBox = () => {
     const handleClick = () => {
         const rotateDegree = lan_box ? 0 : 180;
 
-
         if (lan_box) {
             removeLanBox();
         } else {
@@ -45,9 +60,6 @@ export const EditorBox = () => {
         }
     }
 
-    useEffect(() => {
-        iconRef.current.style.transition = "all .4s ease-out";
-    }, []);
 
     return (
         <div className={'editor-box flex'}>
@@ -60,10 +72,10 @@ export const EditorBox = () => {
                     {lan_box && <Languages opa={v} setLan={setLan} currLAn={currLAn}/>}
                 </div>
                 <div className={"editor-run-box flex"}>
-                <div className={"run-box flex"}>
+                    <button className={"run-box flex"} onClick={sohwCode}>
                         <span>Run</span>
                         <i className="fa-solid fa-play fa-xs"></i>
-                    </div>
+                    </button>
                     <div className={"submit-box"}>
                         <span>Submit</span>
                     </div>
@@ -80,7 +92,8 @@ export const EditorBox = () => {
                     height={'100%'}
                     language={'java'}
                     theme={"light"}
-                    defaultValue={"class codeKing {\n\tpublic int solve(int n) {\n\n\t}\n}"}
+                    value={code}
+                    onChange={(value, event) => setCode(value)}
                 />
             </div>
         </div>

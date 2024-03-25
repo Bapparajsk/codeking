@@ -1,5 +1,7 @@
+// import '$/problem/showProblem/submissins.css';
+
 export const Submissions = () => {
     return (
-        <div>Submissions</div>
+        <div className={'submissions-main'}>Submissions</div>
     )
 }

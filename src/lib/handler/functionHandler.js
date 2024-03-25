@@ -48,4 +48,21 @@ const findMaxLangth = (data) => {
     return max;
 }
 
-module.exports = { createLink, linkToName, composeFile, findMaxLangth }
+const Split = (inputString) => {
+    return inputString.split(', ').map(pair => {
+        const [key, value] = pair.split(' = ');
+        const type = value.trim()[0] === '[' ? 'Array' : !isNaN(parseFloat(value)) && isFinite(value) ? 'Number' : 'String';
+        return { key, value, type };
+    }).filter(obj => obj.value !== undefined);
+};
+
+const splitTestCase = (testCase) => {
+    const result = [];
+    result.push(Split(testCase.example1.input));
+    result.push(Split(testCase.example2.input))
+
+    return result;
+}
+
+
+module.exports = { createLink, linkToName, composeFile, findMaxLangth, splitTestCase, Split }

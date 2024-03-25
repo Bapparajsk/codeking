@@ -7,7 +7,8 @@ const ProblemContext = createContext();
 const ProblemProvider = ({ children }) => {
     
     const [problemLists, setProblemLists] = useState(undefined);
-    const [nameOfTotalProblem, setNameOfTotalProblem] = useState(undefined)
+    const [nameOfTotalProblem, setNameOfTotalProblem] = useState(undefined);
+    const [currentProblem, setCurrentProblem] = useState(undefined);
     const [pinNames, setPinNames] = useState({ difficulty: '', status: ''});
     const [tagNames, setTagNames] = useState({})
     
@@ -29,7 +30,7 @@ const ProblemProvider = ({ children }) => {
     }
 
     return (
-        <ProblemContext.Provider value={{ problemLists, getSize, setProblems, setTotalProblem, nameOfTotalProblem, pinNames, setPinNames, tagNames, setTagNames }}>
+        <ProblemContext.Provider value={{ problemLists, getSize, setProblems, setTotalProblem, nameOfTotalProblem, pinNames, setPinNames, tagNames, setTagNames, currentProblem, setCurrentProblem }}>
             {children}
         </ProblemContext.Provider>
     );
