@@ -14,7 +14,7 @@ export const Dashboard = () => {
 
     const [testCases, setTestCases] = useState(undefined);
 
-    const { navigate } = useNavigateRouter();
+    const { navigate, setNavigate } = useNavigateRouter();
     const pathName = usePathname();
     const { router } = useNavigateRouter();
     const { setCurrentProblem } = useProblem();
@@ -22,7 +22,7 @@ export const Dashboard = () => {
     useEffect(() => {
         const link = pathName.split("/")[2];
         document.title = `Code King - ${ link }`;
-
+        setNavigate("Description");
         const fetchData = async () => {
             let problemName = linkToName(link);
             const token = localStorage.getItem('token');
@@ -42,7 +42,7 @@ export const Dashboard = () => {
         }
         fetchData();
     }, [])
-    
+
     return (
         <div className={"dashboard-main"}>
             {

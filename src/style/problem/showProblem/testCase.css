@@ -88,3 +88,52 @@
     color: rgba(255, 255, 255, 0.65);
     transition: aLL 0.3s ease-in-out;
 }
+
+.testCase-show-box {
+    width: 100%;
+    height: auto;
+    row-gap: 10px;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 15px;
+}
+
+.testCase-show-card {
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 5px;
+
+    & .testCase-show-box-input-name {
+        padding: 5px 10px;
+        background-color: turquoise;
+        border-radius: 5px;
+        color: rgba(0, 0, 0, 0.82);
+        box-shadow: rgba(50, 50, 93, 0.25) 0 50px 100px -20px, rgba(0, 0, 0, 0.3) 0 30px 60px -30px, rgba(10, 37, 64, 0.35) 0 -2px 6px 0 inset;
+    }
+
+    & .testCase-show-box-input-value {
+        width: 100%!important;
+        height: 40px;
+        background-color: #415672;
+        border-radius: 6px;
+        overflow: hidden;
+
+        & input {
+            width: 100%;
+            height: 100%;
+            outline: none;
+            border: none;
+            background-color: #7d8da0;
+            padding: 0 10px;
+            letter-spacing: 1.5px;
+            color: #000000AD;
+            font-family: "Roboto Mono", monospace;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+            font-size: 14px;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+}

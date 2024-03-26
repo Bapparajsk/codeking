@@ -4,62 +4,57 @@ import { useProblem } from '@/context/problemList/ProblemProvider';
 import { Split } from '@/lib/handler/functionHandler';
 
 export const TestCase = ({ testCases, setTestCases }) => {
-    const [activeTestCase, setActiveTestCase] = useState();
     const [showAddtext, setShowAddtext] = useState(false);
     const [howcurrntTaseCAse, setHowcurrntTaseCAse] = useState(undefined);
+    const [activeTestCase, setActiveTestCase] = useState(0);
 
     const handleAddCase = () => {
-
         setTestCases(prev => {
-            const newCase = testCases[testCases.length - 1];
+            const newCase = howcurrntTaseCAse.map((input, idx) => {
+                return { key: input.key, value: input.value};
+            });
             return [...prev, newCase];
         });
     }
 
+    const handleInputChange = (newValue, idx) => {
+        setTestCases(prev => {
+            const updatedCases = [...prev];
+            updatedCases[activeTestCase][idx].value = newValue;
+            return updatedCases;
+        });
+    };
+
     useEffect(() => {
         if (testCases) {
-            let key = 1;
-            const updatedState = {};
-            for (const testCase of testCases) {
-                updatedState[key] = key === 1;
-                key++;
-            }
-            setActiveTestCase(updatedState);
-            setHowcurrntTaseCAse(testCases[0][0]);
+            setHowcurrntTaseCAse(testCases[0]);
         }
-    }, [testCases]);
+    }, []);
 
 
     return (
         <div className={'testCase-box'}>
             <div className={'testCase-title flex'}>
                 {
-                    activeTestCase && Object.keys(activeTestCase).map((key, idx) => {
+                    testCases?.map((_, idx) => {
                         return (
                             <div
                                 key={idx}
                                 onClick={() => {
                                     console.log("activeTestCase");
-                                    setHowcurrntTaseCAse(testCases[idx][0])
-                                    setActiveTestCase(prevState => {
-                                        const updatedState = {};
-                                        for (const k in prevState) {
-                                            updatedState[k] = (k === key);
-                                        }
-                                        return updatedState;
-                                    });
+                                    setHowcurrntTaseCAse(testCases[idx])
+                                    setActiveTestCase(idx);
                                 }}
                             >
                                 <CaseButton
-                                    caseNumber={key}
-                                    isActive={activeTestCase[key]}
+                                    caseNumber={idx+1}
+                                    isActive={activeTestCase === idx}
                                 />
                             </div>
-
                         )
                     })
                 }
-                { testCases.length < 8 &&
+                { testCases?.length < 8 &&
                     <div className={'add-case-button flex'}>
                         <i
                             className="fa-solid fa-plus"
@@ -73,12 +68,22 @@ export const TestCase = ({ testCases, setTestCases }) => {
                     </div>
                 }
             </div>
-            <div>
+            <div className={'testCase-show-box flex'}>
                 {
-                    howcurrntTaseCAse?.key
-                }
-                {
-                    howcurrntTaseCAse?.value
+                    howcurrntTaseCAse && howcurrntTaseCAse.map((input, idx) => {
+                        return (
+                            <div key={idx} className={'testCase-show-card flex'}>
+                                <InputName name={input.key}/>
+                                <InputValue
+                                    value={input.value}
+                                    onChange={(newValue) => {
+                                        console.log(newValue);
+                                        handleInputChange(newValue, idx);
+                                    }}
+                                />
+                            </div>
+                        )
+                    })
                 }
             </div>
         </div>
@@ -88,14 +93,13 @@ export const TestCase = ({ testCases, setTestCases }) => {
 
 const CaseButton = ({caseNumber, isActive}) => {
     const [showXMark, setShowXMark] = useState(false);
-    console.log(caseNumber);
     return (
         <button
             className={`case-button ${isActive ? 'case-button-active' : ''}`}
             onMouseOver={() => setShowXMark(true)}
             onMouseOut={() => setShowXMark(false)}
         >
-            {caseNumber !== '1' && <div
+            {caseNumber !== 1 && <div
                 className={'case-button-icon flex '}
                 style={{display: showXMark ? 'flex' : 'none'}}
             >
@@ -105,3 +109,24 @@ const CaseButton = ({caseNumber, isActive}) => {
         </button>
     )
 }
+
+const InputName = ({name}) => {
+    return (
+        <div className={'testCase-show-box-input-name'}>
+            <span>{name} =</span>
+        </div>
+    )
+}
+
+const InputValue = ({ value, onChange }) => {
+    const handleInputChange = (e) => {
+        onChange(e.target.value);
+    };
+
+    return (
+        <div className={'testCase-show-box-input-value'}>
+            <input value={value} onChange={handleInputChange}/>
+        </div>
+    )
+}
+
