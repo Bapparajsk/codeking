@@ -3,6 +3,11 @@ import "$/problem/showProblem/editorBox.css"
 import { Editor } from '@monaco-editor/react';
 import { Languages } from "#/problem/showProblem/Ianguages";
 import { useProblem } from '@/context/problemList/ProblemProvider';
+import Loader  from '@/component/Loader';
+import SubmitLoader from '@/component/SubmitLoader';
+import { useNavigateRouter } from "@/context/navigation/NavigateProvider";
+
+import axios from "axios";
 
 export const EditorBox = () => {
 
@@ -12,17 +17,65 @@ export const EditorBox = () => {
     const [code, setCode] = useState('');
     const [codeDetails, setCodeDetails] = useState(undefined);
     const iconRef = useRef();
+    const [codeRunIs, setCodeRunIs] = useState(false);
+    const [codeSubmitIs, setCodeSubmitIs] = useState(false);
+    const [runCode, setRunCode] = useState(false);
 
     const { currentProblem } = useProblem();
+    const { setNavigate, setIsTrue } = useNavigateRouter();
 
+    const setRunCodeFalse = () => {
+        const id = setTimeout(() => {
+            setRunCode(false);
+        }, 5000);
 
-    const sohwCode = () => {
-        console.log(code);
+        return id;
+    }
+
+    const submitCode = async () => {
+        if (runCode) {
+            alert('try agen 5s later');
+            return;
+        }
+        setRunCode(true);
+        let id = setRunCodeFalse();
+        const headers = {'token': localStorage.getItem('token')};
+
+        try {
+            setCodeSubmitIs(true);
+            const body = {
+                code: code,
+                lang: 'java',
+                userName: 'bapparajsk',
+                problemId: currentProblem._id
+            }
+
+            const res = await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/problem/submit/run-code`,
+                body,
+                {headers}
+            );
+
+            setCodeSubmitIs(false);
+            clearTimeout(id);
+            setRunCodeFalse();
+            setIsTrue(true);
+            setNavigate('Submissions');
+
+        } catch (e) {
+
+            console.log('error', e);
+            setCodeSubmitIs(false);
+            clearTimeout(id);
+            setRunCodeFalse();
+
+            setNavigate('Submissions');
+        }
     }
 
     useEffect(() => {
         if (currentProblem) {
-            const defaultValue = `class codeKing {\n\tpublic ${currentProblem.codeDetails.returnType} ${currentProblem.codeDetails.functionName}(${currentProblem.codeDetails.functionParameter}) {\n       //code here\n\t}\n}`;
+            const defaultValue = `class CodeKing {\n\tpublic ${currentProblem.codeDetails.returnType} ${currentProblem.codeDetails.functionName}(${currentProblem.codeDetails.functionParameter}) {\n       //code here\n\t}\n}`;
             setCode(defaultValue);
         }
     }, [currentProblem]);
@@ -72,13 +125,21 @@ export const EditorBox = () => {
                     {lan_box && <Languages opa={v} setLan={setLan} currLAn={currLAn}/>}
                 </div>
                 <div className={"editor-run-box flex"}>
-                    <button className={"run-box flex"} onClick={sohwCode}>
-                        <span>Run</span>
-                        <i className="fa-solid fa-play fa-xs"></i>
+                    <button className={"run-box flex"} disabled={codeRunIs || codeSubmitIs}>
+                        {
+                            codeRunIs ? <Loader/> :
+                                <>
+                                    <span>Run</span>
+                                    <i className="fa-solid fa-play fa-xs"></i>
+                                </>
+                        }
+
                     </button>
-                    <div className={"submit-box"}>
-                        <span>Submit</span>
-                    </div>
+                    <button className={"submit-box flex"} disabled={codeRunIs || codeSubmitIs} onClick={submitCode}>
+                        {
+                            codeSubmitIs ? <SubmitLoader/> : <span>Submit</span>
+                        }
+                    </button>
                 </div>
                 <div className={"editor-setting-box flex"}>
                     <div className={"setting-box"}>

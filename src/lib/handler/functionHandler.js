@@ -14,7 +14,7 @@ const linkToName = (link) => {
 
 const composeFile = (key, value) => {
     const newFile = {};
-    
+
     if(key['user_name']) {
         newFile['user_name'] = value['user_name'];
     }
@@ -33,7 +33,7 @@ const composeFile = (key, value) => {
     if(key['cursor']) {
         newFile['cursor'] = value['cursor'];
     }
-    
+
     return newFile;
 }
 
@@ -64,5 +64,14 @@ const splitTestCase = (testCase) => {
     return result;
 }
 
+const getpinNamesIcon = (item) => {
+    return item === ' Todo' ? <i className="fa-solid fa-window-minimize" style={{color: '#ffffff', transform: 'translateY(-4.5px)'}}></i> :
+        item === " Solved" ? <i className="fa-solid fa-check" style={{color: '#28a745'}}></i> :
+            item == " Attempted" ? <i className="fa-solid fa-file-pen" style={{color: '#FFD43B'}}></i>: '';
+}
 
-module.exports = { createLink, linkToName, composeFile, findMaxLangth, splitTestCase, Split }
+const getTextCode = (name) => {
+    return name === 'Easy' ? '#16C2AC' : name === 'Medium' ? '#FFC02F' : name === 'Hard' ? '#FF3B47' : '';
+}
+
+module.exports = { createLink, linkToName, composeFile, findMaxLangth, splitTestCase, Split, getpinNamesIcon, getTextCode }

@@ -38,10 +38,8 @@ export const sortButton = (name) => {
     }
 
     return [
-        'Accepted',
-        'Not Attempted',
-        'Wrong Answer',
-        'Runtime Error',
-        'Time Limit Exceeded',
+        ' Todo',
+        ' Solved',
+        ' Attempted',
     ];
 }

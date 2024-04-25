@@ -1,4 +1,6 @@
-import { useState } from "react";
+'use client'
+
+import { useState, useEffect } from "react";
 
 
 const diff = (name) => {
@@ -20,6 +22,7 @@ export const ProblemBox = ({ successful, problemNumber, problemName, difficulty,
 
     const [statusHover, setStatusHover] = useState(false);
     const [statusIcon, setStatusIcon] = useState({w: 25, h:25});
+    const [succe, setSucce] = useState('nqtddedc');
 
     const statusHoverInHandler = () => {
         setStatusHover(true);
@@ -31,6 +34,17 @@ export const ProblemBox = ({ successful, problemNumber, problemName, difficulty,
         setStatusIcon({w: 25, h: 25});
     }
 
+    useEffect(() => {
+        const data = successful()
+            if(data === 'solve') {
+                setSucce('oqdmuxru');
+            } else if (data === 'attempted') {
+                setSucce('zrtfxghu');
+            } else {
+                setSucce('nqtddedc');
+            }
+    }, [successful]);
+
     return (
         <>
             <hr className={"problem-box-hr"}/>
@@ -41,9 +55,9 @@ export const ProblemBox = ({ successful, problemNumber, problemName, difficulty,
                     onMouseOut={statusHoverOutHandler}>
 
                     <lord-icon
-                        src={`https://cdn.lordicon.com/${successful ? "oqdmuxru" : "nqtddedc"}.json`}
+                        src={`https://cdn.lordicon.com/${succe}.json`}
                         trigger={statusHover ? "loop" : "in"}
-                        colors={`primary:# ${successful ? "16c72e" : "c71f16"}`}
+                        colors={`primary:# ${succe === 'oqdmuxru' ? "16c72e" : succe === 'nqtddedc' ? "c71f16" : 'e8e230'}`}
                         style={{width: statusIcon.w,height: statusIcon.h}}>
                     </lord-icon>
                 </div>

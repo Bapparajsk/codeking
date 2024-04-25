@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
             }
         }
         init();
-    },[])
+    },[]);
 
     const fetchUser = async (localToken) => {
         try {

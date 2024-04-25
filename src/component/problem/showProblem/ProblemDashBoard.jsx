@@ -1,7 +1,6 @@
-import "$/problem/showProblem/dashboardNavbar.css"
+import "$/problem/showProblem/dashboardNavbar.css";
 import { DashboardNavbar } from "#/problem/showProblem/DashboardNavbar";
 import { Dashboard } from "#/problem/showProblem/Dashboard";
-
 
 export const ProblemDashBoard = () => {
     return (

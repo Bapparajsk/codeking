@@ -1,13 +1,29 @@
+'use client'
+
 import "$/problem/problems.css"
 import {ProblemBox} from "#/problem/ProblemBox";
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useState ,useEffect } from "react";
 import { createLink } from '@/lib/handler/functionHandler';
+import { useUserDetails } from '@/context/user/UserProvider';
 
 export const Problems = ({ problemLists }) => {
 
-    // const { problemLists } = useProblem();
-    // console.log(problemLists);
+    const [solve, setSolve] = useState({});
+    const [attempted, setAttempted] = useState({});
+
+    const { getSolveProblemById } = useUserDetails();
+
+    useEffect(() => {
+        const init = async () => {
+            const data = await getSolveProblemById();
+            const { Solved, Attempted } = data;
+            console.log("data", data)
+            setSolve(Solved);
+            setAttempted(Attempted);
+        }
+        init();
+    }, []);
 
     return (
         <div className={"problems-container flex"}>
@@ -16,7 +32,15 @@ export const Problems = ({ problemLists }) => {
                     return (
                         <Link key={idx} href={`/problems/${createLink(item.hading)}`} style={{width: "100%"}}>
                         <ProblemBox
-                            successful={false}
+                            successful={() => {
+                                if (solve[item.id]) {
+                                    return "solve";
+                                } else if (attempted[item.id]) {
+                                    return "attempted";
+                                } else {
+                                    return 'todo'
+                                }
+                            }}
                             problemNumber={item.number}
                             problemName={item.hading}
                             difficulty={item.difficulty}

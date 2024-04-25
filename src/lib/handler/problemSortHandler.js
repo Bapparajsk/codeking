@@ -1,29 +1,22 @@
-export const sort = (problemList, condition, Status) => {
-    const { difficulty, status } = condition;
-    const { accepted, runtimeError, timeLimitExceeded, wrongAnswer, notAttempted } = Status;
+const sortByDifficulty = (problemList, difficulty) => {
+    return problemList.filter((problem) => problem.difficulty === difficulty );
+};
+
+const sortByStatus = (problemList, status, userStatus) => {;
+    const { Solved, Attempted } = userStatus;
 
     return problemList.filter((problem) => {
-        if (difficulty !== '' && problem.difficulty !== difficulty) {
-            return false;
+        const { id } = problem;
+        if (status === ' Todo') {
+            return !Solved[id] && !Attempted[id];
+        } else if (status === ' Solved') {
+            return Solved[id];
         }
-
-        if (status !== '') {
-            const statusMap = {
-                'Accepted': accepted[problem.number],
-                'Runtime Error': runtimeError[problem.number],
-                'Time Limit Exceeded': timeLimitExceeded[problem.number],
-                'Wrong Answer': wrongAnswer[problem.number],
-                'Not Attempted': !notAttempted[problem.number]
-            };
-
-            return statusMap[status];
-        }
-
-        return true;
+        return Attempted[id];
     });
 };
 
-export const sortByTagName = (problemList, tages) => {
+const sortByTagName = (problemList, tages) => {
     // const wordSet = new Set(tagName);
     return problemList.filter((problem) => {
         const wordSet = new Set(problem.tagName);
@@ -39,3 +32,4 @@ export const sortByTagName = (problemList, tages) => {
     });
 }
 
+export { sortByDifficulty, sortByStatus, sortByTagName };

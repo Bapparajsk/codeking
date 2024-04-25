@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { findMaxLangth } from '@/lib/handler/functionHandler';
+import { findMaxLangth, getpinNamesIcon, getTextCode } from '@/lib/handler/functionHandler';
 
 export const ControlButton = ({ buttonName, list, setPinName, keyName }) => {
     const [roted, setRoted] = useState(0);
@@ -36,7 +36,7 @@ export const ControlButton = ({ buttonName, list, setPinName, keyName }) => {
     useEffect(() => {
         if (list) {
             const maxLangth = findMaxLangth(list);
-            setBox((maxLangth * 10) + 35);
+            setBox((maxLangth * 10) + 40);
         }
 
     }, [list]);
@@ -48,13 +48,16 @@ export const ControlButton = ({ buttonName, list, setPinName, keyName }) => {
             <div className={'pro-con-box'} style={{width: `${box}px`, display: `${roted === 0 ? 'none' : 'block'}`}}>
                 <ul>
                     {list?.map((item, index) => {
-                        let textColor = item === 'Easy' ? 'green' : item === 'Medium' ? 'orange' : item === 'Hard' ? 'red' : '';
+                        let textColor = getTextCode(item);
                         return (
                             <li
                                 key={index}
                                 style={{color: `${textColor.length !== 0 ? textColor : ''}`}}
                                 onClick={() => setPinName(keyName, item)}
-                            >{item}</li>
+                            >
+                                { getpinNamesIcon(item)}
+                                {item}
+                            </li>
                         )
                     })}
                 </ul>

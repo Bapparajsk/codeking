@@ -5,6 +5,7 @@ import { EditorBox } from "#/problem/showProblem/EditorBox";
 import { ProblemDashBoard } from "#/problem/showProblem/ProblemDashBoard";
 
 const ShowProblem = () => {
+    
 
     return (
         <div className={"show-problem-main flex"}>

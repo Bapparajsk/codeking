@@ -1,6 +1,6 @@
 .submissions-main {
-    width: calc(100% - 20px);
-    height: calc(100% - 80px);
+    height: auto;
+    padding: 10px 20px;
     border-radius: 10px;
     overflow-y: scroll;
     background-color: #415672;
@@ -19,4 +19,76 @@
 .submissions-main::-webkit-scrollbar-thumb {
     border-radius: 8px;
     background-color: rgba(100, 244, 88, 0.66);
+}
+
+.submissions-title {
+    width: 100%;
+    height: 50px;
+    justify-content: start;
+    color: rgba(255, 255, 255, 0.71);
+    letter-spacing: .5px;
+    font-family: "Roboto Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.submissions-content {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+}
+
+.submissions-content-lists {
+    width: 100%;
+    height: 50px;
+    justify-content: start;
+    position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 10px;
+    transition: all .3s ease;
+
+    &:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+        transition: all .3s ease;
+    }
+
+    &:hover:before {
+        opacity: 1;
+    }
+
+    &:hover {
+        background-color: rgba(252, 0, 0, 0.07);
+    }
+}
+
+.content-lists-before-wrong:before {
+    background-color: #FF204E;
+}
+
+.content-lists-before-correct:before {
+    background-color: rgba(11, 232, 62, 0.84);
+}
+
+.submissions-content-lists-item {
+    width: 100%;
+    height: 100%;
+    justify-content: start;
+    margin-left: 10px;
+    /*flex-direction: c;*/
+
+    & span {
+        /*color: rgba(255, 0, 0, 0.88);*/
+        letter-spacing: .5px;
+        font-family: "Roboto Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        font-size: 15px;
+        padding-left: 10px;
+    }
 }

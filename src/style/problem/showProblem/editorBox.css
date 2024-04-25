@@ -75,14 +75,12 @@
     }
 }
 
-
-
 .editor-run-box {
     width: 60%;
     height: 100%;
 
     .run-box {
-        padding: 5px 10px;
+        padding: 8px 15px;
         background-color: #000000AA;
         border-radius: 10px;
         cursor: pointer;
@@ -93,6 +91,8 @@
             margin-right: 5px;
             color: rgba(231, 235, 242, 0.82);
             transition: all .2s linear;
+            letter-spacing: 0.5px;
+            font-family: "Roboto Light", sans-serif;
         }
 
         i {
@@ -106,7 +106,6 @@
 
             i {
                 color: #ffffff;
-                font-size: 14px;
             }
 
             span {
@@ -116,12 +115,15 @@
     }
 
     .submit-box {
-        padding: 5px 10px;
+        padding: 8px 15px;
         background-color: #2fd19d;
         border-radius: 10px;
         cursor: pointer;
         transition: background-color .2s linear;
         margin-left: 10px;
+        border: none;
+        letter-spacing: 0.5px;
+        font-family: "Roboto Light", sans-serif;
 
         &:hover {
             background-color: rgba(47, 209, 157, 0.68);

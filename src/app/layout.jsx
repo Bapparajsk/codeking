@@ -8,7 +8,7 @@ import { AuthProvider } from '@/context/usertoken/AuthUser';
 import { UserProvider } from '@/context/user/UserProvider';
 import { ProblemProvider } from "@/context/problemList/ProblemProvider";
 import { Cursor } from '@/component/cursor/Cursor';
-import { CursorProvider, useCursor } from '@/context/cursor/cursorProvider'; // Import the missing useCursor function
+import { CursorProvider, useCursor } from '@/context/cursor/cursorProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 

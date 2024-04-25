@@ -1,14 +1,17 @@
+'use client'
+
 import "$/problem/showProblem/dashboard.css"
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import axios from "axios";
 import { Description } from "#/problem/showProblem/Description";
 import { Submissions } from '@/component/problem/showProblem/Submissions';
-import { useNavigateRouter } from "@/context/navigation/NavigateProvider";
 import { TestCase } from '@/component/problem/showProblem/TestCase';
 import { TestResult } from '@/component/problem/showProblem/TestResult';
+import { Solution } from "@/component/problem/showProblem/Solution";
+import { useNavigateRouter } from "@/context/navigation/NavigateProvider";
 import { useProblem } from '@/context/problemList/ProblemProvider';
 import { linkToName, splitTestCase } from '@/lib/handler/functionHandler';
-import axios from "axios";
 
 export const Dashboard = () => {
 
@@ -47,8 +50,10 @@ export const Dashboard = () => {
         <div className={"dashboard-main"}>
             {
                 navigate === 'Description' ? <Description/> :
+                navigate === 'Solution' ? <Solution/> :
                 navigate === 'Submissions' ? <Submissions/> :
-                navigate === 'TestCase' ? <TestCase testCases={testCases} setTestCases={setTestCases}/> : <TestResult/>
+                navigate === 'TestCase' ? <TestCase testCases={testCases} setTestCases={setTestCases}/> :
+                navigate === 'TestResult' ?<TestResult taseCases={testCases}/> : null
             }
         </div>
     )

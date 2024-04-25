@@ -6,6 +6,7 @@ export const DashboardNavbar = () => {
     const [subHover, setSubHover] = useState(false);
     const [testHover, setTestHover] = useState(false);
     const [recHover, setRecHover] = useState(false);
+    const [solHover, setSolHover] = useState(false);
 
     const { setNavigate } = useNavigateRouter();
 
@@ -28,17 +29,18 @@ export const DashboardNavbar = () => {
                 </li>
                 <li
                     className={"dashboard-nav-name"}
-                    onMouseOver={() => setSubHover(true)}
-                    onMouseOut={() => setSubHover(false)}
-                    onClick={() => setNavigate('Submissions')}
+                    onMouseOver={() => setSolHover(true)}
+                    onMouseOut={() => setSolHover(false)}
+                    onClick={() => setNavigate('Solution')}
                 >
                     <lord-icon
-                        src="https://cdn.lordicon.com/vuiggmtc.json"
-                        trigger={subHover ? "loop" : "in"}
-                        colors="primary:#2516c7"
+                        src="https://cdn.lordicon.com/yodjuckr.json"
+                        trigger={solHover ? "loop" : "in"}
+                        colors="primary:#2516c7,secondary:#b4b4b4"
+
                         style={{width: 25, height: 25}}>
                     </lord-icon>
-                    <span>Submissions</span>
+                    <span>Solution</span>
                 </li>
                 <li
                     className={"dashboard-nav-name"}
@@ -68,6 +70,20 @@ export const DashboardNavbar = () => {
                         style={{width: 25, height: 25}}>
                     </lord-icon>
                     <span>Test Result</span>
+                </li>
+                <li
+                    className={"dashboard-nav-name"}
+                    onMouseOver={() => setSubHover(true)}
+                    onMouseOut={() => setSubHover(false)}
+                    onClick={() => setNavigate('Submissions')}
+                >
+                    <lord-icon
+                        src="https://cdn.lordicon.com/vuiggmtc.json"
+                        trigger={subHover ? "loop" : "in"}
+                        colors="primary:#2516c7"
+                        style={{width: 25, height: 25}}>
+                    </lord-icon>
+                    <span>Submissions</span>
                 </li>
             </ul>
         </div>

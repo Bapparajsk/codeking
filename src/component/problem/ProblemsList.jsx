@@ -4,13 +4,12 @@ import { TopicButton } from "#/problem/TopicButton";
 import { ControlButton } from "#/problem/ControlButton";
 import { Problems } from "#/problem/Problems";
 import { useProblem } from "@/context/problemList/ProblemProvider";
-import { sort, sortByTagName } from '@/lib/handler/problemSortHandler';
+import { sortByDifficulty, sortByStatus, sortByTagName } from '@/lib/handler/problemSortHandler';
 import { getButtonDetails, sortButton } from '@/lib/button/listingButton';
 import { useUserDetails } from "@/context/user/UserProvider";
 import { ProblemSearch } from "#/problem/ProblemSearch";
-import { createLink } from '@/lib/handler/functionHandler';
+import { createLink, getpinNamesIcon, getTextCode } from '@/lib/handler/functionHandler';
 import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
-
 
 
 export const ProblemsList = () => {
@@ -22,7 +21,7 @@ export const ProblemsList = () => {
     const { getProblemStatus } = useUserDetails();
     const { router } = useNavigateRouter();
     const buttons = getButtonDetails();
-    
+
     const Difficulty = sortButton('difficulty');
     const Status = sortButton('status');
 
@@ -39,7 +38,7 @@ export const ProblemsList = () => {
             [key]: ''
         }));
     }
-    
+
     const addTagNameinState = (name) => {
         setTagNames(prevTagNames => ({ ...prevTagNames, [name]: name }));
     }
@@ -66,7 +65,7 @@ export const ProblemsList = () => {
             setProblemLists(problemLists);
         }
     }, [problemLists]);
-    
+
     useEffect(() => {
         const { difficulty, status } = pinNames;
         if (difficulty === '' && status === '' && Object.keys(tagNames).length === 0 && searchProblemByName === '') {
@@ -74,7 +73,16 @@ export const ProblemsList = () => {
             return;
         }
 
-        let sortProblem = sort(problemLists, pinNames, getProblemStatus());
+        let sortProblem = problemLists;
+
+        if (difficulty !== '') {
+            sortProblem = sortByDifficulty(sortProblem, difficulty);
+        }
+
+        if (status !== '') {
+            sortProblem = sortByStatus(sortProblem, status, getProblemStatus());
+        }
+
         if (Object.keys(tagNames).length !== 0) {
             sortProblem = sortByTagName(sortProblem, tagNames);
         }
@@ -182,9 +190,16 @@ export const ProblemsList = () => {
                 <div className={'pin-list-box flex'}>
                     {Object.keys(pinNames).map((key, idx) => {
                         if (pinNames[key] !== '') {
+                            let item = pinNames[key];
+                            let textColor = getTextCode(item);
                             return (
                                 <div key={idx} className={"pin-list-item"}>
-                                    <span>{pinNames[key]}</span>
+                                    <span
+                                        style={{color: `${textColor.length !== 0 ? textColor : ''}`}}
+                                    >
+                                        { getpinNamesIcon(item) }
+                                        {item}
+                                    </span>
                                     <i className="fa-solid fa-xmark" onClick={() => removePinName(key)}></i>
                                 </div>
                             );

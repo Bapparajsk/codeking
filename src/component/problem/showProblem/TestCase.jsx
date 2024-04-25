@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '$/problem/showProblem/testCase.css';
 import { useProblem } from '@/context/problemList/ProblemProvider';
-import { Split } from '@/lib/handler/functionHandler';
 
 export const TestCase = ({ testCases, setTestCases }) => {
     const [showAddtext, setShowAddtext] = useState(false);

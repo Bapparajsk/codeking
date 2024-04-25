@@ -8,10 +8,11 @@ const Navigate = createContext();
 const NavigateProvider = ({ children }) => {
 
     const [navigate, setNavigate] = useState('Description');
+    const [isTrue, setIsTrue] = useState(false);
     const router = useRouter();
-    
+
     return (
-        <Navigate.Provider value={{ router, navigate, setNavigate }}>
+        <Navigate.Provider value={{ router, navigate, setNavigate, isTrue, setIsTrue }}>
             {children}
         </Navigate.Provider>
     );
