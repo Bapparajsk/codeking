@@ -17,13 +17,13 @@ export const Submissions = () => {
     const { token } = useAuthUser();
     const { currentProblem } = useProblem();
     const { isTrue, setIsTrue } = useNavigateRouter();
-    
+
+    const init = async () => {
+        const data = await getSubmissionsStatus(currentProblem._id);
+        setSubmission(data);
+    }
+
     useEffect(() => {
-        const init = async () => {
-            const token = localStorage.getItem('token');
-            const data = await getSubmissionsStatus(currentProblem._id, token);
-            setSubmission(data);
-        }
         init();
     }, []);
 

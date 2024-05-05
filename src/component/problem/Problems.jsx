@@ -17,8 +17,8 @@ export const Problems = ({ problemLists }) => {
     useEffect(() => {
         const init = async () => {
             const data = await getSolveProblemById();
+            console.log(data);
             const { Solved, Attempted } = data;
-            console.log("data", data)
             setSolve(Solved);
             setAttempted(Attempted);
         }

@@ -6,6 +6,7 @@ import { useProblem } from '@/context/problemList/ProblemProvider';
 import Loader  from '@/component/Loader';
 import SubmitLoader from '@/component/SubmitLoader';
 import { useNavigateRouter } from "@/context/navigation/NavigateProvider";
+import { useUserDetails } from '@/context/user/UserProvider';
 
 import axios from "axios";
 
@@ -23,6 +24,7 @@ export const EditorBox = () => {
 
     const { currentProblem } = useProblem();
     const { setNavigate, setIsTrue } = useNavigateRouter();
+    const { updateUserProgress, updateUserLogs } = useUserDetails();
 
     const setRunCodeFalse = () => {
         const id = setTimeout(() => {
@@ -61,6 +63,8 @@ export const EditorBox = () => {
             setRunCodeFalse();
             setIsTrue(true);
             setNavigate('Submissions');
+            updateUserProgress();
+            updateUserLogs();
 
         } catch (e) {
 

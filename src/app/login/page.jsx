@@ -15,9 +15,8 @@ const Page = () => {
     const setSignup = (value) => {
         setSing(value);
     }
-    
-    const showMassagegHandler = (massage, bg, shroll) => {
 
+    const showMassagegHandler = (massage, bg, shroll) => {
         setNotification(prevNotification => ({
             ...prevNotification,
             ['backgroundColor']: bg,

@@ -86,29 +86,19 @@ export const Signup = props => {
 
     const handleSignup = async (e) => {
         e.preventDefault();
-        
+
         let passValid = isValid.isPassword(password);
         const allValid = passValid.every(boolean => boolean);
 
-
-        const userD = {
+        const userDetails = {
             userName: username,
             email: email,
             password: password
         }
         try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/sign-up`, userD);
-            const { userDetails, token, problemsStatus } = res.data;
-            console.log('userDetails :- ', res.data);
-            setTokenInLocalstorage(token);  /* set token in localstorage */
-            setUserDetails(userDetails);    /* set user details in context */
-            setProblemStatus(problemsStatus); /* set problem status in context */
-
-            const headers = { 'token': token };
-
-            const resProblem = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/get-all`, {headers});
-            setProblems(resProblem.data.problem);   /* set problems in context */
-            router.push('/user/profile');
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/sign-up`, userDetails);
+            const { sessionToken } = res.data;
+            router.push(`/login/verify/${sessionToken}`);
         } catch (error) {
             console.log('login error :- ', error);
         }

@@ -6,19 +6,15 @@ import "$/problem/style.css"
 import { CardList } from "#/problem/CardList";
 import { SubTitles } from "#/problem/SubTitles";
 import { ProblemsList } from "#/problem/ProblemsList";
-import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
-import { useAuthUser } from '@/context/usertoken/AuthUser';
+import { useProblem } from '@/context/problemList/ProblemProvider';
 
 const Page = () => {
 
-    const { router } = useNavigateRouter();
-    const { getAndSetTokenInLocalstorage } = useAuthUser();
-    
+    const { fetchProblemsInServer } = useProblem();
+
     useEffect(() => {
         const init = async () => {
-            if (!await getAndSetTokenInLocalstorage()) {
-                router.push('/login');
-            }
+            await fetchProblemsInServer();
         }
         init();
         document.title = "Code King - Problems List"

@@ -4,7 +4,6 @@ import '$/navbar/style.css';
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useUserDetails } from '@/context/user/UserProvider';
-import { useAuthUser } from '@/context/usertoken/AuthUser';
 import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
 
 export const Navbar = () => {
@@ -15,12 +14,11 @@ export const Navbar = () => {
     const [userHover, setUserHover] = useState(false);
     const [singInHover, setSingInHover] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
-    const [useName, setUseName] = useState('User');
+    const [userName, setUserName] = useState('User');
 
-    const { userDetails, setUserDetails } = useUserDetails();
-    const { removeToken } = useAuthUser();
+    const { getUserName  } = useUserDetails();
     const { router } = useNavigateRouter();
-    
+
 
     const handleHovers = (setHover, value) => {
         setHover(value)
@@ -30,14 +28,13 @@ export const Navbar = () => {
         removeToken();
         setUserDetails(undefined);
         router.push('/login');
-        setUseName('User');
+        setUserName('User');
     }
 
     useEffect(() => {
-        if (userDetails) {
-            setUseName(userDetails.user_name);
-        }
-    }, [userDetails]);
+        setUserName(getUserName());
+        console.log("getUserName",getUserName());
+    }, [getUserName]);
 
     return (
         <nav className={'navbar'}>
@@ -105,42 +102,28 @@ export const Navbar = () => {
                             delay="150"
                             style={{width: "35px", height: "35px"}}>
                         </lord-icon>
-                        <span>{useName}</span>
+                        <span>{userName}</span>
                     </Link>
                 </li>
 
-                { userDetails === undefined ?
-                    <li
-                        onMouseOver={() => handleHovers(setSingInHover, true)}
-                        onMouseOut={() => handleHovers(setSingInHover, false)}
-                    >
-                        <Link href={"/login"} className={"nav-link"}>
-                            <lord-icon
-                                src="https://cdn.lordicon.com/bdwluond.json"
-                                colors="primary:#e8308c,secondary:#7166ee"
-                                trigger={singInHover ? "loop" : "in"}
-                                delay="150"
-                                style={{ width: "35px", height: "35px" }}>
-                            </lord-icon>
-                            <span>Sing up</span>
-                        </Link>
-                    </li> : 
-                    <li
-                        onMouseOver={() => handleHovers(setSingInHover, true)}
-                        onMouseOut={() => handleHovers(setSingInHover, false)}
-                        className='nav-link'
-                        style={{cursor: 'pointer'}}
-                        onClick={logout}
-                    >
-                            <lord-icon
-                                src="https://cdn.lordicon.com/gwvmctbb.json"
-                                colors="primary:#121331,secondary:#1663c7"
-                                trigger={singInHover ? "loop" : "in"}
-                                delay="150"
-                                style={{ width: "35px", height: "35px" }}>
-                            </lord-icon>
-                            <span>Log out</span>
-                    </li> 
+                {
+                    userName === 'User' ? (
+                        <li
+                            onMouseOver={() => handleHovers(setSingInHover, true)}
+                            onMouseOut={() => handleHovers(setSingInHover, false)}
+                        >
+                            <Link href={"/login"} className={"nav-link"}>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/bdwluond.json"
+                                    colors="primary:#e8308c,secondary:#7166ee"
+                                    trigger={singInHover ? "loop" : "in"}
+                                    delay="150"
+                                    style={{width: "35px", height: "35px"}}>
+                                </lord-icon>
+                                <span>Sing up</span>
+                            </Link>
+                        </li>
+                    ): null
                 }
             </ul>
         </nav>

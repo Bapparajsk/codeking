@@ -3,10 +3,8 @@ import getButton from "@/lib/button/tagButtons";
 import React, { useEffect, useRef, useState } from 'react';
 import { usePathname } from "next/navigation";
 import { TopicTage } from "#/problem/showProblem/TopicTage";
-
 import { useNavigateRouter } from "@/context/navigation/NavigateProvider";
 import { useProblem } from '@/context/problemList/ProblemProvider';
-
 
 export const Description = () => {
     const [tagButton, setTagButton] = useState(null);
@@ -22,9 +20,9 @@ export const Description = () => {
     }
 
     const hoverOutHandler = () => {
-        const { boxShadow, transform} = tagButton.mouseOut();
-        buttonRef.current.style.boxShadow = boxShadow;
-        buttonRef.current.style.transform = transform;
+        const { boxShadow, transform} = tagButton?.mouseOut();
+        // buttonRef.current.style.boxShadow = boxShadow;
+        // buttonRef.current.style.transform = transform;
     }
 
     const scrollToSection = () => {

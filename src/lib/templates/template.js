@@ -2,19 +2,19 @@ const getProgressStatusTemplate = () => {
     return {
         "Easy": {
             name: "Easy",
-            total_Problems: 778,
-            total_Solve: 215,
+            total_Problems: 0,
+            total_Solve: 0,
             progress_color: "#2fd19d",
         },
         "Medium" : {
             name: "Easy",
-            total_Problems: 1591,
-            total_Solve: 237,
+            total_Problems: 0,
+            total_Solve: 0,
             progress_color:"#FFC01E"
         },
         "Hard": {
             name: "Hard",
-            total_Problems: 664, total_Solve: 44,
+            total_Problems: 0, total_Solve: 0,
             progress_color: "#EF4743"
         }
     }

@@ -1,3 +1,5 @@
+"use client"
+
 import "$/problem/problemLists.css"
 import { useState, useEffect } from "react";
 import { TopicButton } from "#/problem/TopicButton";
@@ -9,7 +11,7 @@ import { getButtonDetails, sortButton } from '@/lib/button/listingButton';
 import { useUserDetails } from "@/context/user/UserProvider";
 import { ProblemSearch } from "#/problem/ProblemSearch";
 import { createLink, getpinNamesIcon, getTextCode } from '@/lib/handler/functionHandler';
-import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
+import { useRouter } from 'next/navigation';
 
 
 export const ProblemsList = () => {
@@ -17,9 +19,11 @@ export const ProblemsList = () => {
     const [roted, setRoted] = useState(0);
     const [ProblemLists, setProblemLists] = useState([]);
     const [searchProblemByName, setSearchProblemByName] = useState('')
-    const { problemLists, pinNames, setPinNames, tagNames, setTagNames } = useProblem();
-    const { getProblemStatus } = useUserDetails();
-    const { router } = useNavigateRouter();
+    const router = useRouter();
+
+    const { getProblemList, pinNames, setPinNames, tagNames, setTagNames } = useProblem();
+    const { getSolveProblemById } = useUserDetails();
+
     const buttons = getButtonDetails();
 
     const Difficulty = sortButton('difficulty');
@@ -58,51 +62,54 @@ export const ProblemsList = () => {
     const containskey = (key) => {
         return Object.keys(tagNames).includes(key);
     }
-
+    const init = async () => {
+        const data = await getProblemList();
+        setProblemLists(data);
+    }
+    useEffect(() => {
+        init();
+    }, []);
 
     useEffect(() => {
-        if (problemLists) {
-            setProblemLists(problemLists);
-        }
-    }, [problemLists]);
-
-    useEffect(() => {
-        const { difficulty, status } = pinNames;
-        if (difficulty === '' && status === '' && Object.keys(tagNames).length === 0 && searchProblemByName === '') {
-            setProblemLists(problemLists);
-            return;
-        }
-
-        let sortProblem = problemLists;
-
-        if (difficulty !== '') {
-            sortProblem = sortByDifficulty(sortProblem, difficulty);
-        }
-
-        if (status !== '') {
-            sortProblem = sortByStatus(sortProblem, status, getProblemStatus());
-        }
-
-        if (Object.keys(tagNames).length !== 0) {
-            sortProblem = sortByTagName(sortProblem, tagNames);
-        }
-
-        if (searchProblemByName !== '') {
-            if(/^-?\d*\.?\d+$/.test(searchProblemByName)) {
-                sortProblem = sortProblem.filter(problem => problem.number.toString().includes(searchProblemByName));
-            } else {
-                sortProblem = sortProblem.filter(problem => problem.hading.toLowerCase().includes(searchProblemByName.toLowerCase()));
+        const sortByAsync = async () => {
+            const {difficulty, status} = pinNames;
+            if (difficulty === '' && status === '' && Object.keys(tagNames).length === 0 && searchProblemByName === '') {
+                await init();
+                return;
             }
-        }
 
-        setProblemLists(sortProblem);
+            let sortProblem = await getProblemList();
+
+            if (difficulty !== '') {
+                sortProblem = sortByDifficulty(sortProblem, difficulty);
+            }
+
+            if (status !== '') {
+                const problemStatus = await getSolveProblemById();
+                sortProblem = sortByStatus(sortProblem, status, problemStatus);
+            }
+
+            if (Object.keys(tagNames).length !== 0) {
+                sortProblem = sortByTagName(sortProblem, tagNames);
+            }
+
+            if (searchProblemByName !== '') {
+                if (/^-?\d*\.?\d+$/.test(searchProblemByName)) {
+                    sortProblem = sortProblem.filter(problem => problem.number.toString().includes(searchProblemByName));
+                } else {
+                    sortProblem = sortProblem.filter(problem => problem.hading.toLowerCase().includes(searchProblemByName.toLowerCase()));
+                }
+            }
+
+            setProblemLists(sortProblem);
+        }
+        sortByAsync();
     }, [pinNames, tagNames, searchProblemByName]);
 
     const handleOnePick = () => {
-        const random = Math.floor(Math.random() * problemLists.length);
-        const problem = problemLists[random];
-        console.log(problem);
-        router.push(`/problems/${createLink(problem.hading)}`);
+        const random = Math.floor(Math.random() * ProblemLists.length);
+        const problem = ProblemLists[random];
+        router.push(`/problems/${createLink(problem.hading)}`, {scroll : true});
     }
 
     const onClickHandle = (e) => {

@@ -6,24 +6,17 @@ import { Footer } from "#/footer/Footer";
 import { UserDetails } from "#/user/UserDetails";
 import { ProgressCard } from "#/user/ProgressCard";
 import { LanguagesProgress } from "#/user/LanguagesProgress";
-import { useNavigateRouter } from '@/context/navigation/NavigateProvider';
-import { useAuthUser } from '@/context/usertoken/AuthUser';
 import { SolvedProblems }  from "#/user/SolvedProblems";
+import { useUserDetails } from '@/context/user/UserProvider';
 
 const Profile = () => {
 
-    const { router } = useNavigateRouter();
-    const { getAndSetTokenInLocalstorage } = useAuthUser();
+    const { fetchUserDataToServer } = useUserDetails();
 
     useEffect(() => {
-        const checkTokenAndRedirect = async () => {
-            const isTokenSet = await getAndSetTokenInLocalstorage();
-            if (!isTokenSet) {
-                router.push('/login');
-            }
-        };
-
-        checkTokenAndRedirect();
+        const init = async () => {
+            await fetchUserDataToServer();
+        }
     }, []);
 
     return (

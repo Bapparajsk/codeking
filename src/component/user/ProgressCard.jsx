@@ -1,3 +1,5 @@
+"use client"
+
 import "$/user/progresscard.css"
 import { useEffect, useState } from "react";
 import { Progress } from "#/user/Progress";
@@ -10,18 +12,20 @@ export const ProgressCard = () => {
     const [totalProblemNumber, setTotalProblemNumber] = useState(0);
     const [progressStatus, setProgressStatus] = useState(getProgressStatusTemplate());
 
-    const { userDetails } = useUserDetails();
-    const { getSize, nameOfTotalProblem } = useProblem();
+    const { getUserProgress } = useUserDetails();
+    const { getSize, getNameOfTotalProblem  } = useProblem();
 
     useEffect(() => {
-        if (userDetails && nameOfTotalProblem) {
-            const { Easy, Medium, Hard } = userDetails.problem_difficulty;
-            setProgressStatusTemplate(userDetails.problem_difficulty, setProgressStatus, nameOfTotalProblem);
+        const init = async () => {
+            const problemDifficulty = await getUserProgress();
+            const { Easy, Medium, Hard } = problemDifficulty;
+            const notp = await getNameOfTotalProblem();
+            setProgressStatusTemplate(problemDifficulty, setProgressStatus, notp);
             setPoint_hover(Easy + Medium + Hard);
+            setTotalProblemNumber(getSize());
         }
-
-        setTotalProblemNumber(getSize);
-    }, [userDetails, getSize, useProblem]);
+        init();
+    }, []);
 
     return (
         <div className={'progress-card flex'}>

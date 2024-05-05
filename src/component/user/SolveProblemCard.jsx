@@ -1,35 +1,38 @@
-import { useState } from 'react';
+'use client'
 
-export const SolveProblemCard = ({number, name}) => {
+import { useState, useRef } from 'react';
 
+export const SolveProblemCard = ({id, name, date, isSolve}) => {
     const [solveHover, setSolveHover] = useState(false);
-    function getCurrentDate() {
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-        let yyyy = today.getFullYear();
-
-        return dd + '/' + mm + '/' + yyyy;
-    }
-
+    const ref = useRef(null);
     return (
         <div
+            ref={ref}
             className={'solve-problem-card flex'}
-            onMouseOver={() => setSolveHover(true)}
-            onMouseOut={() => setSolveHover(false)}
+            style={{
+                backgroundColor: isSolve ? '#0BE83E7F' : '#FF204E7F',
+            }}
+            onMouseOver={() => {
+                setSolveHover(true);
+                ref.current.style.backgroundColor = isSolve ? '#0BE83E99' : '#FF204E99';
+            }}
+            onMouseOut={() => {
+                setSolveHover(false);
+                ref.current.style.backgroundColor = isSolve ? '#0BE83E7F' : '#FF204E7F';
+            }}
         >
             <div className={'problem-name-number'}>
-                <span>{number}</span>
+                <span>{id}</span>.
                 <span>{name}</span>
             </div>
             <div className={'solve-date flex'}>
-                <span>{getCurrentDate()}</span>
+                <span>{date}</span>
                 <lord-icon
-                    src="https://cdn.lordicon.com/cgzlioyf.json"
+                    src={`https://cdn.lordicon.com/${isSolve ? 'cgzlioyf' : 'ygvjgdmk'}.json`}
                     trigger={solveHover ? 'loop': 'in'}
                     stroke="bold"
-                    state="hover-pinch"
-                    colors="primary:#16c72e"
+                    state={`hover-${isSolve ? 'pinch' : 'error-2'}`}
+                    colors={`primary:#${isSolve ? '1679AB' : 'FF004D'}`}
                     style={{ width: 25, height: 25 }}>
                 </lord-icon>
             </div>

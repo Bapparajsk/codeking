@@ -1,4 +1,4 @@
-import '$/home/page3.css'
+import '@/style/home/page3.css'
 import Link from "next/link";
 import React, {useState} from "react";
 import {CardList} from "#/home/CardList";

@@ -16,22 +16,22 @@ export const AuthProvider = ({ children }) => {
     const { setProblems, setTotalProblem } = useProblem();
     const router = useRouter();
 
-    useEffect(() => {
-        const init = async () => {
-            try {
-                const localToken = localStorage.getItem('token');
-                if (localToken) {
-                    console.log('token', localToken);
-                    await fetchUser(localToken);
-                    setToken(localToken);
-                }
-            } catch (e) {
-                console.log(e);
-                router.push('/login');
-            }
-        }
-        init();
-    },[]);
+    // useEffect(() => {
+    //     const init = async () => {
+    //         try {
+    //             const localToken = localStorage.getItem('token');
+    //             if (localToken) {
+    //                 console.log('token', localToken);
+    //                 await fetchUser(localToken);
+    //                 setToken(localToken);
+    //             }
+    //         } catch (e) {
+    //             console.log(e);
+    //             router.push('/login');
+    //         }
+    //     }
+    //     init();
+    // },[]);
 
     const fetchUser = async (localToken) => {
         try {
